@@ -1,0 +1,41 @@
+{
+  "name": "@tronscan/client",
+  "version": "0.0.2",
+  "description": "Tronscan API Client",
+  "main": "src/index.js",
+  "homepage": "https://api.tronscan.org/",
+  "scripts": {
+    "test": "mocha",
+    "protoc:install": "cd protocol && ./install-protobuf.sh",
+    "protoc:generate": "./protocol/protobuf-3.5.1/src/.libs/protoc --proto_path=protocol/protobuf-3.5.1/src --proto_path=protocol --grpc_out=./src/protocol --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` --js_out=import_style=commonjs,binary:src/protocol protocol/core/*.proto protocol/api/*.proto",
+    "test:watch": "mocha --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tronscan/tronscan-node-client.git"
+  },
+  "keywords": [
+    "tron"
+  ],
+  "author": "Rovak",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "base-58": "^0.0.1",
+    "chai": "^4.1.2",
+    "crypto-js": "^3.1.9-1",
+    "elliptic": "^6.4.0",
+    "google-protobuf": "^3.5.0",
+    "grpc": "^1.10.0",
+    "grpc-caller": "^0.4.0",
+    "grpc-tools": "^1.6.6",
+    "js-sha3": "^0.7.0",
+    "mocha": "^5.1.0",
+    "nano-time": "^1.0.0",
+    "qs": "^6.5.1"
+  }
+}
