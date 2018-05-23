@@ -14,6 +14,7 @@ const {
   WitnessUpdateContract,
   WithdrawBalanceContract,
   WitnessCreateContract,
+  UnfreezeAssetContract,
 } = require("../protocol/core/Contract_pb");
 
 function encodeString(str) {
@@ -208,6 +209,22 @@ function buildUnfreezeBalance(address) {
     contract,
     Transaction.Contract.ContractType.UNFREEZEBALANCECONTRACT,
     "UnfreezeBalanceContract");
+}
+
+/**
+ * Unfreeze balance
+ *
+ * @param address From which address to freze
+ */
+function buildUnfreezeAsset(address) {
+  let contract = new UnfreezeAssetContract();
+
+  contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
+
+  return buildTransferContract(
+    contract,
+    Transaction.Contract.ContractType.UNFREEZEASSETCONTRACT,
+    "UnfreezeAssetContract");
 }
 
 module.exports = {
