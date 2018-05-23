@@ -21,18 +21,18 @@ function encodeString(str) {
 }
 
 function buildTransferContract(message, contractType, typeName) {
-  var anyValue = new google_protobuf_any_pb.Any();
+  let anyValue = new google_protobuf_any_pb.Any();
   anyValue.pack(message.serializeBinary(), "protocol." + typeName);
 
-  var contract = new Transaction.Contract();
+  let contract = new Transaction.Contract();
   contract.setType(contractType);
   contract.setParameter(anyValue);
 
-  var raw = new Transaction.raw();
+  let raw = new Transaction.raw();
   raw.addContract(contract);
   raw.setTimestamp(new Date().getTime() * 1000000);
 
-  var transaction = new Transaction();
+  let transaction = new Transaction();
   transaction.setRawData(raw);
 
   return transaction;
@@ -111,13 +111,13 @@ function buildWithdrawBalance(address) {
 }
 
 function buildVote(address, votes) {
-  var contract = new VoteWitnessContract();
+  let contract = new VoteWitnessContract();
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
 
   for (let address of Object.keys(votes)) {
-    var vote = new VoteWitnessContract.Vote();
+    let vote = new VoteWitnessContract.Vote();
     vote.setVoteAddress(Uint8Array.from(decode58Check(address)))
-    var numberOfVotes = parseInt(votes[address]);
+    let numberOfVotes = parseInt(votes[address]);
     if (isNaN(numberOfVotes) || numberOfVotes <= 0) {
       continue;
     }
@@ -133,7 +133,7 @@ function buildVote(address, votes) {
 
 
 function buildAssetParticipate(address, issuerAddress, token, amount) {
-  var contract = new ParticipateAssetIssueContract();
+  let contract = new ParticipateAssetIssueContract();
 
   contract.setToAddress(Uint8Array.from(decode58Check(issuerAddress)));
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
@@ -147,7 +147,8 @@ function buildAssetParticipate(address, issuerAddress, token, amount) {
 }
 
 function buildAssetIssue(options) {
-  var contract = new AssetIssueContract();
+
+  let contract = new AssetIssueContract();
   contract.setOwnerAddress(Uint8Array.from(decode58Check(options.address)));
   contract.setName(encodeString(options.name));
   contract.setTotalSupply(options.totalSupply);
@@ -157,6 +158,15 @@ function buildAssetIssue(options) {
   contract.setTrxNum(options.trxNum);
   contract.setDescription(encodeString(options.description));
   contract.setUrl(encodeString(options.url));
+
+  if (options.frozenSupply) {
+    for (let frozenSupply of options.frozenSupply) {
+      let frozenSupplyContract = new AssetIssueContract.FrozenSupply();
+      frozenSupplyContract.setFrozenAmount(frozenSupply.amount);
+      frozenSupplyContract.setFrozenDays(frozenSupply.days);
+      contract.addFrozenSupply(frozenSupplyContract);
+    }
+  }
 
   return buildTransferContract(
     contract,
@@ -172,7 +182,7 @@ function buildAssetIssue(options) {
  * @param duration Duration in days
  */
 function buildFreezeBalance(address, amount, duration) {
-  var contract = new FreezeBalanceContract();
+  let contract = new FreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
   contract.setFrozenBalance(amount);
@@ -190,7 +200,7 @@ function buildFreezeBalance(address, amount, duration) {
  * @param address From which address to freze
  */
 function buildUnfreezeBalance(address) {
-  var contract = new UnfreezeBalanceContract();
+  let contract = new UnfreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
 
