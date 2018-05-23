@@ -238,5 +238,6 @@ module.exports = {
   buildWitnessUpdate,
   buildWithdrawBalance,
   buildWitnessCreate,
+  buildUnfreezeAsset,
 };
 

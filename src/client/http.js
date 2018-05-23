@@ -1,7 +1,8 @@
 const xhr = require("axios");
 const {
   buildTransferTransaction, buildVote, buildAssetParticipate, buildFreezeBalance, buildAssetIssue,
-  buildUnfreezeBalance, buildAccountUpdate, buildWitnessUpdate, buildWithdrawBalance, buildWitnessCreate
+  buildUnfreezeBalance, buildAccountUpdate, buildWitnessUpdate, buildWithdrawBalance, buildWitnessCreate,
+  buildUnfreezeAsset,
 } = require("../utils/transactionBuilder");
 const {hexStr2byteArray} = require("../lib/code");
 const PrivateKeySigner = require("../signer/privateKeySigner");
@@ -140,8 +141,13 @@ class ApiClient {
     return (pk) => this.sendTransaction(pk, transaction);
   }
 
-  unfreezeBalance(address, amount, duration) {
+  unfreezeBalance(address) {
     let transaction = buildUnfreezeBalance(address);
+    return (pk) => this.sendTransaction(pk, transaction);
+  }
+
+  unfreezeAssets(address) {
+    let transaction = buildUnfreezeAsset(address);
     return (pk) => this.sendTransaction(pk, transaction);
   }
 
@@ -216,6 +222,18 @@ class ApiClient {
   async getTransactionByHash(hash) {
     let {data} = await xhr.get(`${this.apiUrl}/api/transaction/${hash}`);
     return data;
+  }
+
+  async getIssuedAsset(owner) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/token`, {
+      params: {
+        owner,
+      },
+    });
+    return {
+      token: data.data[0],
+      data,
+    };
   }
 
   async getAccounts(options = {}) {
