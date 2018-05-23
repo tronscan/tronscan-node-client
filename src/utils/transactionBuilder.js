@@ -198,7 +198,7 @@ function buildFreezeBalance(address, amount, duration) {
 /**
  * Unfreeze balance
  *
- * @param address From which address to freze
+ * @param address From which address to freeze
  */
 function buildUnfreezeBalance(address) {
   let contract = new UnfreezeBalanceContract();
@@ -212,9 +212,9 @@ function buildUnfreezeBalance(address) {
 }
 
 /**
- * Unfreeze balance
+ * Unfreeze Assets
  *
- * @param address From which address to freze
+ * @param address From which address to unfreeze
  */
 function buildUnfreezeAsset(address) {
   let contract = new UnfreezeAssetContract();
