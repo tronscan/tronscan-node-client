@@ -67,7 +67,7 @@ class ApiClient {
     let rawData = transaction.getRawData();
     rawData.setRefBlockHash(Uint8Array.from(generateBlockId.slice(8, 16)));
     rawData.setRefBlockBytes(Uint8Array.from(numBytes.slice(6, 8)));
-    rawData.setExpiration(latestBlock.timestamp + (60 * 1000));
+    rawData.setExpiration(latestBlock.timestamp + (60 * 5 * 1000));
 
     transaction.setRawData(rawData);
     return transaction;
@@ -261,6 +261,7 @@ class ApiClient {
     return {
       votes: data.data,
       total: data.total,
+      totalVotes: data.totalVotes,
     };
   }
 
