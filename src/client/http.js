@@ -185,6 +185,14 @@ class ApiClient {
       total: data.total,
     };
   }
+  async getLatestBlock() {
+    let {blocks} = await this.getBlocks({
+      sort: '-number',
+      limit: 1,
+    });
+
+    return blocks[0];
+  }
 
   async getTransactions(options = {}) {
     let {data} = await xhr.get(`${this.apiUrl}/api/transaction`, {
