@@ -273,6 +273,11 @@ class ApiClient {
     };
   }
 
+  async secondsUntilNextCycle() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/vote/next-cycle`);
+    return data.nextCycle / 1000;
+  }
+
 
   async getAccountByAddress(address) {
     let {data} = await xhr.get(`${this.apiUrl}/api/account/${address}`);
