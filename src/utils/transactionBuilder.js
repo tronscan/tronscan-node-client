@@ -152,6 +152,7 @@ function buildAssetIssue(options) {
   let contract = new AssetIssueContract();
   contract.setOwnerAddress(Uint8Array.from(decode58Check(options.address)));
   contract.setName(encodeString(options.name));
+  contract.setAbbr(encodeString(options.shortName));
   contract.setTotalSupply(options.totalSupply);
   contract.setNum(options.num);
   contract.setEndTime(Date.parse(options.endTime));

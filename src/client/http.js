@@ -209,6 +209,21 @@ class ApiClient {
     };
   }
 
+  async getTransfers(options = {}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/transfer`, {
+      params: Object.assign({
+        sort: '-timestamp',
+        count: true,
+        limit: 50,
+      }, options)
+    });
+
+    return {
+      transfers: data.data,
+      total: data.total,
+    };
+  }
+
   async getBlockByNumber(number) {
     let {blocks} = await this.getBlocks({
       limit: 1,
@@ -289,8 +304,8 @@ class ApiClient {
     return data;
   }
 
-  async getTransactionStats(options = {}) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/transaction/stats`, {
+  async getTransferStats(options = {}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/transfer/stats`, {
       params: Object.assign({
       }, options)
     });
