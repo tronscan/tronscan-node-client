@@ -48,12 +48,7 @@ class ApiClient {
 
   async addRef(transaction) {
 
-    let {blocks: latestBlock} = await this.getBlocks({
-      sort: '-timestamp',
-      limit: 1
-    });
-
-    latestBlock = latestBlock[0];
+    let latestBlock = await this.getLatestBlock();
 
     let latestBlockHash = latestBlock.hash;
     let latestBlockNum = latestBlock.number;
@@ -177,6 +172,7 @@ class ApiClient {
       params: Object.assign({
         sort: '-number',
         limit: 50,
+        count: true,
       }, options),
     });
 
@@ -186,12 +182,8 @@ class ApiClient {
     };
   }
   async getLatestBlock() {
-    let {blocks} = await this.getBlocks({
-      sort: '-number',
-      limit: 1,
-    });
-
-    return blocks[0];
+    let {data} = await xhr.get(`${this.apiUrl}/api/block/latest`);
+    return data;
   }
 
   async getTransactions(options = {}) {
@@ -299,9 +291,19 @@ class ApiClient {
     return data;
   }
 
+  async getRichList() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/account/richlist`);
+    return data;
+  }
+
   async getVotesForCurrentCycle() {
     let {data} = await xhr.get(`${this.apiUrl}/api/vote/current-cycle`);
     return data;
+  }
+
+  async getLiveVotes() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/vote/live`);
+    return data.data;
   }
 
   async getTransferStats(options = {}) {
@@ -413,8 +415,8 @@ class ApiClient {
     return data;
   }
 
-  async getSyncStatus() {
-    let {data} = await xhr.get(`${this.apiUrl}/api/system/sync`);
+  async getSystemStatus() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/system/status`);
     return data;
   }
 

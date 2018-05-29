@@ -160,6 +160,9 @@ function buildAssetIssue(options) {
   contract.setTrxNum(options.trxNum);
   contract.setDescription(encodeString(options.description));
   contract.setUrl(encodeString(options.url));
+  contract.setPublicFreeAssetNetUsage(0);
+  contract.setFreeAssetNetLimit(0);
+  contract.setPublicFreeAssetNetLimit(0);
 
   if (options.frozenSupply) {
     for (let frozenSupply of options.frozenSupply) {
