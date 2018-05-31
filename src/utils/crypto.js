@@ -5,6 +5,7 @@ const {encode58, decode58} = require("../lib/base58");
 const EC = require('elliptic').ec;
 const { keccak256 } = require('js-sha3');
 const jsSHA = require("../lib/sha256");
+const ADDRESS_SIZE = require("./address").ADDRESS_SIZE;
 const { byte2hexStr, byteArray2hexStr } = require("./bytes");
 
 /**
@@ -82,15 +83,13 @@ function computeAddress(pubBytes) {
   var hash = keccak256(pubBytes).toString();
   var addressHex = hash.substring(24);
   addressHex = ADDRESS_PREFIX + addressHex;
-  var addressBytes = hexStr2byteArray(addressHex);
-  return addressBytes;
+  return hexStr2byteArray(addressHex);
 }
 
 //return address by bytes, priKeyBytes is byte[]
 function getAddressFromPriKey(priKeyBytes) {
   let pubBytes = getPubKeyFromPriKey(priKeyBytes);
-  let addressBytes = computeAddress(pubBytes);
-  return addressBytes;
+  return computeAddress(pubBytes);
 }
 
 //return address by Base58Check String,
@@ -99,9 +98,7 @@ function getBase58CheckAddress(addressBytes) {
   var hash1 = SHA256(hash0);
   var checkSum = hash1.slice(0, 4);
   checkSum = addressBytes.concat(checkSum);
-  var base58Check = encode58(checkSum);
-
-  return base58Check;
+  return encode58(checkSum);
 }
 
 function decode58Check(addressStr) {
@@ -126,18 +123,19 @@ function decode58Check(addressStr) {
   return null;
 }
 
-function isAddressValid(base58Sting) {
-  if (typeof(base58Sting) != 'string') {
+function isAddressValid(base58Str) {
+  if (typeof(base58Str) !== 'string') {
     return false;
   }
-  if (base58Sting.length != 35) {
+  if (base58Str.length !== ADDRESS_SIZE) {
     return false;
   }
-  var address = decode58(base58Sting);
-  if (address.length != 25) {
+  var address = decode58(base58Str);
+
+  if (address.length !== 25) {
     return false;
   }
-  if (address[0] != ADDRESS_PREFIX_BYTE) {
+  if (address[0] !== ADDRESS_PREFIX_BYTE) {
     return false;
   }
   var checkSum = address.slice(21);
