@@ -1,3 +1,4 @@
+const {ADDRESS_PREFIX, ADDRESS_PREFIX_BYTE} = require("./address");
 const base64EncodeToString = require("../lib/code").base64EncodeToString;
 const {base64DecodeFromString, hexStr2byteArray} = require("../lib/code");
 const {encode58, decode58} = require("../lib/base58");
@@ -5,10 +6,6 @@ const EC = require('elliptic').ec;
 const { keccak256 } = require('js-sha3');
 const jsSHA = require("../lib/sha256");
 const { byte2hexStr, byteArray2hexStr } = require("./bytes");
-
-const add_pre_fix = 'a0'; //a0 + address  ,a0 is version
-const add_pre_fix_byte = 0xa0;   //a0 + address  ,a0 is version
-
 
 /**
  * Sign A Transaction by priKey.
@@ -84,7 +81,7 @@ function computeAddress(pubBytes) {
 
   var hash = keccak256(pubBytes).toString();
   var addressHex = hash.substring(24);
-  addressHex = add_pre_fix + addressHex;
+  addressHex = ADDRESS_PREFIX + addressHex;
   var addressBytes = hexStr2byteArray(addressHex);
   return addressBytes;
 }
@@ -140,7 +137,7 @@ function isAddressValid(base58Sting) {
   if (address.length != 25) {
     return false;
   }
-  if (address[0] != add_pre_fix_byte) {
+  if (address[0] != ADDRESS_PREFIX_BYTE) {
     return false;
   }
   var checkSum = address.slice(21);

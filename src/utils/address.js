@@ -1,6 +1,8 @@
-const ADDRESS_PREFIX = "a0";
-const ADDRESS_SIZE = 42;
+let isTestNet = process.env.NET === 'testnet';
 
+const ADDRESS_SIZE = 42;
+const ADDRESS_PREFIX = isTestNet ? "a0" : "41";
+const ADDRESS_PREFIX_BYTE = isTestNet ? 0xa0 : 0x41;
 
 function isAddressValid(address) {
 
@@ -21,4 +23,7 @@ function isAddressValid(address) {
 
 module.exports = {
   isAddressValid,
+  ADDRESS_SIZE,
+  ADDRESS_PREFIX,
+  ADDRESS_PREFIX_BYTE,
 };
