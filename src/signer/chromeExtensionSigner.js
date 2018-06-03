@@ -8,7 +8,6 @@ const TRONSCAN_REQUEST_ACCOUNT = "TRONSCAN_REQUEST_ACCOUNT";
 
 class ChromeExtensionSigner {
 
-
   constructor() {
     this.callbackId = 0;
   }
@@ -29,13 +28,21 @@ class ChromeExtensionSigner {
     return account;
   }
 
+  /**
+   * Send a message to the chrome extension
+   *
+   * @param data
+   * @returns {Promise<object>}
+   */
   sendMessage(data) {
-    let callbackId = this.callbackId++;
     return new Promise(resolve => {
+      let callbackId = this.callbackId++;
 
       let responseCallback = (event) => {
+        console.log("CLIENT RESPONSE", event);
         if ((event.data._fromClient !== true) && (event.data.callbackId === callbackId)) {
           window.removeEventListener("message", responseCallback);
+          console.log("RESPONSE", event.data, event);
           resolve(event.data);
         }
       };
@@ -49,14 +56,24 @@ class ChromeExtensionSigner {
     });
   }
 
+  /**
+   * Signs the given transaction object
+   *
+   * @param transactionObj Transaction
+   * @returns {Promise<Object.transaction>}
+   */
   async signTransaction(transactionObj) {
 
-    let {transaction} = await this.sendMessage({
+    let {transaction, rejected} = await this.sendMessage({
       type: TRONSCAN_TRANSACTION,
       transaction: {
         hex: byteArray2hexStr(transactionObj.serializeBinary()),
       }
     });
+
+    if (rejected === true) {
+      throw new Error("Rejected transaction");
+    }
 
     return transaction;
   }
@@ -64,6 +81,4 @@ class ChromeExtensionSigner {
 
 module.exports = {
   ChromeExtensionSigner,
-  TRONSCAN_TRANSACTION,
-  TRONSCAN_TRANSACTION_RESPONSE,
 };
