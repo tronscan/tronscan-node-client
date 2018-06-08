@@ -31,7 +31,7 @@ function buildTransferContract(message, contractType, typeName) {
 
   let raw = new Transaction.raw();
   raw.addContract(contract);
-  raw.setTimestamp(new Date().getTime() * 1000000);
+  // raw.setTimestamp(new Date().getTime() * 1000000);
 
   let transaction = new Transaction();
   transaction.setRawData(raw);
