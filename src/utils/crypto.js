@@ -124,30 +124,35 @@ function decode58Check(addressStr) {
 }
 
 function isAddressValid(base58Str) {
-  if (typeof(base58Str) !== 'string') {
-    return false;
-  }
-  if (base58Str.length !== ADDRESS_SIZE) {
-    return false;
-  }
-  var address = decode58(base58Str);
+  try {
+    if (typeof(base58Str) !== 'string') {
+      return false;
+    }
+    if (base58Str.length !== ADDRESS_SIZE) {
+      return false;
+    }
+    var address = decode58(base58Str);
 
-  if (address.length !== 25) {
-    return false;
+    if (address.length !== 25) {
+      return false;
+    }
+    if (address[0] !== ADDRESS_PREFIX_BYTE) {
+      return false;
+    }
+    var checkSum = address.slice(21);
+    address = address.slice(0, 21);
+    var hash0 = SHA256(address);
+    var hash1 = SHA256(hash0);
+    var checkSum1 = hash1.slice(0, 4);
+    if (checkSum[0] == checkSum1[0] && checkSum[1] == checkSum1[1] && checkSum[2]
+        == checkSum1[2] && checkSum[3] == checkSum1[3]
+    ) {
+      return true
+    }
+  } catch(e) {
+    // ignore
   }
-  if (address[0] !== ADDRESS_PREFIX_BYTE) {
-    return false;
-  }
-  var checkSum = address.slice(21);
-  address = address.slice(0, 21);
-  var hash0 = SHA256(address);
-  var hash1 = SHA256(hash0);
-  var checkSum1 = hash1.slice(0, 4);
-  if (checkSum[0] == checkSum1[0] && checkSum[1] == checkSum1[1] && checkSum[2]
-      == checkSum1[2] && checkSum[3] == checkSum1[3]
-  ) {
-    return true
-  }
+
   return false;
 }
 
