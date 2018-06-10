@@ -1,6 +1,6 @@
 {
   "name": "@tronscan/client",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Tronscan API Client",
   "main": "src/index.js",
   "homepage": "https://api.tronscan.org/",
@@ -30,9 +30,6 @@
     "crypto-js": "^3.1.9-1",
     "elliptic": "^6.4.0",
     "google-protobuf": "^3.5.0",
-    "grpc": "^1.10.0",
-    "grpc-caller": "^0.4.0",
-    "grpc-tools": "^1.6.6",
     "js-sha3": "^0.7.0",
     "mocha": "^5.1.0",
     "nano-time": "^1.0.0",
