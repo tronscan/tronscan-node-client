@@ -1,9 +1,9 @@
 /* eslint-disable */
+
 function bin2String(array) {
   return String.fromCharCode.apply(String, array);
 }
 
-//比较两个byteArray是否相等
 function arrayEquals(array1, array2) {
   if (array1.length != array2.length) {
     return false;
@@ -17,7 +17,7 @@ function arrayEquals(array1, array2) {
   return true;
 }
 
-//从base64字符串中解析TransAction对象
+
 function getTransActionFromBase64String(base64String) {
   var bytesDecode = base64DecodeFromString(base64String);
   var transaction = proto.protocol.Transaction.deserializeBinary(bytesDecode);
@@ -25,91 +25,6 @@ function getTransActionFromBase64String(base64String) {
   return transaction;
 }
 
-//Return a list contains contract object
-//从TransAction对象中获得合约列表
-function getContractListFromTransaction(transaction) {
-  var raw = transaction.getRawData();
-  var type = raw.getType();
-  if (type != 1) {
-    layer.alert("Invalid transaction type !!!!" + type);
-    return null;
-  }
-  var contractList = raw.getContractList();
-  var count = contractList.length;
-  if (count == 0) {
-    layer.alert("No contract !!!!");
-    return null;
-  }
-
-  array = new Array(count);
-  var unpack = proto.google.protobuf.Any.prototype.unpack;
-  while (count > 0) {
-    count--;
-    var oneContract = contractList[count];
-    var any = oneContract.getParameter();
-    var contarcType = oneContract.getType();
-    var obje;
-    switch (contarcType) {
-      case proto.protocol.Transaction.Contract.ContractType.ACCOUNTCREATECONTRACT:
-        obje = any.unpack(
-            proto.protocol.AccountCreateContract.deserializeBinary,
-            "protocol.AccountCreateContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.TRANSFERCONTRACT:
-        obje = any.unpack(
-            proto.protocol.TransferContract.deserializeBinary,
-            "protocol.TransferContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.TRANSFERASSETCONTRACT:
-        obje = any.unpack(
-            proto.protocol.TransferAsstContract.deserializeBinary,
-            "protocol.TransferAssetContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.VOTEASSETCONTRACT:
-        obje = any.unpack(
-            proto.protocol.VoteAssetContract.deserializeBinary,
-            "protocol.VoteAssetContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.VOTEWITNESSCONTRACT:
-        obje = any.unpack(
-            proto.protocol.VoteWitnessContract.deserializeBinary,
-            "protocol.VoteWitnessContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.WITNESSCREATECONTRACT:
-        obje = any.unpack(
-            proto.protocol.WitnessCreateContract.deserializeBinary,
-            "protocol.WitnessCreateContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.ASSETISSUECONTRACT:
-        obje = any.unpack(
-            proto.protocol.AssetIssueContract.deserializeBinary,
-            "protocol.AssetIssueContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.DEPLOYCONTRACT:
-        obje = any.unpack(
-            proto.protocol.DeployContract.deserializeBinary,
-            "protocol.DeployContract");
-        break;
-
-      case proto.protocol.Transaction.Contract.ContractType.WITNESSUPDATECONTRACT:
-        obje = any.unpack(
-            proto.protocol.WitnessUpdateContract.deserializeBinary,
-            "protocol.WitnessUpdateContract");
-        break;
-    }
-    array[count] = obje;
-  }
-  return array;
-}
-
-//字符串转byteArray数据格式
 function stringToBytes(str) {
   var bytes = new Array();
   var len, c;

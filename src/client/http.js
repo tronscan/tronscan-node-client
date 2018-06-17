@@ -75,12 +75,18 @@ class ApiClient {
   async sendTransaction(pk, transaction) {
     transaction = await this.addRef(transaction);
     let privateKeySigner = this.getSigner(pk);
-    let {hex} = await privateKeySigner.signTransaction(transaction);
-    let {data} = await xhr.post(`${this.apiUrl}/api/transaction`, {
-      transaction: hex,
-    });
+    try {
+      let {hex} = await privateKeySigner.signTransaction(transaction);
+      let {data} = await xhr.post(`${this.apiUrl}/api/transaction`, {
+        transaction: hex,
+      });
 
-    return data;
+      return data;
+    } catch(e) {
+      return {
+        success: false,
+      };
+    }
   }
 
   async sendTransactionRaw(transactionHex) {
