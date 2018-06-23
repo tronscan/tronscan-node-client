@@ -1,8 +1,6 @@
-let isTestNet = process.env.NET === 'testnet';
-
-const ADDRESS_SIZE = isTestNet ? 35 : 34;
-const ADDRESS_PREFIX = isTestNet ? "a0" : "41";
-const ADDRESS_PREFIX_BYTE = isTestNet ? 0xa0 : 0x41;
+const ADDRESS_SIZE = 34;
+const ADDRESS_PREFIX = "41";
+const ADDRESS_PREFIX_BYTE = 0x41;
 
 module.exports = {
   ADDRESS_SIZE,
