@@ -132,7 +132,6 @@ function isAddressValid(base58Str) {
       return false;
     }
     var address = decode58(base58Str);
-
     if (address.length !== 25) {
       return false;
     }

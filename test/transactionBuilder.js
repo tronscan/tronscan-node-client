@@ -16,7 +16,7 @@ describe('transactionBuilder', () => {
   });
 
   it('build freeze', async () => {
-    let transaction = buildFreezeBalance("TKcrAJN3tgLshGqp7aTDTJLabdWqZSKFMx", 100_000_000, 3);
+    let transaction = buildFreezeBalance("TKcrAJN3tgLshGqp7aTDTJLabdWqZSKFMx", 100000000, 3);
     console.log("hex", byteArray2hexStr(transaction.getRawData().serializeBinary()));
   });
 
