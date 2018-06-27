@@ -1,6 +1,6 @@
 {
   "name": "@tronscan/client",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Tronscan API Client",
   "main": "src/index.js",
   "homepage": "https://api.tronscan.org/",
