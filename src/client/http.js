@@ -92,10 +92,9 @@ class ApiClient {
   }
 
   async auth(pk) {
-    let transaction = buildTransferTransaction("TRX", pkToAddress(pk), pkToAddress(pk), 1);
+    let transaction = buildWitnessUpdate(pkToAddress(pk), "UPDATE_SR");
     let privateKeySigner = this.getSigner(pk);
     let {hex} = await privateKeySigner.signTransaction(transaction);
-
     let {data} = await xhr.post(`${this.apiUrl}/api/auth`, {
       transaction: hex,
     });
@@ -104,7 +103,7 @@ class ApiClient {
   }
 
   async updateSuperRepresentative(key, sr) {
-    let {data} = await xhr.post(`${this.apiUrl}/api/account/${sr.address}/sr`, sr, {
+    await xhr.post(`${this.apiUrl}/api/account/${sr.address}/sr`, sr, {
       headers: {
         "X-Key": key,
       }
@@ -113,7 +112,7 @@ class ApiClient {
 
   async getSuperRepresentative(address) {
     let {data} = await xhr.get(`${this.apiUrl}/api/account/${address}/sr`);
-    return data.data;
+    return data;
   }
 
   updateAccountName(address, name) {
