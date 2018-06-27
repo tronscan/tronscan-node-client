@@ -92,7 +92,6 @@ function buildWitnessCreate(address, url) {
 function buildWitnessUpdate(address, url) {
   let contract = new WitnessUpdateContract();
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
-  console.log("SET RURL", url);
   contract.setUpdateUrl(encodeString(url));
 
   return buildTransferContract(
