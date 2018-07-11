@@ -435,6 +435,14 @@ class ApiClient {
     let {data} = await xhr.get(`${this.apiUrl}/api/vote/stats`);
     return data.results;
   }
+
+  async getTxOverviewStats() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview`);
+    return {
+      txOverviewStats:data.data
+    }
+  }
+  
 }
 
 module.exports = ApiClient;
