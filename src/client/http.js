@@ -6,7 +6,7 @@ const {
 } = require("../utils/transactionBuilder");
 const {hexStr2byteArray} = require("../lib/code");
 const PrivateKeySigner = require("../signer/privateKeySigner");
-const encodeString = require("../utils/bytes").encodeString;
+const encodeString = require("../lib/code").encodeString;
 const pkToAddress = require("../utils/crypto").pkToAddress;
 
 function longToByteArray(/*long*/long) {

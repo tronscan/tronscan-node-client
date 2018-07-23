@@ -1,6 +1,5 @@
 const {Base64} = require("./base64");
 
-
 /* Convert a byte to string */
 function byte2hexStr(byte) {
   var hexByteMap = "0123456789ABCDEF";
@@ -59,7 +58,6 @@ function base64DecodeFromString(string64) {
   return new Base64().decodeToByteArray(string64);
 }
 
-
 function byteArray2hexStr(byteArray) {
   let str = "";
   for (let i = 0; i < (byteArray.length); i++) {
@@ -69,17 +67,10 @@ function byteArray2hexStr(byteArray) {
 }
 
 
-function encodeString(str) {
-  return Uint8Array.from(base64DecodeFromString(btoa(str)));
-}
-
-
-
 module.exports = {
   byteArray2hexStr,
   hextoString,
   base64DecodeFromString,
   bytesToString,
-  byte2hexStr,
-  encodeString
+  byte2hexStr
 };
