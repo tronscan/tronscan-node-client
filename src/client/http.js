@@ -6,6 +6,7 @@ const {
 } = require("../utils/transactionBuilder");
 const {hexStr2byteArray} = require("../lib/code");
 const PrivateKeySigner = require("../signer/privateKeySigner");
+const encodeString = require("../utils/bytes").encodeString;
 const pkToAddress = require("../utils/crypto").pkToAddress;
 
 function longToByteArray(/*long*/long) {
@@ -43,6 +44,18 @@ class ApiClient {
 
   send(token, from, to, amount) {
     let transaction = buildTransferTransaction(token, from, to, amount);
+    return (pk) => this.sendTransaction(pk, transaction);
+  }
+
+  sendWithNote(token, from, to, amount, note) {
+    let transaction = buildTransferTransaction(token, from, to, amount);
+
+    if (note.length > 0) {
+      let rawData = transaction.getRawData();
+      rawData.setData(encodeString(note));
+      transaction.setRawData(rawData);
+    }
+
     return (pk) => this.sendTransaction(pk, transaction);
   }
 
@@ -442,7 +455,7 @@ class ApiClient {
       txOverviewStats:data.data
     }
   }
-  
+
 }
 
 module.exports = ApiClient;

@@ -69,10 +69,17 @@ function byteArray2hexStr(byteArray) {
 }
 
 
+function encodeString(str) {
+  return Uint8Array.from(base64DecodeFromString(btoa(str)));
+}
+
+
+
 module.exports = {
   byteArray2hexStr,
   hextoString,
   base64DecodeFromString,
   bytesToString,
-  byte2hexStr
+  byte2hexStr,
+  encodeString
 };
