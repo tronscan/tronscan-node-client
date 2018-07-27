@@ -2,6 +2,8 @@ const decode58Check = require("./crypto").decode58Check;
 const {Block, Transaction, Account} = require("../protocol/core/Tron_pb");
 const google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
 const base64DecodeFromString = require("../lib/code").base64DecodeFromString;
+const btoa = require('btoa');
+
 const {
   TransferContract,
   TransferAssetContract,
