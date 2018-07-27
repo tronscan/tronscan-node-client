@@ -48,9 +48,9 @@ function signBytes(privateKey, contents) {
   }
 
   let hashBytes = SHA256(contents);
-  let signBytes = ECKeySign(hashBytes, privateKey);
+  let signedBytes = ECKeySign(hashBytes, privateKey);
 
-  return signBytes;
+  return signedBytes;
 }
 
 //return bytes of rowdata, use to sign.
