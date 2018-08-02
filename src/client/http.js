@@ -456,6 +456,13 @@ class ApiClient {
     }
   }
 
+  async getStatisticData() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/witness/maintenance-statistic`);
+    return {
+      statisticData:data
+    }
+  }
+
 }
 
 module.exports = ApiClient;
