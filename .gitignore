@@ -63,4 +63,4 @@ typings/
 # IDE
 .idea
 
-protocol
+/protocol
