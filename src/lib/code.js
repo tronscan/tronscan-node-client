@@ -1,3 +1,5 @@
+const btoa = require('btoa');
+
 /* eslint-disable */
 function bin2String(array) {
   return String.fromCharCode.apply(String, array);
