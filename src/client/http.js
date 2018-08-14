@@ -52,7 +52,7 @@ class ApiClient {
 
     if (note.length > 0) {
       let rawData = transaction.getRawData();
-      rawData.setData(encodeString(note));
+      rawData.setData(encodeString(encodeURIComponent(note)));
       transaction.setRawData(rawData);
     }
 
