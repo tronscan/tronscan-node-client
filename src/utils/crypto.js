@@ -222,8 +222,6 @@ function ECKeySign(hashBytes, priKeyBytes) {
   return hexStr2byteArray(signHex);
 }
 
-//toDO:
-//return 32 bytes
 function SHA256(msgBytes) {
   let shaObj = new jsSHA("SHA-256", "HEX");
   let msgHex = byteArray2hexStr(msgBytes);
@@ -256,4 +254,5 @@ module.exports = {
   pkToAddress,
   decode58Check,
   signBytes,
+  SHA256,
 };
