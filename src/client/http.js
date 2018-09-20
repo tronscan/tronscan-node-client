@@ -33,8 +33,8 @@ function byteArrayToLong(/*byte[]*/byteArray) {
 
 class ApiClient {
 
-  constructor() {
-    this.apiUrl = process.env.API_URL;
+  constructor(apiUrl) {
+    this.apiUrl = apiUrl || process.env.API_URL;
     this.signer = null;
   }
 
