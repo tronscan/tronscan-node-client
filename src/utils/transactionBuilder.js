@@ -1,7 +1,8 @@
 const decode58Check = require("./crypto").decode58Check;
-const {Block, Transaction, Account} = require("../protocol/core/Tron_pb");
+const { Block, Transaction, Account } = require("../protocol/core/Tron_pb");
 const google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
 const encodeString = require("../lib/code").encodeString;
+const { hexStr2byteArray } = require('../lib/code');
 
 const {
   TransferContract,
@@ -16,6 +17,7 @@ const {
   WithdrawBalanceContract,
   WitnessCreateContract,
   UnfreezeAssetContract,
+  TriggerSmartContract
 } = require("../protocol/core/Contract_pb");
 
 function buildTransferContract(message, contractType, typeName) {
@@ -227,6 +229,19 @@ function buildUnfreezeAsset(address) {
     "UnfreezeAssetContract");
 }
 
+function buildTriggerSmartContract(owner_address, contract_address, call_value, data) {
+  let contract = new TriggerSmartContract();
+  contract.setOwnerAddress(Uint8Array.from(hexStr2byteArray(owner_address)));
+  contract.setContractAddress(Uint8Array.from(hexStr2byteArray(contract_address)));
+  contract.setCallValue(call_value);
+  contract.setData(Uint8Array.from(hexStr2byteArray(data)));
+  return buildTransferContract(
+    contract,
+    Transaction.Contract.ContractType.TRIGGERSMARTCONTRACT,
+    'TriggerSmartContract'
+  );
+}
+
 module.exports = {
   buildTransferTransaction,
   buildAccountUpdate,
@@ -239,5 +254,6 @@ module.exports = {
   buildWithdrawBalance,
   buildWitnessCreate,
   buildUnfreezeAsset,
+  buildTriggerSmartContract,
 };
 
