@@ -185,10 +185,10 @@ proto.protocol.InventoryItems.prototype.getItemsList = function() {
 /**
  * repeated bytes items = 2;
  * This is a type-conversion wrapper around `getItemsList()`
- * @return {!Array.<string>}
+ * @return {!Array<string>}
  */
 proto.protocol.InventoryItems.prototype.getItemsList_asB64 = function() {
-  return /** @type {!Array.<string>} */ (jspb.Message.bytesListAsB64(
+  return /** @type {!Array<string>} */ (jspb.Message.bytesListAsB64(
       this.getItemsList()));
 };
 
@@ -198,10 +198,10 @@ proto.protocol.InventoryItems.prototype.getItemsList_asB64 = function() {
  * Note that Uint8Array is not supported on all browsers.
  * @see http://caniuse.com/Uint8Array
  * This is a type-conversion wrapper around `getItemsList()`
- * @return {!Array.<!Uint8Array>}
+ * @return {!Array<!Uint8Array>}
  */
 proto.protocol.InventoryItems.prototype.getItemsList_asU8 = function() {
-  return /** @type {!Array.<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
+  return /** @type {!Array<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
       this.getItemsList()));
 };
 
