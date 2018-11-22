@@ -17,7 +17,8 @@ const {
   WithdrawBalanceContract,
   WitnessCreateContract,
   UnfreezeAssetContract,
-  TriggerSmartContract
+  TriggerSmartContract,
+  ResourceCode
 } = require("../protocol/core/Contract_pb");
 
 function buildTransferContract(message, contractType, typeName) {
@@ -183,13 +184,15 @@ function buildAssetIssue(options) {
  * @param address From which address to freze
  * @param amount The amount of TRX to freeze
  * @param duration Duration in days
+ * @param resource One of ['BANDWIDTH', 'ENERGY']
  */
-function buildFreezeBalance(address, amount, duration) {
+function buildFreezeBalance(address, amount, duration, resource = 'BANDWIDTH') {
   let contract = new FreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
   contract.setFrozenBalance(amount);
   contract.setFrozenDuration(duration);
+  contract.setResource(ResourceCode[resource]);
 
   return buildTransferContract(
     contract,
