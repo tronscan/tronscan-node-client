@@ -228,6 +228,7 @@ function buildUnfreezeAsset(address) {
 }
 
 module.exports = {
+  buildTransferContract,
   buildTransferTransaction,
   buildAccountUpdate,
   buildAssetParticipate,
