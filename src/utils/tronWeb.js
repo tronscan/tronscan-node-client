@@ -145,7 +145,7 @@ export function contractJsonToProtobuf(contract) {
       let contract = new VoteWitnessContract();
       contract.setOwnerAddress(fromHexString(value.owner_address));
 
-      for (let address of Object.keys(value.votes)) {
+      for (let address of value.votes) {
         let vote = new VoteWitnessContract.Vote();
         vote.setVoteAddress(fromHexString(address.vote_address));
         vote.setVoteCount(address.vote_count);
