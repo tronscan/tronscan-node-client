@@ -16,6 +16,10 @@ const {
   WithdrawBalanceContract,
   WitnessCreateContract,
   UnfreezeAssetContract,
+  ExchangeCreateContract,
+  ExchangeInjectContract,
+  ExchangeWithdrawContract,
+  ExchangeTransactionContract
 } = require("../protocol/core/Contract_pb");
 
 function buildTransferContract(message, contractType, typeName) {
@@ -181,13 +185,15 @@ function buildAssetIssue(options) {
  * @param address From which address to freze
  * @param amount The amount of TRX to freeze
  * @param duration Duration in days
+ * @param andwith or energy   Bandwidth Point = 0，Energy = 1
  */
-function buildFreezeBalance(address, amount, duration) {
+function buildFreezeBalance(address, amount, duration, resource) {
   let contract = new FreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
   contract.setFrozenBalance(amount);
   contract.setFrozenDuration(duration);
+  contract.setResource(resource);
 
   return buildTransferContract(
     contract,
@@ -200,10 +206,11 @@ function buildFreezeBalance(address, amount, duration) {
  *
  * @param address From which address to freeze
  */
-function buildUnfreezeBalance(address) {
+function buildUnfreezeBalance(address, resource) {
   let contract = new UnfreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
+  contract.setResource(resource);
 
   return buildTransferContract(
     contract,
@@ -227,6 +234,96 @@ function buildUnfreezeAsset(address) {
     "UnfreezeAssetContract");
 }
 
+/**
+ * Create Exchange
+ *
+ * @param address From  which address to create exchange
+ * @param firstTokenID  The first token id
+ * @param secondTokenId  The second token id
+ * @param firstTokenBalance   The balance of the first token
+ * @param secondTokenBalance  The balance of the second token
+ */
+function buildExchangeCreate(address,firstTokenID,secondTokenId,firstTokenBalance,secondTokenBalance) {
+    let contract = new ExchangeCreateContract();
+    contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
+    contract.setFirstTokenId(encodeString(firstTokenID));
+    contract.setFirstTokenBalance(firstTokenBalance);
+    contract.setSecondTokenId(encodeString(secondTokenId));
+    contract.setSecondTokenBalance(secondTokenBalance);
+
+    return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGECREATECONTRACT,
+        "ExchangeCreateContract");
+}
+
+/**
+ * Inject Exchange
+ *
+ * @param address  From which address to create exchange
+ * @param exchangeId  The id of the transaction pair
+ * @param tokenId  The id of the token to be funded
+ * @param quant  The amount of the token to be injected
+ */
+function buildExchangeInject(address,exchangeId, tokenId, quant) {
+    let contract = new ExchangeInjectContract();
+    contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
+    contract.setExchangeId(exchangeId);
+    contract.setTokenId(encodeString(tokenId));
+    contract.setQuant(quant);
+
+    return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGEINJECTCONTRACT,
+        "ExchangeInjectContract");
+}
+
+/**
+ * Withdraw Exchange
+ *
+ * @param address  From which address to create exchange
+ * @param exchangeId  The id of the transaction pair
+ * @param tokenId  The id of the token to be funded
+ * @param quant  The amount of the token to be injected
+ */
+function buildExchangeWithdraw(address,exchangeId, tokenId, quant) {
+    let contract = new ExchangeWithdrawContract();
+    contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
+    contract.setExchangeId(exchangeId);
+    contract.setTokenId(encodeString(tokenId));
+    contract.setQuant(quant);
+
+    return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGEWITHDRAWCONTRACT,
+        "ExchangeWithdrawContract");
+}
+
+
+/**
+ * Withdraw Exchange
+ *
+ * @param address  From which address to create exchange
+ * @param exchangeId  The id of the transaction pair
+ * @param tokenId  The id of the token to be funded
+ * @param quant  The amount of the token to be injected
+ * @param expected  The minimum amount of another token expected to be obtained. If it is less than this value, the transaction will not succeed
+ */
+function buildTransactionExchange(address,exchange_id, token_id, quant, expected) {
+    let contract = new ExchangeTransactionContract();
+    contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
+    contract.setExchangeId(exchange_id);
+    contract.setTokenId(encodeString(token_id));
+    contract.setQuant(quant);
+    contract.setExpected(expected)
+
+    return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGETRANSACTIONCONTRACT,
+        "ExchangeTransactionContract");
+}
+
+
 module.exports = {
   buildTransferContract,
   buildTransferTransaction,
@@ -240,5 +337,9 @@ module.exports = {
   buildWithdrawBalance,
   buildWitnessCreate,
   buildUnfreezeAsset,
+  buildExchangeCreate,
+  buildExchangeInject,
+  buildExchangeWithdraw,
+  buildTransactionExchange
 };
 
