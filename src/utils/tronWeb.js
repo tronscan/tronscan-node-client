@@ -14,6 +14,7 @@ const {
   WithdrawBalanceContract,
   WitnessCreateContract,
   UnfreezeAssetContract,
+  TriggerSmartContract,
 } = require("../protocol/core/Contract_pb");
 
 const fromHexString = hexString =>
@@ -35,6 +36,10 @@ export function transactionJsonToProtoBuf(transaction) {
 
   if (rawData.timestamp) {
     rawDataObj.setTimestamp(rawData.timestamp);
+  }
+
+  if (rawData.fee_limit) {
+    rawDataObj.setFeeLimit(rawData.fee_limit);
   }
 
   transactionObj.setRawData(rawDataObj);
@@ -66,7 +71,7 @@ export function contractJsonToProtobuf(contract) {
       let transferContract = new TransferAssetContract();
       transferContract.setToAddress(fromHexString(to_address));
       transferContract.setOwnerAddress(fromHexString(owner_address));
-      transferContract.setAssetName(asset_name);
+      transferContract.setAssetName(fromHexString(asset_name));
       transferContract.setAmount(amount);
 
       return buildTransferContract(
@@ -125,13 +130,16 @@ export function contractJsonToProtobuf(contract) {
 
     case "FreezeBalanceContract": {
 
-      // TODO ADD ENERGY SWITCH
-
       let contract = new FreezeBalanceContract();
 
       contract.setOwnerAddress(fromHexString(value.owner_address));
       contract.setFrozenBalance(value.frozen_balance);
       contract.setFrozenDuration(value.frozen_duration);
+      if (value.resource === "BANDWIDTH")
+        contract.setResource(0);
+      else
+        contract.setResource(1);
+      
 
       return buildTransferContract(
         contract,
@@ -174,11 +182,13 @@ export function contractJsonToProtobuf(contract) {
 
     case "UnfreezeBalanceContract": {
 
-      // TODO ADD ENERGY SWITCH
-
       let contract = new UnfreezeBalanceContract();
 
       contract.setOwnerAddress(fromHexString(value.owner_address));
+      if (value.resource === "BANDWIDTH")
+        contract.setResource(0);
+      else
+        contract.setResource(1);
 
       return buildTransferContract(
         contract,
@@ -196,6 +206,21 @@ export function contractJsonToProtobuf(contract) {
         contract,
         Transaction.Contract.ContractType.UNFREEZEASSETCONTRACT,
         "UnfreezeAssetContract");
+    }
+
+    case "TriggerSmartContract": {
+
+      let contract = new TriggerSmartContract();
+
+      contract.setOwnerAddress(fromHexString(value.owner_address));
+      contract.setContractAddress(fromHexString(value.contract_address));
+      contract.setCallValue(value.call_value);
+      contract.setData(fromHexString(value.data));
+      
+      return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.TRIGGERSMARTCONTRACT,
+        "TriggerSmartContract");
     }
 
   }
