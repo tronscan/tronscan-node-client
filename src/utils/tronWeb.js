@@ -15,6 +15,10 @@ const {
   WitnessCreateContract,
   UnfreezeAssetContract,
   TriggerSmartContract,
+  ExchangeTransactionContract,
+  ExchangeCreateContract,
+  ExchangeWithdrawContract,
+  ExchangeInjectContract,
 } = require("../protocol/core/Contract_pb");
 
 const fromHexString = hexString =>
@@ -135,11 +139,10 @@ export function contractJsonToProtobuf(contract) {
       contract.setOwnerAddress(fromHexString(value.owner_address));
       contract.setFrozenBalance(value.frozen_balance);
       contract.setFrozenDuration(value.frozen_duration);
-      if (value.resource === "BANDWIDTH")
-        contract.setResource(0);
-      else
+      if (value.resource === "ENERGY")
         contract.setResource(1);
-      
+      else
+        contract.setResource(0);
 
       return buildTransferContract(
         contract,
@@ -185,10 +188,10 @@ export function contractJsonToProtobuf(contract) {
       let contract = new UnfreezeBalanceContract();
 
       contract.setOwnerAddress(fromHexString(value.owner_address));
-      if (value.resource === "BANDWIDTH")
-        contract.setResource(0);
-      else
+      if (value.resource === "ENERGY")
         contract.setResource(1);
+      else
+        contract.setResource(0);
 
       return buildTransferContract(
         contract,
@@ -221,6 +224,68 @@ export function contractJsonToProtobuf(contract) {
         contract,
         Transaction.Contract.ContractType.TRIGGERSMARTCONTRACT,
         "TriggerSmartContract");
+    }
+
+    case "ExchangeTransactionContract": {
+
+      let contract = new ExchangeTransactionContract();
+
+      contract.setOwnerAddress(fromHexString(value.owner_address));
+      contract.setExchangeId(value.exchange_id);
+      contract.setTokenId(fromHexString(value.token_id));
+      contract.setQuant(value.quant);
+      contract.setExpected(value.expected);
+      
+      return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGETRANSACTIONCONTRACT,
+        "ExchangeTransactionContract");
+    }
+
+    case "ExchangeCreateContract": {
+
+      let contract = new ExchangeCreateContract();
+
+      contract.setOwnerAddress(fromHexString(value.owner_address));
+      contract.setFirstTokenId(fromHexString(value.first_token_id));
+      contract.setFirstTokenBalance(value.first_token_balance);
+      contract.setSecondTokenId(fromHexString(value.second_token_id));
+      contract.setSecondTokenBalance(value.second_token_balance);
+      
+      return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGECREATECONTRACT,
+        "ExchangeCreateContract");
+    }
+
+    case "ExchangeInjectContract": {
+
+      let contract = new ExchangeInjectContract();
+
+      contract.setOwnerAddress(fromHexString(value.owner_address));
+      contract.setExchangeId(value.exchange_id);
+      contract.setTokenId(fromHexString(value.token_id));
+      contract.setQuant(value.quant);
+      
+      return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGEINJECTCONTRACT,
+        "ExchangeInjectContract");
+    }
+
+    case "ExchangeWithdrawContract": {
+
+      let contract = new ExchangeWithdrawContract();
+
+      contract.setOwnerAddress(fromHexString(value.owner_address));
+      contract.setExchangeId(value.exchange_id);
+      contract.setTokenId(fromHexString(value.token_id));
+      contract.setQuant(value.quant);
+      
+      return buildTransferContract(
+        contract,
+        Transaction.Contract.ContractType.EXCHANGEWITHDRAWCONTRACT,
+        "ExchangeWithdrawContract");
     }
 
   }

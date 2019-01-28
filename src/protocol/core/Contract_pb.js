@@ -26,9 +26,6 @@ goog.exportSymbol('proto.protocol.ExchangeTransactionContract', null, global);
 goog.exportSymbol('proto.protocol.ExchangeWithdrawContract', null, global);
 goog.exportSymbol('proto.protocol.FreezeBalanceContract', null, global);
 goog.exportSymbol('proto.protocol.ParticipateAssetIssueContract', null, global);
-goog.exportSymbol('proto.protocol.PermissionAddKeyContract', null, global);
-goog.exportSymbol('proto.protocol.PermissionDeleteKeyContract', null, global);
-goog.exportSymbol('proto.protocol.PermissionUpdateKeyContract', null, global);
 goog.exportSymbol('proto.protocol.ProposalApproveContract', null, global);
 goog.exportSymbol('proto.protocol.ProposalCreateContract', null, global);
 goog.exportSymbol('proto.protocol.ProposalDeleteContract', null, global);
@@ -41,6 +38,7 @@ goog.exportSymbol('proto.protocol.TriggerSmartContract', null, global);
 goog.exportSymbol('proto.protocol.UnfreezeAssetContract', null, global);
 goog.exportSymbol('proto.protocol.UnfreezeBalanceContract', null, global);
 goog.exportSymbol('proto.protocol.UpdateAssetContract', null, global);
+goog.exportSymbol('proto.protocol.UpdateEnergyLimitContract', null, global);
 goog.exportSymbol('proto.protocol.UpdateSettingContract', null, global);
 goog.exportSymbol('proto.protocol.VoteAssetContract', null, global);
 goog.exportSymbol('proto.protocol.VoteWitnessContract', null, global);
@@ -2255,6 +2253,250 @@ proto.protocol.UpdateSettingContract.prototype.setConsumeUserResourcePercent = f
  * @extends {jspb.Message}
  * @constructor
  */
+proto.protocol.UpdateEnergyLimitContract = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.protocol.UpdateEnergyLimitContract, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.UpdateEnergyLimitContract.displayName = 'proto.protocol.UpdateEnergyLimitContract';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.UpdateEnergyLimitContract.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.UpdateEnergyLimitContract} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.UpdateEnergyLimitContract.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    ownerAddress: msg.getOwnerAddress_asB64(),
+    contractAddress: msg.getContractAddress_asB64(),
+    originEnergyLimit: jspb.Message.getFieldWithDefault(msg, 3, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.UpdateEnergyLimitContract}
+ */
+proto.protocol.UpdateEnergyLimitContract.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.UpdateEnergyLimitContract;
+  return proto.protocol.UpdateEnergyLimitContract.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.UpdateEnergyLimitContract} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.UpdateEnergyLimitContract}
+ */
+proto.protocol.UpdateEnergyLimitContract.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setOwnerAddress(value);
+      break;
+    case 2:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setContractAddress(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setOriginEnergyLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.UpdateEnergyLimitContract.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.UpdateEnergyLimitContract} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.UpdateEnergyLimitContract.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwnerAddress_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      1,
+      f
+    );
+  }
+  f = message.getContractAddress_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      2,
+      f
+    );
+  }
+  f = message.getOriginEnergyLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional bytes owner_address = 1;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getOwnerAddress = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * optional bytes owner_address = 1;
+ * This is a type-conversion wrapper around `getOwnerAddress()`
+ * @return {string}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getOwnerAddress_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getOwnerAddress()));
+};
+
+
+/**
+ * optional bytes owner_address = 1;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getOwnerAddress()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getOwnerAddress_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getOwnerAddress()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.UpdateEnergyLimitContract.prototype.setOwnerAddress = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional bytes contract_address = 2;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getContractAddress = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * optional bytes contract_address = 2;
+ * This is a type-conversion wrapper around `getContractAddress()`
+ * @return {string}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getContractAddress_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getContractAddress()));
+};
+
+
+/**
+ * optional bytes contract_address = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getContractAddress()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getContractAddress_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getContractAddress()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.UpdateEnergyLimitContract.prototype.setContractAddress = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional int64 origin_energy_limit = 3;
+ * @return {number}
+ */
+proto.protocol.UpdateEnergyLimitContract.prototype.getOriginEnergyLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.UpdateEnergyLimitContract.prototype.setOriginEnergyLimit = function(value) {
+  jspb.Message.setField(this, 3, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.protocol.WitnessCreateContract = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -2732,6 +2974,7 @@ proto.protocol.AssetIssueContract.prototype.toObject = function(opt_includeInsta
  */
 proto.protocol.AssetIssueContract.toObject = function(includeInstance, msg) {
   var f, obj = {
+    id: jspb.Message.getFieldWithDefault(msg, 41, ""),
     ownerAddress: msg.getOwnerAddress_asB64(),
     name: msg.getName_asB64(),
     abbr: msg.getAbbr_asB64(),
@@ -2739,6 +2982,7 @@ proto.protocol.AssetIssueContract.toObject = function(includeInstance, msg) {
     frozenSupplyList: jspb.Message.toObjectList(msg.getFrozenSupplyList(),
     proto.protocol.AssetIssueContract.FrozenSupply.toObject, includeInstance),
     trxNum: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    precision: jspb.Message.getFieldWithDefault(msg, 7, 0),
     num: jspb.Message.getFieldWithDefault(msg, 8, 0),
     startTime: jspb.Message.getFieldWithDefault(msg, 9, 0),
     endTime: jspb.Message.getFieldWithDefault(msg, 10, 0),
@@ -2786,6 +3030,10 @@ proto.protocol.AssetIssueContract.deserializeBinaryFromReader = function(msg, re
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 41:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
     case 1:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setOwnerAddress(value);
@@ -2810,6 +3058,10 @@ proto.protocol.AssetIssueContract.deserializeBinaryFromReader = function(msg, re
     case 6:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setTrxNum(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPrecision(value);
       break;
     case 8:
       var value = /** @type {number} */ (reader.readInt32());
@@ -2884,6 +3136,13 @@ proto.protocol.AssetIssueContract.prototype.serializeBinary = function() {
  */
 proto.protocol.AssetIssueContract.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      41,
+      f
+    );
+  }
   f = message.getOwnerAddress_asU8();
   if (f.length > 0) {
     writer.writeBytes(
@@ -2924,6 +3183,13 @@ proto.protocol.AssetIssueContract.serializeBinaryToWriter = function(message, wr
   if (f !== 0) {
     writer.writeInt32(
       6,
+      f
+    );
+  }
+  f = message.getPrecision();
+  if (f !== 0) {
+    writer.writeInt32(
+      7,
       f
     );
   }
@@ -3177,6 +3443,21 @@ proto.protocol.AssetIssueContract.FrozenSupply.prototype.setFrozenDays = functio
 
 
 /**
+ * optional string id = 41;
+ * @return {string}
+ */
+proto.protocol.AssetIssueContract.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 41, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.AssetIssueContract.prototype.setId = function(value) {
+  jspb.Message.setField(this, 41, value);
+};
+
+
+/**
  * optional bytes owner_address = 1;
  * @return {!(string|Uint8Array)}
  */
@@ -3351,6 +3632,21 @@ proto.protocol.AssetIssueContract.prototype.getTrxNum = function() {
 /** @param {number} value */
 proto.protocol.AssetIssueContract.prototype.setTrxNum = function(value) {
   jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * optional int32 precision = 7;
+ * @return {number}
+ */
+proto.protocol.AssetIssueContract.prototype.getPrecision = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.AssetIssueContract.prototype.setPrecision = function(value) {
+  jspb.Message.setField(this, 7, value);
 };
 
 
@@ -3912,7 +4208,8 @@ proto.protocol.FreezeBalanceContract.toObject = function(includeInstance, msg) {
     ownerAddress: msg.getOwnerAddress_asB64(),
     frozenBalance: jspb.Message.getFieldWithDefault(msg, 2, 0),
     frozenDuration: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    resource: jspb.Message.getFieldWithDefault(msg, 10, 0)
+    resource: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    receiverAddress: msg.getReceiverAddress_asB64()
   };
 
   if (includeInstance) {
@@ -3960,6 +4257,14 @@ proto.protocol.FreezeBalanceContract.deserializeBinaryFromReader = function(msg,
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setFrozenDuration(value);
+      break;
+    case 10:
+      var value = /** @type {!proto.protocol.ResourceCode} */ (reader.readEnum());
+      msg.setResource(value);
+      break;
+    case 15:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setReceiverAddress(value);
       break;
     case 10:
       var value = /** @type {!proto.protocol.ResourceCode} */ (reader.readEnum());
@@ -4019,6 +4324,13 @@ proto.protocol.FreezeBalanceContract.serializeBinaryToWriter = function(message,
   if (f !== 0.0) {
     writer.writeEnum(
       10,
+      f
+    );
+  }
+  f = message.getReceiverAddress_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      15,
       f
     );
   }
@@ -4109,6 +4421,45 @@ proto.protocol.FreezeBalanceContract.prototype.setResource = function(value) {
 };
 
 
+/**
+ * optional bytes receiver_address = 15;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.FreezeBalanceContract.prototype.getReceiverAddress = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * optional bytes receiver_address = 15;
+ * This is a type-conversion wrapper around `getReceiverAddress()`
+ * @return {string}
+ */
+proto.protocol.FreezeBalanceContract.prototype.getReceiverAddress_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getReceiverAddress()));
+};
+
+
+/**
+ * optional bytes receiver_address = 15;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getReceiverAddress()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.FreezeBalanceContract.prototype.getReceiverAddress_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getReceiverAddress()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.FreezeBalanceContract.prototype.setReceiverAddress = function(value) {
+  jspb.Message.setField(this, 15, value);
+};
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -4157,7 +4508,8 @@ proto.protocol.UnfreezeBalanceContract.prototype.toObject = function(opt_include
 proto.protocol.UnfreezeBalanceContract.toObject = function(includeInstance, msg) {
   var f, obj = {
     ownerAddress: msg.getOwnerAddress_asB64(),
-    resource: jspb.Message.getFieldWithDefault(msg, 10, 0)
+    resource: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    receiverAddress: msg.getReceiverAddress_asB64()
   };
 
   if (includeInstance) {
@@ -4202,6 +4554,10 @@ proto.protocol.UnfreezeBalanceContract.deserializeBinaryFromReader = function(ms
       var value = /** @type {!proto.protocol.ResourceCode} */ (reader.readEnum());
       msg.setResource(value);
       break;
+    case 15:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setReceiverAddress(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4242,6 +4598,13 @@ proto.protocol.UnfreezeBalanceContract.serializeBinaryToWriter = function(messag
   if (f !== 0.0) {
     writer.writeEnum(
       10,
+      f
+    );
+  }
+  f = message.getReceiverAddress_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      15,
       f
     );
   }
@@ -4299,6 +4662,45 @@ proto.protocol.UnfreezeBalanceContract.prototype.getResource = function() {
 /** @param {!proto.protocol.ResourceCode} value */
 proto.protocol.UnfreezeBalanceContract.prototype.setResource = function(value) {
   jspb.Message.setField(this, 10, value);
+};
+
+
+/**
+ * optional bytes receiver_address = 15;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.UnfreezeBalanceContract.prototype.getReceiverAddress = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * optional bytes receiver_address = 15;
+ * This is a type-conversion wrapper around `getReceiverAddress()`
+ * @return {string}
+ */
+proto.protocol.UnfreezeBalanceContract.prototype.getReceiverAddress_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getReceiverAddress()));
+};
+
+
+/**
+ * optional bytes receiver_address = 15;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getReceiverAddress()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.UnfreezeBalanceContract.prototype.getReceiverAddress_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getReceiverAddress()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.UnfreezeBalanceContract.prototype.setReceiverAddress = function(value) {
+  jspb.Message.setField(this, 15, value);
 };
 
 
@@ -5614,7 +6016,9 @@ proto.protocol.CreateSmartContract.prototype.toObject = function(opt_includeInst
 proto.protocol.CreateSmartContract.toObject = function(includeInstance, msg) {
   var f, obj = {
     ownerAddress: msg.getOwnerAddress_asB64(),
-    newContract: (f = msg.getNewContract()) && core_Tron_pb.SmartContract.toObject(includeInstance, f)
+    newContract: (f = msg.getNewContract()) && core_Tron_pb.SmartContract.toObject(includeInstance, f),
+    callTokenValue: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    tokenId: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -5660,6 +6064,14 @@ proto.protocol.CreateSmartContract.deserializeBinaryFromReader = function(msg, r
       reader.readMessage(value,core_Tron_pb.SmartContract.deserializeBinaryFromReader);
       msg.setNewContract(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCallTokenValue(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTokenId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -5702,6 +6114,20 @@ proto.protocol.CreateSmartContract.serializeBinaryToWriter = function(message, w
       2,
       f,
       core_Tron_pb.SmartContract.serializeBinaryToWriter
+    );
+  }
+  f = message.getCallTokenValue();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getTokenId();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
     );
   }
 };
@@ -5776,6 +6202,37 @@ proto.protocol.CreateSmartContract.prototype.hasNewContract = function() {
 };
 
 
+/**
+ * optional int64 call_token_value = 3;
+ * @return {number}
+ */
+proto.protocol.CreateSmartContract.prototype.getCallTokenValue = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.CreateSmartContract.prototype.setCallTokenValue = function(value) {
+  jspb.Message.setField(this, 3, value);
+};
+
+
+
+/**
+ * optional int64 token_id = 4;
+ * @return {number}
+ */
+proto.protocol.CreateSmartContract.prototype.getTokenId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.CreateSmartContract.prototype.setTokenId = function(value) {
+  jspb.Message.setField(this, 4, value);
+};
+
+
 
 /**
  * Generated by JsPbCodeGenerator.
@@ -5826,7 +6283,9 @@ proto.protocol.TriggerSmartContract.toObject = function(includeInstance, msg) {
     ownerAddress: msg.getOwnerAddress_asB64(),
     contractAddress: msg.getContractAddress_asB64(),
     callValue: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    data: msg.getData_asB64()
+    data: msg.getData_asB64(),
+    callTokenValue: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    tokenId: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -5878,6 +6337,14 @@ proto.protocol.TriggerSmartContract.deserializeBinaryFromReader = function(msg, 
     case 4:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setData(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCallTokenValue(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTokenId(value);
       break;
     default:
       reader.skipField();
@@ -5933,6 +6400,20 @@ proto.protocol.TriggerSmartContract.serializeBinaryToWriter = function(message, 
   if (f.length > 0) {
     writer.writeBytes(
       4,
+      f
+    );
+  }
+  f = message.getCallTokenValue();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
+  f = message.getTokenId();
+  if (f !== 0) {
+    writer.writeInt64(
+      6,
       f
     );
   }
@@ -6068,6 +6549,36 @@ proto.protocol.TriggerSmartContract.prototype.getData_asU8 = function() {
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TriggerSmartContract.prototype.setData = function(value) {
   jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * optional int64 call_token_value = 5;
+ * @return {number}
+ */
+proto.protocol.TriggerSmartContract.prototype.getCallTokenValue = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.TriggerSmartContract.prototype.setCallTokenValue = function(value) {
+  jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * optional int64 token_id = 6;
+ * @return {number}
+ */
+proto.protocol.TriggerSmartContract.prototype.getTokenId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.TriggerSmartContract.prototype.setTokenId = function(value) {
+  jspb.Message.setField(this, 6, value);
 };
 
 
@@ -7809,943 +8320,6 @@ proto.protocol.ExchangeTransactionContract.prototype.getExpected = function() {
 /** @param {number} value */
 proto.protocol.ExchangeTransactionContract.prototype.setExpected = function(value) {
   jspb.Message.setField(this, 5, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.protocol.AccountPermissionUpdateContract = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.protocol.AccountPermissionUpdateContract.repeatedFields_, null);
-};
-goog.inherits(proto.protocol.AccountPermissionUpdateContract, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.protocol.AccountPermissionUpdateContract.displayName = 'proto.protocol.AccountPermissionUpdateContract';
-}
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.protocol.AccountPermissionUpdateContract.repeatedFields_ = [2];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.toObject = function(opt_includeInstance) {
-  return proto.protocol.AccountPermissionUpdateContract.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.protocol.AccountPermissionUpdateContract} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.AccountPermissionUpdateContract.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    ownerAddress: msg.getOwnerAddress_asB64(),
-    permissionsList: jspb.Message.toObjectList(msg.getPermissionsList(),
-    core_Tron_pb.Permission.toObject, includeInstance)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.protocol.AccountPermissionUpdateContract}
- */
-proto.protocol.AccountPermissionUpdateContract.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.protocol.AccountPermissionUpdateContract;
-  return proto.protocol.AccountPermissionUpdateContract.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.protocol.AccountPermissionUpdateContract} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.protocol.AccountPermissionUpdateContract}
- */
-proto.protocol.AccountPermissionUpdateContract.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setOwnerAddress(value);
-      break;
-    case 2:
-      var value = new core_Tron_pb.Permission;
-      reader.readMessage(value,core_Tron_pb.Permission.deserializeBinaryFromReader);
-      msg.addPermissions(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.protocol.AccountPermissionUpdateContract.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.protocol.AccountPermissionUpdateContract} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.AccountPermissionUpdateContract.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getOwnerAddress_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      1,
-      f
-    );
-  }
-  f = message.getPermissionsList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      2,
-      f,
-      core_Tron_pb.Permission.serializeBinaryToWriter
-    );
-  }
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * @return {!(string|Uint8Array)}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.getOwnerAddress = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {string}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.getOwnerAddress_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getOwnerAddress()));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {!Uint8Array}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.getOwnerAddress_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getOwnerAddress()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.protocol.AccountPermissionUpdateContract.prototype.setOwnerAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * repeated Permission permissions = 2;
- * @return {!Array.<!proto.protocol.Permission>}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.getPermissionsList = function() {
-  return /** @type{!Array.<!proto.protocol.Permission>} */ (
-    jspb.Message.getRepeatedWrapperField(this, core_Tron_pb.Permission, 2));
-};
-
-
-/** @param {!Array.<!proto.protocol.Permission>} value */
-proto.protocol.AccountPermissionUpdateContract.prototype.setPermissionsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
-};
-
-
-/**
- * @param {!proto.protocol.Permission=} opt_value
- * @param {number=} opt_index
- * @return {!proto.protocol.Permission}
- */
-proto.protocol.AccountPermissionUpdateContract.prototype.addPermissions = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.protocol.Permission, opt_index);
-};
-
-
-proto.protocol.AccountPermissionUpdateContract.prototype.clearPermissionsList = function() {
-  this.setPermissionsList([]);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.protocol.PermissionAddKeyContract = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.protocol.PermissionAddKeyContract, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.protocol.PermissionAddKeyContract.displayName = 'proto.protocol.PermissionAddKeyContract';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.protocol.PermissionAddKeyContract.prototype.toObject = function(opt_includeInstance) {
-  return proto.protocol.PermissionAddKeyContract.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.protocol.PermissionAddKeyContract} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.PermissionAddKeyContract.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    ownerAddress: msg.getOwnerAddress_asB64(),
-    key: (f = msg.getKey()) && core_Tron_pb.Key.toObject(includeInstance, f),
-    permissionName: jspb.Message.getFieldWithDefault(msg, 3, "")
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.protocol.PermissionAddKeyContract}
- */
-proto.protocol.PermissionAddKeyContract.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.protocol.PermissionAddKeyContract;
-  return proto.protocol.PermissionAddKeyContract.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.protocol.PermissionAddKeyContract} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.protocol.PermissionAddKeyContract}
- */
-proto.protocol.PermissionAddKeyContract.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setOwnerAddress(value);
-      break;
-    case 2:
-      var value = new core_Tron_pb.Key;
-      reader.readMessage(value,core_Tron_pb.Key.deserializeBinaryFromReader);
-      msg.setKey(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPermissionName(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionAddKeyContract.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.protocol.PermissionAddKeyContract.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.protocol.PermissionAddKeyContract} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.PermissionAddKeyContract.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getOwnerAddress_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      1,
-      f
-    );
-  }
-  f = message.getKey();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      core_Tron_pb.Key.serializeBinaryToWriter
-    );
-  }
-  f = message.getPermissionName();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * @return {!(string|Uint8Array)}
- */
-proto.protocol.PermissionAddKeyContract.prototype.getOwnerAddress = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {string}
- */
-proto.protocol.PermissionAddKeyContract.prototype.getOwnerAddress_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getOwnerAddress()));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionAddKeyContract.prototype.getOwnerAddress_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getOwnerAddress()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.protocol.PermissionAddKeyContract.prototype.setOwnerAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * optional Key key = 2;
- * @return {?proto.protocol.Key}
- */
-proto.protocol.PermissionAddKeyContract.prototype.getKey = function() {
-  return /** @type{?proto.protocol.Key} */ (
-    jspb.Message.getWrapperField(this, core_Tron_pb.Key, 2));
-};
-
-
-/** @param {?proto.protocol.Key|undefined} value */
-proto.protocol.PermissionAddKeyContract.prototype.setKey = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-proto.protocol.PermissionAddKeyContract.prototype.clearKey = function() {
-  this.setKey(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.protocol.PermissionAddKeyContract.prototype.hasKey = function() {
-  return jspb.Message.getField(this, 2) != null;
-};
-
-
-/**
- * optional string permission_name = 3;
- * @return {string}
- */
-proto.protocol.PermissionAddKeyContract.prototype.getPermissionName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/** @param {string} value */
-proto.protocol.PermissionAddKeyContract.prototype.setPermissionName = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.protocol.PermissionUpdateKeyContract = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.protocol.PermissionUpdateKeyContract, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.protocol.PermissionUpdateKeyContract.displayName = 'proto.protocol.PermissionUpdateKeyContract';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.toObject = function(opt_includeInstance) {
-  return proto.protocol.PermissionUpdateKeyContract.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.protocol.PermissionUpdateKeyContract} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.PermissionUpdateKeyContract.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    ownerAddress: msg.getOwnerAddress_asB64(),
-    key: (f = msg.getKey()) && core_Tron_pb.Key.toObject(includeInstance, f),
-    permissionName: jspb.Message.getFieldWithDefault(msg, 3, "")
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.protocol.PermissionUpdateKeyContract}
- */
-proto.protocol.PermissionUpdateKeyContract.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.protocol.PermissionUpdateKeyContract;
-  return proto.protocol.PermissionUpdateKeyContract.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.protocol.PermissionUpdateKeyContract} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.protocol.PermissionUpdateKeyContract}
- */
-proto.protocol.PermissionUpdateKeyContract.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setOwnerAddress(value);
-      break;
-    case 2:
-      var value = new core_Tron_pb.Key;
-      reader.readMessage(value,core_Tron_pb.Key.deserializeBinaryFromReader);
-      msg.setKey(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPermissionName(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.protocol.PermissionUpdateKeyContract.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.protocol.PermissionUpdateKeyContract} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.PermissionUpdateKeyContract.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getOwnerAddress_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      1,
-      f
-    );
-  }
-  f = message.getKey();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      core_Tron_pb.Key.serializeBinaryToWriter
-    );
-  }
-  f = message.getPermissionName();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * @return {!(string|Uint8Array)}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.getOwnerAddress = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {string}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.getOwnerAddress_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getOwnerAddress()));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.getOwnerAddress_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getOwnerAddress()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.protocol.PermissionUpdateKeyContract.prototype.setOwnerAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * optional Key key = 2;
- * @return {?proto.protocol.Key}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.getKey = function() {
-  return /** @type{?proto.protocol.Key} */ (
-    jspb.Message.getWrapperField(this, core_Tron_pb.Key, 2));
-};
-
-
-/** @param {?proto.protocol.Key|undefined} value */
-proto.protocol.PermissionUpdateKeyContract.prototype.setKey = function(value) {
-  jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-proto.protocol.PermissionUpdateKeyContract.prototype.clearKey = function() {
-  this.setKey(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.hasKey = function() {
-  return jspb.Message.getField(this, 2) != null;
-};
-
-
-/**
- * optional string permission_name = 3;
- * @return {string}
- */
-proto.protocol.PermissionUpdateKeyContract.prototype.getPermissionName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/** @param {string} value */
-proto.protocol.PermissionUpdateKeyContract.prototype.setPermissionName = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.protocol.PermissionDeleteKeyContract = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.protocol.PermissionDeleteKeyContract, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.protocol.PermissionDeleteKeyContract.displayName = 'proto.protocol.PermissionDeleteKeyContract';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.toObject = function(opt_includeInstance) {
-  return proto.protocol.PermissionDeleteKeyContract.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.protocol.PermissionDeleteKeyContract} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.PermissionDeleteKeyContract.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    ownerAddress: msg.getOwnerAddress_asB64(),
-    keyAddress: msg.getKeyAddress_asB64(),
-    permissionName: jspb.Message.getFieldWithDefault(msg, 3, "")
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.protocol.PermissionDeleteKeyContract}
- */
-proto.protocol.PermissionDeleteKeyContract.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.protocol.PermissionDeleteKeyContract;
-  return proto.protocol.PermissionDeleteKeyContract.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.protocol.PermissionDeleteKeyContract} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.protocol.PermissionDeleteKeyContract}
- */
-proto.protocol.PermissionDeleteKeyContract.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setOwnerAddress(value);
-      break;
-    case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setKeyAddress(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPermissionName(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.protocol.PermissionDeleteKeyContract.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.protocol.PermissionDeleteKeyContract} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.protocol.PermissionDeleteKeyContract.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getOwnerAddress_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      1,
-      f
-    );
-  }
-  f = message.getKeyAddress_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      2,
-      f
-    );
-  }
-  f = message.getPermissionName();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * @return {!(string|Uint8Array)}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getOwnerAddress = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {string}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getOwnerAddress_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getOwnerAddress()));
-};
-
-
-/**
- * optional bytes owner_address = 1;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getOwnerAddress()`
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getOwnerAddress_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getOwnerAddress()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.protocol.PermissionDeleteKeyContract.prototype.setOwnerAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * optional bytes key_address = 2;
- * @return {!(string|Uint8Array)}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getKeyAddress = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * optional bytes key_address = 2;
- * This is a type-conversion wrapper around `getKeyAddress()`
- * @return {string}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getKeyAddress_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getKeyAddress()));
-};
-
-
-/**
- * optional bytes key_address = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getKeyAddress()`
- * @return {!Uint8Array}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getKeyAddress_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getKeyAddress()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.protocol.PermissionDeleteKeyContract.prototype.setKeyAddress = function(value) {
-  jspb.Message.setField(this, 2, value);
-};
-
-
-/**
- * optional string permission_name = 3;
- * @return {string}
- */
-proto.protocol.PermissionDeleteKeyContract.prototype.getPermissionName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/** @param {string} value */
-proto.protocol.PermissionDeleteKeyContract.prototype.setPermissionName = function(value) {
-  jspb.Message.setField(this, 3, value);
 };
 
 
