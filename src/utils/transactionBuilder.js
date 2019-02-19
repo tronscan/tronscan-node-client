@@ -25,24 +25,21 @@ const {
 function buildTransferContract(message, contractType, typeName) {
   let anyValue = new google_protobuf_any_pb.Any();
   anyValue.pack(message.serializeBinary(), "protocol." + typeName);
-
   let contract = new Transaction.Contract();
   contract.setType(contractType);
   contract.setParameter(anyValue);
-
   let raw = new Transaction.raw();
   raw.addContract(contract);
   // raw.setTimestamp(new Date().getTime() * 1000000);
 
   let transaction = new Transaction();
   transaction.setRawData(raw);
-
   return transaction;
 }
 
 function buildTransferTransaction(token, from, to, amount) {
 
-  if (token.toUpperCase() === 'TRX') {
+  if (token === '_') {
 
     let transferContract = new TransferContract();
     transferContract.setToAddress(Uint8Array.from(decode58Check(to)));
@@ -148,7 +145,7 @@ function buildAssetParticipate(address, issuerAddress, token, amount) {
 }
 
 function buildAssetIssue(options) {
-
+  console.log(options);
   let contract = new AssetIssueContract();
   contract.setOwnerAddress(Uint8Array.from(decode58Check(options.address)));
   contract.setName(encodeString(options.name));
@@ -158,6 +155,7 @@ function buildAssetIssue(options) {
   contract.setEndTime(Date.parse(options.endTime));
   contract.setStartTime(Date.parse(options.startTime));
   contract.setTrxNum(options.trxNum);
+  contract.setPrecision(options.precision);
   contract.setDescription(encodeString(options.description));
   contract.setUrl(encodeString(options.url));
   contract.setPublicFreeAssetNetUsage(0);
@@ -339,6 +337,7 @@ module.exports = {
   buildExchangeCreate,
   buildExchangeInject,
   buildExchangeWithdraw,
-  buildTransactionExchange
+  buildTransactionExchange,
+  buildTransferContract,
 };
 
