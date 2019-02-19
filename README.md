@@ -4,7 +4,7 @@
 </h1>
 
 <h4 align="center">
-  Node Client for the <a href="https://api.tronscan.org">Tronscan.org API</a>
+  Node Client for the <a href="https://github.com/tronscan/tronscan-frontend/blob/dev2019/document/api.md">Tronscan.org API</a>
 </h4>
 
 <p align="center">
