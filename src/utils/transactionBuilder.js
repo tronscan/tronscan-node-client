@@ -19,7 +19,8 @@ const {
   ExchangeCreateContract,
   ExchangeInjectContract,
   ExchangeWithdrawContract,
-  ExchangeTransactionContract
+  ExchangeTransactionContract,
+  TriggerSmartContract,
 } = require("../protocol/core/Contract_pb");
 
 function buildTransferContract(message, contractType, typeName) {
@@ -183,7 +184,7 @@ function buildAssetIssue(options) {
  * @param address From which address to freze
  * @param amount The amount of TRX to freeze
  * @param duration Duration in days
- * @param andwith or energy   Bandwidth Point = 0，Energy = 1
+ * @param resource bandwith or energy   Bandwidth Point = 0，Energy = 1
  */
 function buildFreezeBalance(address, amount, duration, resource) {
   let contract = new FreezeBalanceContract();
@@ -323,6 +324,7 @@ function buildTransactionExchange(address,exchange_id, token_id, quant, expected
 
 
 module.exports = {
+  buildTransferContract,
   buildTransferTransaction,
   buildAccountUpdate,
   buildAssetParticipate,

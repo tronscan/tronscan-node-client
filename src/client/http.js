@@ -270,7 +270,6 @@ class ApiClient {
     return data;
   }
 
-
   async getIssuedAsset(owner) {
     let {data} = await xhr.get(`${this.apiUrl}/api/token`, {
       params: {
@@ -375,7 +374,7 @@ class ApiClient {
   }
 
   async getAddressStats(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account/stats?address=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/account/stats?address=${address}`);
     return data;
   }
 
@@ -394,7 +393,7 @@ class ApiClient {
   }
 
   async getAccountVotes(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account/votes?address=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/account/votes?address=${address}`);
     return data;
   }
 
@@ -494,7 +493,7 @@ class ApiClient {
   }
 
   async getVoteWitness(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/vote/witness?address=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/vote/witness?address=${address}`);
     return data
   }
 
@@ -504,12 +503,12 @@ class ApiClient {
   }
 
   async getContracts(options = {}) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/contracts`, {
-      params: Object.assign({
-        count: true,
-        limit: 40,
-      }, options)
-    });
+      let {data} = await xhr.get(`${this.apiUrl}/api/contracts`, {
+          params: Object.assign({
+              count: true,
+              limit: 40,
+          }, options)
+      });
 
     return data;
   }
@@ -527,7 +526,7 @@ class ApiClient {
   }
 
   async getContractOverview(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=` + address);
+      let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=${address}`);
 
     return data;
   }
@@ -546,14 +545,14 @@ class ApiClient {
 
 
   async getContractTriggers(options = {}) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/contracts/trigger`, {
-      params: Object.assign({
-        sort: '-timestamp',
-        confirm: 0,
-        count: true,
-        limit: 50,
-      }, options)
-    });
+        let {data} = await xhr.get(`${this.apiUrl}/api/contracts/trigger`, {
+            params: Object.assign({
+                sort: '-timestamp',
+                confirm: 0,
+                count: true,
+                limit: 50,
+            }, options)
+        });
 
     return {
       triggers: data.data,
@@ -562,8 +561,8 @@ class ApiClient {
   }
 
   async getAccountByAddressNew(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account?address=` + address);
-    return data;
+      let {data} = await xhr.get(`${this.apiUrl}/api/account?address=${address}`);
+      return data;
   }
 
   async getExchangesList(options = {}) {
@@ -577,8 +576,8 @@ class ApiClient {
 
 
   async exchange(options = {}) {
-    let {data} = await xhr.post(`${this.apiUrl}/api/exchange/transaction`, options);
-    return data;
+      let {data} = await xhr.post(`${this.apiUrl}/api/exchange/transaction`, options);
+      return data;
   }
 
   async getExchangesKline(options = {}) {
@@ -602,23 +601,23 @@ class ApiClient {
   }
 
   async getChainparameters() {
-    let {data} = await xhr.get(`${this.apiUrl}/api/chainparameters`);
-    return {
-      tronParameters: data.tronParameters,
-    }
+      let {data} = await xhr.get(`${this.apiUrl}/api/chainparameters`);
+      return {
+          tronParameters: data.tronParameters,
+      }
   }
 
   async getProposalList(options = {}) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/proposal`, {
-      params: Object.assign({
-        sort: '-timestamp',
-        limit: 50,
-      }, options)
-    });
-    return {
-      proposal: data.data,
-      total: data.total
-    }
+        let {data} = await xhr.get(`${this.apiUrl}/api/proposal`, {
+            params: Object.assign({
+                sort: '-timestamp',
+                limit: 50,
+            }, options)
+        });
+        return {
+            proposal: data.data,
+            total: data.total
+        }
   }
 
   async getProposalById(id) {
