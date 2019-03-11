@@ -188,13 +188,15 @@ function buildAssetIssue(options) {
  * @param duration Duration in days
  * @param resource bandwith or energy   Bandwidth Point = 0，Energy = 1
  */
-function buildFreezeBalance(address, amount, duration, resource) {
+function buildFreezeBalance(address, amount, duration, resource, receiver_address) {
   let contract = new FreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
   contract.setFrozenBalance(amount);
   contract.setFrozenDuration(duration);
   contract.setResource(resource);
+  if (receiver_address)
+    contract.setReceiverAddress(Uint8Array.from(decode58Check(receiver_address)));
 
   return buildTransferContract(
     contract,
@@ -207,11 +209,13 @@ function buildFreezeBalance(address, amount, duration, resource) {
  *
  * @param address From which address to freeze
  */
-function buildUnfreezeBalance(address, resource) {
+function buildUnfreezeBalance(address, resource, receiver_address) {
   let contract = new UnfreezeBalanceContract();
 
   contract.setOwnerAddress(Uint8Array.from(decode58Check(address)));
   contract.setResource(resource);
+  if (receiver_address)
+    contract.setReceiverAddress(Uint8Array.from(decode58Check(receiver_address)));
 
   return buildTransferContract(
     contract,
