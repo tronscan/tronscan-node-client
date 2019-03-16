@@ -197,7 +197,7 @@ export function contractJsonToProtobuf(contract) {
         contract.setResource(0);
 
       if (value.receiver_address)
-        contract.setReceiverAddress(value.receiver_address);
+        contract.setReceiverAddress(fromHexString(value.receiver_address));
 
       return buildTransferContract(
         contract,
