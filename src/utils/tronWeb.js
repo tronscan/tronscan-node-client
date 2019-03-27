@@ -7,7 +7,6 @@ const {
   AccountUpdateContract,
   VoteWitnessContract,
   ParticipateAssetIssueContract,
-  AssetIssueContract,
   FreezeBalanceContract,
   UnfreezeBalanceContract,
   WitnessUpdateContract,
@@ -219,7 +218,7 @@ export function contractJsonToProtobuf(contract) {
       contract.setContractAddress(fromHexString(value.contract_address));
       contract.setCallValue(value.call_value);
       contract.setData(fromHexString(value.data));
-      
+
       return buildTransferContract(
         contract,
         Transaction.Contract.ContractType.TRIGGERSMARTCONTRACT,
@@ -235,7 +234,7 @@ export function contractJsonToProtobuf(contract) {
       contract.setTokenId(fromHexString(value.token_id));
       contract.setQuant(value.quant);
       contract.setExpected(value.expected);
-      
+
       return buildTransferContract(
         contract,
         Transaction.Contract.ContractType.EXCHANGETRANSACTIONCONTRACT,
@@ -251,7 +250,7 @@ export function contractJsonToProtobuf(contract) {
       contract.setFirstTokenBalance(value.first_token_balance);
       contract.setSecondTokenId(fromHexString(value.second_token_id));
       contract.setSecondTokenBalance(value.second_token_balance);
-      
+
       return buildTransferContract(
         contract,
         Transaction.Contract.ContractType.EXCHANGECREATECONTRACT,
@@ -266,7 +265,7 @@ export function contractJsonToProtobuf(contract) {
       contract.setExchangeId(value.exchange_id);
       contract.setTokenId(fromHexString(value.token_id));
       contract.setQuant(value.quant);
-      
+
       return buildTransferContract(
         contract,
         Transaction.Contract.ContractType.EXCHANGEINJECTCONTRACT,
@@ -281,7 +280,7 @@ export function contractJsonToProtobuf(contract) {
       contract.setExchangeId(value.exchange_id);
       contract.setTokenId(fromHexString(value.token_id));
       contract.setQuant(value.quant);
-      
+
       return buildTransferContract(
         contract,
         Transaction.Contract.ContractType.EXCHANGEWITHDRAWCONTRACT,

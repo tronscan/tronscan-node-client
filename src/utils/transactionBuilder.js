@@ -20,7 +20,6 @@ const {
   ExchangeInjectContract,
   ExchangeWithdrawContract,
   ExchangeTransactionContract,
-  TriggerSmartContract,
 } = require("../protocol/core/Contract_pb");
 
 function buildTransferContract(message, contractType, typeName) {
@@ -31,7 +30,6 @@ function buildTransferContract(message, contractType, typeName) {
   contract.setParameter(anyValue);
   let raw = new Transaction.raw();
   raw.addContract(contract);
-  // raw.setTimestamp(new Date().getTime() * 1000000);
 
   let transaction = new Transaction();
   transaction.setRawData(raw);
