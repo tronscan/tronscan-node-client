@@ -1,6 +1,8 @@
 const buildWithdrawBalance = require("../src/utils/transactionBuilder").buildWithdrawBalance;
 const buildUnfreezeBalance = require("../src/utils/transactionBuilder").buildUnfreezeBalance;
 const buildFreezeBalance = require("../src/utils/transactionBuilder").buildFreezeBalance;
+const buildAccountUpdate = require("../src/utils/transactionBuilder").buildAccountUpdate;
+
 const byteArray2hexStr = require("../src/utils/bytes").byteArray2hexStr;
 const buildVote = require("../src/utils/transactionBuilder").buildVote;
 const { assert } = require('chai');
@@ -27,6 +29,11 @@ describe('transactionBuilder', () => {
 
   it('build withdraw', async () => {
     let transaction = buildWithdrawBalance("TKcrAJN3tgLshGqp7aTDTJLabdWqZSKFMx");
+    console.log("hex", byteArray2hexStr(transaction.getRawData().serializeBinary()));
+  });
+
+  it('build updateAccount', async () => {
+    let transaction = buildAccountUpdate("TLrpNTBuCpGMrB9TyVwgEhNVRhtWEQPHh4", "AAAA");
     console.log("hex", byteArray2hexStr(transaction.getRawData().serializeBinary()));
   });
 
