@@ -96,6 +96,10 @@ service Wallet {
   rpc UpdateSetting (UpdateSettingContract) returns (TransactionExtention) {
   };
 
+  //modify the energy_limit
+  rpc UpdateEnergyLimit (UpdateEnergyLimitContract) returns (TransactionExtention) {
+  };
+
   //Use this function instead of VoteWitnessAccount.
   rpc VoteWitnessAccount2 (VoteWitnessContract) returns (TransactionExtention) {
   };
@@ -312,6 +316,10 @@ service Wallet {
       }
     };
   }
+  rpc GetAssetIssueListByName (BytesMessage) returns (AssetIssueList) {
+  }
+  rpc GetAssetIssueById (BytesMessage) returns (AssetIssueContract) {
+  }
   //Please use GetNowBlock2 instead of this function.
   rpc GetNowBlock (EmptyMessage) returns (Block) {
     option (google.api.http) = {
@@ -396,6 +404,12 @@ service Wallet {
   rpc TriggerContract (TriggerSmartContract) returns (TransactionExtention) {
   }
 
+  rpc TriggerConstantContract (TriggerSmartContract) returns (TransactionExtention) {
+  }
+  
+  rpc ClearContractABI (ClearABIContract) returns (TransactionExtention) {
+  }
+
   rpc ListWitnesses (EmptyMessage) returns (WitnessList) {
     option (google.api.http) = {
       post: "/wallet/listwitnesses"
@@ -404,6 +418,13 @@ service Wallet {
         get: "/wallet/listwitnesses"
       }
     };
+  };
+
+
+  rpc GetDelegatedResource (DelegatedResourceMessage) returns (DelegatedResourceList) {
+  };
+
+  rpc GetDelegatedResourceAccountIndex (BytesMessage) returns (DelegatedResourceAccountIndex) {
   };
 
   rpc ListProposals (EmptyMessage) returns (ProposalList) {
@@ -415,15 +436,15 @@ service Wallet {
       }
     };
   };
- rpc GetPaginatedProposalList (PaginatedMessage) returns (ProposalList) {
-      option (google.api.http) = {
+  rpc GetPaginatedProposalList (PaginatedMessage) returns (ProposalList) {
+    option (google.api.http) = {
           post: "/wallet/getpaginatedproposallist"
           body: "*"
           additional_bindings {
             get: "/wallet/getpaginatedproposallist"
           }
         };
-    }
+  }
   rpc GetProposalById (BytesMessage) returns (Proposal) {
     option (google.api.http) = {
         post: "/wallet/getproposalbyid"
@@ -444,14 +465,14 @@ service Wallet {
     };
   };
   rpc GetPaginatedExchangeList (PaginatedMessage) returns (ExchangeList) {
-      option (google.api.http) = {
+    option (google.api.http) = {
           post: "/wallet/getpaginatedexchangelist"
           body: "*"
           additional_bindings {
             get: "/wallet/getpaginatedexchangelist"
           }
         };
-    }
+  }
   rpc GetExchangeById (BytesMessage) returns (Exchange) {
     option (google.api.http) = {
         post: "/wallet/getexchangebyid"
@@ -536,6 +557,12 @@ service Wallet {
     };
   };
   //Warning: do not invoke this interface provided by others.
+  rpc EasyTransferAsset (EasyTransferAssetMessage) returns (EasyTransferResponse) {
+  };
+  //Warning: do not invoke this interface provided by others.
+  rpc EasyTransferAssetByPrivate (EasyTransferAssetByPrivateMessage) returns (EasyTransferResponse) {
+  };
+  //Warning: do not invoke this interface provided by others.
   rpc EasyTransfer (EasyTransferMessage) returns (EasyTransferResponse) {
     option (google.api.http) = {
       post: "/wallet/easytransfer"
@@ -587,35 +614,6 @@ service Wallet {
     };
   }
 
-  rpc PermissionAddKey (PermissionAddKeyContract) returns (TransactionExtention) {
-    option (google.api.http) = {
-      post: "/wallet/permissionaddkey"
-      body: "*"
-      additional_bindings {
-        get: "/wallet/permissionaddkey"
-      }
-    };
-  }
-
-  rpc PermissionUpdateKey (PermissionUpdateKeyContract) returns (TransactionExtention) {
-    option (google.api.http) = {
-      post: "/wallet/permissionupdatekey"
-      body: "*"
-      additional_bindings {
-        get: "/wallet/permissionupdatekey"
-      }
-    };
-  }
-
-  rpc PermissionDeleteKey (PermissionDeleteKeyContract) returns (TransactionExtention) {
-    option (google.api.http) = {
-      post: "/wallet/permissiondeletekey"
-      body: "*"
-      additional_bindings {
-        get: "/wallet/permissiondeletekey"
-      }
-    };
-  }
 
   rpc AddSign (TransactionSign) returns (TransactionExtention) {
 
@@ -624,6 +622,24 @@ service Wallet {
   rpc GetTransactionSignWeight (Transaction) returns (TransactionSignWeight) {
 
   }
+
+  rpc GetTransactionApprovedList(Transaction) returns (TransactionApprovedList) {
+
+  }
+
+  rpc GetNodeInfo (EmptyMessage) returns (NodeInfo) {
+  };
+
+  rpc GetRewardInfo (BytesMessage) returns (NumberMessage) {
+  };
+
+  rpc GetBrokerageInfo (BytesMessage) returns (NumberMessage) {
+  };
+
+  rpc UpdateBrokerage (UpdateBrokerageContract) returns (TransactionExtention) {
+
+  };
+
 };
 
 
@@ -675,6 +691,14 @@ service WalletSolidity {
         }
       };
   }
+
+  rpc GetAssetIssueByName (BytesMessage) returns (AssetIssueContract) {
+  }
+  rpc GetAssetIssueListByName (BytesMessage) returns (AssetIssueList) {
+  }
+  rpc GetAssetIssueById (BytesMessage) returns (AssetIssueContract) {
+  }
+
   //Please use GetNowBlock2 instead of this function.
   rpc GetNowBlock (EmptyMessage) returns (Block) {
     option (google.api.http) = {
@@ -705,6 +729,19 @@ service WalletSolidity {
   rpc GetTransactionCountByBlockNum (NumberMessage) returns (NumberMessage) {
   }
 
+  rpc GetDelegatedResource (DelegatedResourceMessage) returns (DelegatedResourceList) {
+  };
+
+  rpc GetDelegatedResourceAccountIndex (BytesMessage) returns (DelegatedResourceAccountIndex) {
+  };
+
+  rpc GetExchangeById (BytesMessage) returns (Exchange) {
+  };
+
+  rpc ListExchanges (EmptyMessage) returns (ExchangeList) {
+  };
+
+
   rpc GetTransactionById (BytesMessage) returns (Transaction) {
     option (google.api.http) = {
       post: "/walletsolidity/gettransactionbyid"
@@ -714,6 +751,7 @@ service WalletSolidity {
       }
     };
   }
+
   rpc GetTransactionInfoById (BytesMessage) returns (TransactionInfo) {
     option (google.api.http) = {
       post: "/walletsolidity/gettransactioninfobyid"
@@ -723,6 +761,7 @@ service WalletSolidity {
       }
     };
   }
+
   //Warning: do not invoke this interface provided by others.
   rpc GenerateAddress (EmptyMessage) returns (AddressPrKeyPairMessage) {
     option (google.api.http) = {
@@ -733,6 +772,16 @@ service WalletSolidity {
       }
     };
   }
+
+  rpc TriggerConstantContract (TriggerSmartContract) returns (TransactionExtention) {
+  }
+
+  rpc GetRewardInfo (BytesMessage) returns (NumberMessage) {
+  };
+
+  rpc GetBrokerageInfo (BytesMessage) returns (NumberMessage) {
+  };
+
 };
 
 service WalletExtension {
@@ -793,6 +842,8 @@ message Return {
     TOO_BIG_TRANSACTION_ERROR = 7;
     TRANSACTION_EXPIRATION_ERROR = 8;
     SERVER_BUSY = 9;
+    NO_CONNECTION = 10;
+    NOT_ENOUGH_EFFECTIVE_CONNECTION = 11;
     OTHER_ERROR = 20;
   }
 
@@ -828,6 +879,13 @@ message BlockList {
 }
 message TransactionList {
   repeated Transaction transaction = 1;
+}
+message DelegatedResourceMessage {
+  bytes fromAddress = 1;
+  bytes toAddress = 2;
+}
+message DelegatedResourceList {
+  repeated DelegatedResource delegatedResource = 1;
 }
 
 // Gossip node list
@@ -917,16 +975,30 @@ message EasyTransferMessage {
   int64 amount = 3;
 }
 
+message EasyTransferAssetMessage {
+  bytes passPhrase = 1;
+  bytes toAddress = 2;
+  string assetId = 3;
+  int64 amount = 4;
+}
+
 message EasyTransferByPrivateMessage {
   bytes privateKey = 1;
   bytes toAddress = 2;
   int64 amount = 3;
 }
 
+message EasyTransferAssetByPrivateMessage {
+  bytes privateKey = 1;
+  bytes toAddress = 2;
+  string assetId = 3;
+  int64 amount = 4;
+}
+
 message EasyTransferResponse {
   Transaction transaction = 1;
   Return result = 2;
-  bytes txid = 3;   //transaction id =  sha256(transaction.rowdata)
+  bytes txid = 3; //transaction id =  sha256(transaction.rowdata)
 }
 
 message AddressPrKeyPairMessage {
@@ -936,7 +1008,7 @@ message AddressPrKeyPairMessage {
 
 message TransactionExtention {
   Transaction transaction = 1;
-  bytes txid = 2;   //transaction id =  sha256(transaction.rowdata)
+  bytes txid = 2; //transaction id =  sha256(transaction.rowdata)
   repeated bytes constant_result = 3;
   Return result = 4;
 }
@@ -962,7 +1034,7 @@ message TransactionSignWeight {
       NOT_ENOUGH_PERMISSION = 1; // error in
       SIGNATURE_FORMAT_ERROR = 2;
       COMPUTE_ADDRESS_ERROR = 3;
-      PERMISSION_ERROR = 4;      //The key is not in permission
+      PERMISSION_ERROR = 4; //The key is not in permission
       OTHER_ERROR = 20;
     }
     response_code code = 1;
@@ -972,6 +1044,23 @@ message TransactionSignWeight {
   Permission permission = 1;
   repeated bytes approved_list = 2;
   int64 current_weight = 3;
+  Result result = 4;
+  TransactionExtention transaction = 5;
+}
+
+message TransactionApprovedList {
+  message Result {
+    enum response_code {
+      SUCCESS = 0;
+      SIGNATURE_FORMAT_ERROR = 1;
+      COMPUTE_ADDRESS_ERROR = 2;
+      OTHER_ERROR = 20;
+    }
+    response_code code = 1;
+    string message = 2;
+  }
+
+  repeated bytes approved_list = 2;
   Result result = 4;
   TransactionExtention transaction = 5;
 }

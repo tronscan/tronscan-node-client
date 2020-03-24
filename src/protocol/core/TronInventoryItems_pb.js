@@ -169,7 +169,7 @@ proto.protocol.InventoryItems.prototype.getType = function() {
 
 /** @param {number} value */
 proto.protocol.InventoryItems.prototype.setType = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 

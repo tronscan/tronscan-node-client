@@ -2,7 +2,9 @@ const xhr = require("axios");
 const {
   buildTransferTransaction, buildVote, buildAssetParticipate, buildFreezeBalance, buildAssetIssue,
   buildUnfreezeBalance, buildAccountUpdate, buildWitnessUpdate, buildWithdrawBalance, buildWitnessCreate,
-  buildUnfreezeAsset, buildExchangeCreate, buildExchangeInject, buildExchangeWithdraw, buildTransactionExchange
+  buildUnfreezeAsset, buildExchangeCreate, buildExchangeInject, buildExchangeWithdraw, buildTransactionExchange,
+  buildTransferHexStr, buildTriggerSmartContract,getTriggerSmartContractParameterValue, getTransferContractParameterValue,
+  getTransferAssetContractParameterValue,getAccountPermissionUpdateContractParameterValue
 } = require("../utils/transactionBuilder");
 const {hexStr2byteArray} = require("../lib/code");
 const PrivateKeySigner = require("../signer/privateKeySigner");
@@ -33,8 +35,8 @@ function byteArrayToLong(/*byte[]*/byteArray) {
 
 class ApiClient {
 
-  constructor() {
-    this.apiUrl = process.env.API_URL;
+  constructor(url) {
+    this.apiUrl = url;
     this.signer = null;
   }
 
@@ -46,6 +48,12 @@ class ApiClient {
     let transaction = buildTransferTransaction(token, from, to, amount);
     return (pk) => this.sendTransaction(pk, transaction);
   }
+
+  getSendHexStr(token, from, to, amount) {
+      let hexStr = buildTransferHexStr(token, from, to, amount);
+      return hexStr;
+  }
+
 
   sendWithNote(token, from, to, amount, note) {
     let transaction = buildTransferTransaction(token, from, to, amount);
@@ -142,13 +150,13 @@ class ApiClient {
     return (pk) => this.sendTransaction(pk, transaction);
   }
 
-  freezeBalance(address, amount, duration, resource) {
-    let transaction = buildFreezeBalance(address, amount, duration, resource);
+  freezeBalance(address, amount, duration, resource,receiver) {
+    let transaction = buildFreezeBalance(address, amount, duration, resource,receiver);
     return (pk) => this.sendTransaction(pk, transaction);
   }
 
-  unfreezeBalance(address, resource) {
-    let transaction = buildUnfreezeBalance(address, resource);
+  unfreezeBalance(address, resource,receiver) {
+    let transaction = buildUnfreezeBalance(address, resource,receiver);
     return (pk) => this.sendTransaction(pk, transaction);
   }
 
@@ -209,6 +217,7 @@ class ApiClient {
     return {
       blocks: data.data,
       total: data.total,
+      rangeTotal:data.rangeTotal,
     };
   }
 
@@ -229,6 +238,8 @@ class ApiClient {
     return {
       transactions: data.data,
       total: data.total,
+      rangeTotal: data.rangeTotal,
+      wholeChainTxCount: data.wholeChainTxCount
     };
   }
 
@@ -244,6 +255,7 @@ class ApiClient {
     return {
       transfers: data.data,
       total: data.total,
+      rangeTotal: data.rangeTotal,
     };
   }
 
@@ -295,6 +307,7 @@ class ApiClient {
     return {
       accounts: data.data,
       total: data.total,
+      rangeTotal:data.rangeTotal,
     };
   }
 
@@ -414,6 +427,7 @@ class ApiClient {
     return {
       addresses: data.data,
       total: data.total,
+      rangeTotal:data.rangeTotal
     };
   }
 
@@ -481,6 +495,13 @@ class ApiClient {
 
   async getTxOverviewStats() {
     let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview`);
+    return {
+      txOverviewStats: data.data
+    }
+  }
+
+  async getTxOverviewStatsAll() {
+    let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview?days=1000`);
     return {
       txOverviewStats: data.data
     }
@@ -558,6 +579,7 @@ class ApiClient {
     return {
       triggers: data.data,
       total: data.total,
+      rangeTotal:data.rangeTotal
     };
   }
 
@@ -567,14 +589,13 @@ class ApiClient {
   }
 
   async getExchangesList(options = {}) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/exchanges/list`, {
-      params: Object.assign({
-        sort: '-balance',
-      }, options)
-    });
-    return data;
+      let {data} = await xhr.get(`https://bancor.trx.market/api/exchanges/list`, {
+          params: Object.assign({
+              sort: '-balance',
+          }, options)
+      });
+      return data;
   }
-
 
   async exchange(options = {}) {
     let {data} = await xhr.post(`${this.apiUrl}/api/exchange/transaction`, options);
@@ -677,6 +698,206 @@ class ApiClient {
     });
     return data
   }
+
+
+  async getTRC20tfs(options = {}) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/contract/events`, {
+        params: options
+      });
+
+      return {
+        list: data.data,
+        total: data.total,
+        rangeTotal:data.rangeTotal,
+      };
+  }
+
+  async getInternalTransaction(options = {}) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/internal-transaction`, {
+        params: options
+      });
+
+      return {
+        list: data.data,
+        total: data.total,
+        rangeTotal:data.rangeTotal,
+      };
+  }
+
+  async getAssetTransfers(options = {}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/asset/transfer`, {
+      params: options
+    });
+
+    return {
+      list: data.Data,
+      total: data.total,
+      rangeTotal:data.rangeTotal,
+    };
+  }
+
+  async getTokenTRC20Transfers(options = {}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/token_trc20/transfers`, {
+      params: options
+    });
+
+    return {
+      list: data.token_transfers,
+      total: data.total,
+      rangeTotal:data.rangeTotal,
+    };
+  }
+
+  async getTransfersAll(options = {}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/trc10trc20-transfer`, {
+      params: Object.assign({
+        sort: '-timestamp',
+        count: true,
+        limit: 50,
+      }, options)
+    });
+
+    return {
+      transfers: data.transfers,
+      total: data.total,
+      rangeTotal: data.rangeTotal,
+    };
+  }
+
+  async getContractInfo(address) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=${address}`);
+    return data;
+  }
+
+  async createToken20(options = {}) {
+      let {data} = await xhr.post(`${this.apiUrl}/external/trc20tokens`, options);
+      return data;
+  }
+
+  async updateToken20(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc20tokens/update`, options);
+    return data;
+  }
+
+  async updateToken10(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc10tokens/update`, options);
+    return data;
+  }
+
+
+  async getTps(time) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/system/tps?time=${time}`);
+    return data;
+  }
+
+  async getTagNameList() {
+      return [
+          { name: 'binance', addressList: {
+              Cold: ['TMuA6YqfCeX8EhbfYEg5y7S4DqzSJireY9', 'TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb'],
+              Hot: ['TAUN6FwrnwwmaEqYcckffC7wYmbaS6cBiX']}
+          },{
+              name: 'Upbit', addressList: {
+                  Hot: ['TDU1uJNxDND9zhzYjnn7ZunHj18jw7oAca']
+              }
+          },{
+              name: 'Okex', addressList: {
+                  default: ['TM1zzNDZD2DPASbKcgdVoTYhfmYgtfwx9R','TS1P2y41FEaxvNNktvriTbjKHpQPKoRvic']
+              }
+          },{
+              name: 'Huobi', addressList: {
+                  default: ['TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR']
+              }
+          },{
+              name: 'Bittrex', addressList: {
+                  Hot: ['TAahLbGTZk6YuCycii72datPQEtyC5x231'],
+                  default: ['TA5vCXk4f1SrCMfz361UxUNABRGP1g2F1r']
+              }
+          },{
+              name: 'Kucoin', addressList: {
+                  default: ['TLWE45u7eusdewSDCjZqUNmyhTUL1NBMzo','TBcUJq55x7Q83ZSr2AqWj59TRj2LvxVr8a']
+              }
+          },{
+              name: 'Gate', addressList: {
+                  default: ['TBA6CypYJizwA9XdC7Ubgc5F1bxrQ7SqPt']
+              }
+          },{
+              name: 'poloniex', addressList: {
+                  default: ['TNCmcTdyrYKMtmE1KU2itzeCX76jGm5Not']
+              }
+          },
+          {
+              name: 'bitfinex', addressList: {
+                  default: ['TXFBqBbqJommqZf7BV8NNYzePh97UmJodJ']
+              }
+          }
+      ];
+  }
+    async getCountByType(params) {
+        let {data} = await xhr.get(`${this.apiUrl}/api/count`,{params});
+        return data;
+    }
+
+    async getUserList(params) {
+        let {data} = await xhr.post(`https://tronscan.org/users/getUserList`, params);
+
+        return {
+            data: data.data,
+            total: data.total,
+        };
+    }
+    async getAddressReward(params) {
+        let {data} = await xhr.get(`${this.apiUrl}/api/address/reward`,{params});
+        return data;
+    }
+
+    getTriggerSmartContractHexStr(value) {
+        let hexStr = buildTriggerSmartContract(value);
+        return hexStr;
+    }
+
+     getParameterValue (hexStr,ContractType){
+        let hexStrBytes = hexStr2byteArray(hexStr);
+        let parameterValue;
+        let parameter = {};
+        switch (ContractType) {
+          case "TransferContract": {
+            parameterValue = getTransferContractParameterValue(hexStrBytes)
+            return parameterValue;
+          }
+          case "TransferAssetContract": {
+            parameterValue = getTransferAssetContractParameterValue(hexStrBytes)
+            return parameterValue;
+          }
+          case "TriggerSmartContract": {
+            parameterValue = getTriggerSmartContractParameterValue(hexStrBytes)
+            for(let i in parameterValue){
+              if(parameterValue[i] !== ''){
+                parameter[i] = parameterValue[i] 
+              }
+            }
+            return parameter;
+          }
+          case "AccountPermissionUpdateContract": {
+            // let contractData = await xhr.post(`https://tronexapi.tronscan.org/api/contract/convert`, {
+            //   "outType":"json",
+            //   "data":hexStr,
+            //   "contractType":ContractType
+            // });
+            // parameterValue =  contractData.data.message
+            parameterValue = getAccountPermissionUpdateContractParameterValue(hexStrBytes)
+            for(let i in parameterValue){
+              if(parameterValue[i] !== ''){
+                parameter[i] = parameterValue[i] 
+              }
+            }
+            return parameter;
+          }
+          
+        }
+       
+        
+       
+    }
 
 
 }

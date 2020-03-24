@@ -512,6 +512,9 @@ function getStringType(str) {
 function encodeString(str) {
   return Uint8Array.from(base64DecodeFromString(btoa(str)));
 }
+function encodeString2(str){
+  return base64DecodeFromString(btoa(str));
+}
 
 module.exports = {
   base64EncodeToString,
@@ -519,4 +522,5 @@ module.exports = {
   hexStr2byteArray,
   stringToBytes,
   encodeString,
+  encodeString2
 };

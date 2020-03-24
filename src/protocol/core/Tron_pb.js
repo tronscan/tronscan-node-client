@@ -28,6 +28,8 @@ goog.exportSymbol('proto.protocol.ChainInventory', null, global);
 goog.exportSymbol('proto.protocol.ChainInventory.BlockId', null, global);
 goog.exportSymbol('proto.protocol.ChainParameters', null, global);
 goog.exportSymbol('proto.protocol.ChainParameters.ChainParameter', null, global);
+goog.exportSymbol('proto.protocol.DelegatedResource', null, global);
+goog.exportSymbol('proto.protocol.DelegatedResourceAccountIndex', null, global);
 goog.exportSymbol('proto.protocol.DisconnectMessage', null, global);
 goog.exportSymbol('proto.protocol.DynamicProperties', null, global);
 goog.exportSymbol('proto.protocol.Exchange', null, global);
@@ -40,7 +42,14 @@ goog.exportSymbol('proto.protocol.Inventory.InventoryType', null, global);
 goog.exportSymbol('proto.protocol.Items', null, global);
 goog.exportSymbol('proto.protocol.Items.ItemType', null, global);
 goog.exportSymbol('proto.protocol.Key', null, global);
+goog.exportSymbol('proto.protocol.NodeInfo', null, global);
+goog.exportSymbol('proto.protocol.NodeInfo.ConfigNodeInfo', null, global);
+goog.exportSymbol('proto.protocol.NodeInfo.MachineInfo', null, global);
+goog.exportSymbol('proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo', null, global);
+goog.exportSymbol('proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo', null, global);
+goog.exportSymbol('proto.protocol.NodeInfo.PeerInfo', null, global);
 goog.exportSymbol('proto.protocol.Permission', null, global);
+goog.exportSymbol('proto.protocol.Permission.PermissionType', null, global);
 goog.exportSymbol('proto.protocol.Proposal', null, global);
 goog.exportSymbol('proto.protocol.Proposal.State', null, global);
 goog.exportSymbol('proto.protocol.ReasonCode', null, global);
@@ -245,7 +254,7 @@ proto.protocol.AccountId.prototype.getName_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.AccountId.prototype.setName = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -284,7 +293,7 @@ proto.protocol.AccountId.prototype.getAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.AccountId.prototype.setAddress = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -462,7 +471,7 @@ proto.protocol.Vote.prototype.getVoteAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Vote.prototype.setVoteAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -477,7 +486,7 @@ proto.protocol.Vote.prototype.getVoteCount = function() {
 
 /** @param {number} value */
 proto.protocol.Vote.prototype.setVoteCount = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -707,7 +716,7 @@ proto.protocol.Proposal.prototype.getProposalId = function() {
 
 /** @param {number} value */
 proto.protocol.Proposal.prototype.setProposalId = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -746,7 +755,7 @@ proto.protocol.Proposal.prototype.getProposerAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Proposal.prototype.setProposerAddress = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -779,7 +788,7 @@ proto.protocol.Proposal.prototype.getExpirationTime = function() {
 
 /** @param {number} value */
 proto.protocol.Proposal.prototype.setExpirationTime = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -794,7 +803,7 @@ proto.protocol.Proposal.prototype.getCreateTime = function() {
 
 /** @param {number} value */
 proto.protocol.Proposal.prototype.setCreateTime = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -862,7 +871,7 @@ proto.protocol.Proposal.prototype.getState = function() {
 
 /** @param {!proto.protocol.Proposal.State} value */
 proto.protocol.Proposal.prototype.setState = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3EnumField(this, 7, value);
 };
 
 
@@ -1076,7 +1085,7 @@ proto.protocol.Exchange.prototype.getExchangeId = function() {
 
 /** @param {number} value */
 proto.protocol.Exchange.prototype.setExchangeId = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -1115,7 +1124,7 @@ proto.protocol.Exchange.prototype.getCreatorAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Exchange.prototype.setCreatorAddress = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -1130,7 +1139,7 @@ proto.protocol.Exchange.prototype.getCreateTime = function() {
 
 /** @param {number} value */
 proto.protocol.Exchange.prototype.setCreateTime = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -1169,7 +1178,7 @@ proto.protocol.Exchange.prototype.getFirstTokenId_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Exchange.prototype.setFirstTokenId = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3BytesField(this, 6, value);
 };
 
 
@@ -1184,7 +1193,7 @@ proto.protocol.Exchange.prototype.getFirstTokenBalance = function() {
 
 /** @param {number} value */
 proto.protocol.Exchange.prototype.setFirstTokenBalance = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
@@ -1223,7 +1232,7 @@ proto.protocol.Exchange.prototype.getSecondTokenId_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Exchange.prototype.setSecondTokenId = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3BytesField(this, 8, value);
 };
 
 
@@ -1238,7 +1247,7 @@ proto.protocol.Exchange.prototype.getSecondTokenBalance = function() {
 
 /** @param {number} value */
 proto.protocol.Exchange.prototype.setSecondTokenBalance = function(value) {
-  jspb.Message.setField(this, 9, value);
+  jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
@@ -1529,7 +1538,7 @@ proto.protocol.ChainParameters.ChainParameter.prototype.getKey = function() {
 
 /** @param {string} value */
 proto.protocol.ChainParameters.ChainParameter.prototype.setKey = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -1544,7 +1553,7 @@ proto.protocol.ChainParameters.ChainParameter.prototype.getValue = function() {
 
 /** @param {number} value */
 proto.protocol.ChainParameters.ChainParameter.prototype.setValue = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -1602,7 +1611,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.protocol.Account.repeatedFields_ = [5,7,16,31];
+proto.protocol.Account.repeatedFields_ = [5,7,16,33];
 
 
 
@@ -1640,9 +1649,12 @@ proto.protocol.Account.toObject = function(includeInstance, msg) {
     votesList: jspb.Message.toObjectList(msg.getVotesList(),
     proto.protocol.Vote.toObject, includeInstance),
     assetMap: (f = msg.getAssetMap()) ? f.toObject(includeInstance, undefined) : [],
+    assetv2Map: (f = msg.getAssetv2Map()) ? f.toObject(includeInstance, undefined) : [],
     frozenList: jspb.Message.toObjectList(msg.getFrozenList(),
     proto.protocol.Account.Frozen.toObject, includeInstance),
     netUsage: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    acquiredDelegatedFrozenBalanceForBandwidth: jspb.Message.getFieldWithDefault(msg, 41, 0),
+    delegatedFrozenBalanceForBandwidth: jspb.Message.getFieldWithDefault(msg, 42, 0),
     createTime: jspb.Message.getFieldWithDefault(msg, 9, 0),
     latestOprationTime: jspb.Message.getFieldWithDefault(msg, 10, 0),
     allowance: jspb.Message.getFieldWithDefault(msg, 11, 0),
@@ -1653,15 +1665,20 @@ proto.protocol.Account.toObject = function(includeInstance, msg) {
     frozenSupplyList: jspb.Message.toObjectList(msg.getFrozenSupplyList(),
     proto.protocol.Account.Frozen.toObject, includeInstance),
     assetIssuedName: msg.getAssetIssuedName_asB64(),
+    assetIssuedId: msg.getAssetIssuedId_asB64(),
     latestAssetOperationTimeMap: (f = msg.getLatestAssetOperationTimeMap()) ? f.toObject(includeInstance, undefined) : [],
+    latestAssetOperationTimev2Map: (f = msg.getLatestAssetOperationTimev2Map()) ? f.toObject(includeInstance, undefined) : [],
     freeNetUsage: jspb.Message.getFieldWithDefault(msg, 19, 0),
     freeAssetNetUsageMap: (f = msg.getFreeAssetNetUsageMap()) ? f.toObject(includeInstance, undefined) : [],
+    freeAssetNetUsagev2Map: (f = msg.getFreeAssetNetUsagev2Map()) ? f.toObject(includeInstance, undefined) : [],
     latestConsumeTime: jspb.Message.getFieldWithDefault(msg, 21, 0),
     latestConsumeFreeTime: jspb.Message.getFieldWithDefault(msg, 22, 0),
     accountId: msg.getAccountId_asB64(),
     accountResource: (f = msg.getAccountResource()) && proto.protocol.Account.AccountResource.toObject(includeInstance, f),
     codehash: msg.getCodehash_asB64(),
-    permissionsList: jspb.Message.toObjectList(msg.getPermissionsList(),
+    ownerPermission: (f = msg.getOwnerPermission()) && proto.protocol.Permission.toObject(includeInstance, f),
+    witnessPermission: (f = msg.getWitnessPermission()) && proto.protocol.Permission.toObject(includeInstance, f),
+    activePermissionList: jspb.Message.toObjectList(msg.getActivePermissionList(),
     proto.protocol.Permission.toObject, includeInstance)
   };
 
@@ -1726,6 +1743,12 @@ proto.protocol.Account.deserializeBinaryFromReader = function(msg, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readInt64);
          });
       break;
+    case 56:
+      var value = msg.getAssetv2Map();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readInt64);
+         });
+      break;
     case 7:
       var value = new proto.protocol.Account.Frozen;
       reader.readMessage(value,proto.protocol.Account.Frozen.deserializeBinaryFromReader);
@@ -1734,6 +1757,14 @@ proto.protocol.Account.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setNetUsage(value);
+      break;
+    case 41:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setAcquiredDelegatedFrozenBalanceForBandwidth(value);
+      break;
+    case 42:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setDelegatedFrozenBalanceForBandwidth(value);
       break;
     case 9:
       var value = /** @type {number} */ (reader.readInt64());
@@ -1772,8 +1803,18 @@ proto.protocol.Account.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setAssetIssuedName(value);
       break;
+    case 57:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setAssetIssuedId(value);
+      break;
     case 18:
       var value = msg.getLatestAssetOperationTimeMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readInt64);
+         });
+      break;
+    case 58:
+      var value = msg.getLatestAssetOperationTimev2Map();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readInt64);
          });
@@ -1784,6 +1825,12 @@ proto.protocol.Account.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 20:
       var value = msg.getFreeAssetNetUsageMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readInt64);
+         });
+      break;
+    case 59:
+      var value = msg.getFreeAssetNetUsagev2Map();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readInt64);
          });
@@ -1812,7 +1859,17 @@ proto.protocol.Account.deserializeBinaryFromReader = function(msg, reader) {
     case 31:
       var value = new proto.protocol.Permission;
       reader.readMessage(value,proto.protocol.Permission.deserializeBinaryFromReader);
-      msg.addPermissions(value);
+      msg.setOwnerPermission(value);
+      break;
+    case 32:
+      var value = new proto.protocol.Permission;
+      reader.readMessage(value,proto.protocol.Permission.deserializeBinaryFromReader);
+      msg.setWitnessPermission(value);
+      break;
+    case 33:
+      var value = new proto.protocol.Permission;
+      reader.readMessage(value,proto.protocol.Permission.deserializeBinaryFromReader);
+      msg.addActivePermission(value);
       break;
     default:
       reader.skipField();
@@ -1883,6 +1940,10 @@ proto.protocol.Account.serializeBinaryToWriter = function(message, writer) {
   if (f && f.getLength() > 0) {
     f.serializeBinary(6, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeInt64);
   }
+  f = message.getAssetv2Map(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(56, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeInt64);
+  }
   f = message.getFrozenList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
@@ -1895,6 +1956,20 @@ proto.protocol.Account.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeInt64(
       8,
+      f
+    );
+  }
+  f = message.getAcquiredDelegatedFrozenBalanceForBandwidth();
+  if (f !== 0) {
+    writer.writeInt64(
+      41,
+      f
+    );
+  }
+  f = message.getDelegatedFrozenBalanceForBandwidth();
+  if (f !== 0) {
+    writer.writeInt64(
+      42,
       f
     );
   }
@@ -1962,9 +2037,20 @@ proto.protocol.Account.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getAssetIssuedId_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      57,
+      f
+    );
+  }
   f = message.getLatestAssetOperationTimeMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(18, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeInt64);
+  }
+  f = message.getLatestAssetOperationTimev2Map(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(58, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeInt64);
   }
   f = message.getFreeNetUsage();
   if (f !== 0) {
@@ -1976,6 +2062,10 @@ proto.protocol.Account.serializeBinaryToWriter = function(message, writer) {
   f = message.getFreeAssetNetUsageMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(20, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeInt64);
+  }
+  f = message.getFreeAssetNetUsagev2Map(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(59, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeInt64);
   }
   f = message.getLatestConsumeTime();
   if (f !== 0) {
@@ -2013,10 +2103,26 @@ proto.protocol.Account.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getPermissionsList();
+  f = message.getOwnerPermission();
+  if (f != null) {
+    writer.writeMessage(
+      31,
+      f,
+      proto.protocol.Permission.serializeBinaryToWriter
+    );
+  }
+  f = message.getWitnessPermission();
+  if (f != null) {
+    writer.writeMessage(
+      32,
+      f,
+      proto.protocol.Permission.serializeBinaryToWriter
+    );
+  }
+  f = message.getActivePermissionList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      31,
+      33,
       f,
       proto.protocol.Permission.serializeBinaryToWriter
     );
@@ -2174,7 +2280,7 @@ proto.protocol.Account.Frozen.prototype.getFrozenBalance = function() {
 
 /** @param {number} value */
 proto.protocol.Account.Frozen.prototype.setFrozenBalance = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -2189,7 +2295,7 @@ proto.protocol.Account.Frozen.prototype.getExpireTime = function() {
 
 /** @param {number} value */
 proto.protocol.Account.Frozen.prototype.setExpireTime = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -2243,6 +2349,8 @@ proto.protocol.Account.AccountResource.toObject = function(includeInstance, msg)
     energyUsage: jspb.Message.getFieldWithDefault(msg, 1, 0),
     frozenBalanceForEnergy: (f = msg.getFrozenBalanceForEnergy()) && proto.protocol.Account.Frozen.toObject(includeInstance, f),
     latestConsumeTimeForEnergy: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    acquiredDelegatedFrozenBalanceForEnergy: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    delegatedFrozenBalanceForEnergy: jspb.Message.getFieldWithDefault(msg, 5, 0),
     storageLimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
     storageUsage: jspb.Message.getFieldWithDefault(msg, 7, 0),
     latestExchangeStorageTime: jspb.Message.getFieldWithDefault(msg, 8, 0)
@@ -2294,6 +2402,14 @@ proto.protocol.Account.AccountResource.deserializeBinaryFromReader = function(ms
     case 3:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLatestConsumeTimeForEnergy(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setAcquiredDelegatedFrozenBalanceForEnergy(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setDelegatedFrozenBalanceForEnergy(value);
       break;
     case 6:
       var value = /** @type {number} */ (reader.readInt64());
@@ -2358,6 +2474,20 @@ proto.protocol.Account.AccountResource.serializeBinaryToWriter = function(messag
       f
     );
   }
+  f = message.getAcquiredDelegatedFrozenBalanceForEnergy();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
+    );
+  }
+  f = message.getDelegatedFrozenBalanceForEnergy();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
   f = message.getStorageLimit();
   if (f !== 0) {
     writer.writeInt64(
@@ -2393,7 +2523,7 @@ proto.protocol.Account.AccountResource.prototype.getEnergyUsage = function() {
 
 /** @param {number} value */
 proto.protocol.Account.AccountResource.prototype.setEnergyUsage = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -2438,7 +2568,37 @@ proto.protocol.Account.AccountResource.prototype.getLatestConsumeTimeForEnergy =
 
 /** @param {number} value */
 proto.protocol.Account.AccountResource.prototype.setLatestConsumeTimeForEnergy = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 acquired_delegated_frozen_balance_for_energy = 4;
+ * @return {number}
+ */
+proto.protocol.Account.AccountResource.prototype.getAcquiredDelegatedFrozenBalanceForEnergy = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Account.AccountResource.prototype.setAcquiredDelegatedFrozenBalanceForEnergy = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int64 delegated_frozen_balance_for_energy = 5;
+ * @return {number}
+ */
+proto.protocol.Account.AccountResource.prototype.getDelegatedFrozenBalanceForEnergy = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Account.AccountResource.prototype.setDelegatedFrozenBalanceForEnergy = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -2453,7 +2613,7 @@ proto.protocol.Account.AccountResource.prototype.getStorageLimit = function() {
 
 /** @param {number} value */
 proto.protocol.Account.AccountResource.prototype.setStorageLimit = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -2468,7 +2628,7 @@ proto.protocol.Account.AccountResource.prototype.getStorageUsage = function() {
 
 /** @param {number} value */
 proto.protocol.Account.AccountResource.prototype.setStorageUsage = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
@@ -2483,7 +2643,7 @@ proto.protocol.Account.AccountResource.prototype.getLatestExchangeStorageTime = 
 
 /** @param {number} value */
 proto.protocol.Account.AccountResource.prototype.setLatestExchangeStorageTime = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
@@ -2522,7 +2682,7 @@ proto.protocol.Account.prototype.getAccountName_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Account.prototype.setAccountName = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -2537,7 +2697,7 @@ proto.protocol.Account.prototype.getType = function() {
 
 /** @param {!proto.protocol.AccountType} value */
 proto.protocol.Account.prototype.setType = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -2576,7 +2736,7 @@ proto.protocol.Account.prototype.getAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Account.prototype.setAddress = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -2591,7 +2751,7 @@ proto.protocol.Account.prototype.getBalance = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setBalance = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -2645,6 +2805,24 @@ proto.protocol.Account.prototype.clearAssetMap = function() {
 
 
 /**
+ * map<string, int64> assetV2 = 56;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,number>}
+ */
+proto.protocol.Account.prototype.getAssetv2Map = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 56, opt_noLazyCreate,
+      null));
+};
+
+
+proto.protocol.Account.prototype.clearAssetv2Map = function() {
+  this.getAssetv2Map().clear();
+};
+
+
+/**
  * repeated Frozen frozen = 7;
  * @return {!Array.<!proto.protocol.Account.Frozen>}
  */
@@ -2686,7 +2864,37 @@ proto.protocol.Account.prototype.getNetUsage = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setNetUsage = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional int64 acquired_delegated_frozen_balance_for_bandwidth = 41;
+ * @return {number}
+ */
+proto.protocol.Account.prototype.getAcquiredDelegatedFrozenBalanceForBandwidth = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 41, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Account.prototype.setAcquiredDelegatedFrozenBalanceForBandwidth = function(value) {
+  jspb.Message.setProto3IntField(this, 41, value);
+};
+
+
+/**
+ * optional int64 delegated_frozen_balance_for_bandwidth = 42;
+ * @return {number}
+ */
+proto.protocol.Account.prototype.getDelegatedFrozenBalanceForBandwidth = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 42, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Account.prototype.setDelegatedFrozenBalanceForBandwidth = function(value) {
+  jspb.Message.setProto3IntField(this, 42, value);
 };
 
 
@@ -2701,7 +2909,7 @@ proto.protocol.Account.prototype.getCreateTime = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setCreateTime = function(value) {
-  jspb.Message.setField(this, 9, value);
+  jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
@@ -2716,7 +2924,7 @@ proto.protocol.Account.prototype.getLatestOprationTime = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setLatestOprationTime = function(value) {
-  jspb.Message.setField(this, 10, value);
+  jspb.Message.setProto3IntField(this, 10, value);
 };
 
 
@@ -2731,7 +2939,7 @@ proto.protocol.Account.prototype.getAllowance = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setAllowance = function(value) {
-  jspb.Message.setField(this, 11, value);
+  jspb.Message.setProto3IntField(this, 11, value);
 };
 
 
@@ -2746,7 +2954,7 @@ proto.protocol.Account.prototype.getLatestWithdrawTime = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setLatestWithdrawTime = function(value) {
-  jspb.Message.setField(this, 12, value);
+  jspb.Message.setProto3IntField(this, 12, value);
 };
 
 
@@ -2785,7 +2993,7 @@ proto.protocol.Account.prototype.getCode_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Account.prototype.setCode = function(value) {
-  jspb.Message.setField(this, 13, value);
+  jspb.Message.setProto3BytesField(this, 13, value);
 };
 
 
@@ -2802,7 +3010,7 @@ proto.protocol.Account.prototype.getIsWitness = function() {
 
 /** @param {boolean} value */
 proto.protocol.Account.prototype.setIsWitness = function(value) {
-  jspb.Message.setField(this, 14, value);
+  jspb.Message.setProto3BooleanField(this, 14, value);
 };
 
 
@@ -2819,7 +3027,7 @@ proto.protocol.Account.prototype.getIsCommittee = function() {
 
 /** @param {boolean} value */
 proto.protocol.Account.prototype.setIsCommittee = function(value) {
-  jspb.Message.setField(this, 15, value);
+  jspb.Message.setProto3BooleanField(this, 15, value);
 };
 
 
@@ -2889,7 +3097,46 @@ proto.protocol.Account.prototype.getAssetIssuedName_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Account.prototype.setAssetIssuedName = function(value) {
-  jspb.Message.setField(this, 17, value);
+  jspb.Message.setProto3BytesField(this, 17, value);
+};
+
+
+/**
+ * optional bytes asset_issued_ID = 57;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.Account.prototype.getAssetIssuedId = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 57, ""));
+};
+
+
+/**
+ * optional bytes asset_issued_ID = 57;
+ * This is a type-conversion wrapper around `getAssetIssuedId()`
+ * @return {string}
+ */
+proto.protocol.Account.prototype.getAssetIssuedId_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getAssetIssuedId()));
+};
+
+
+/**
+ * optional bytes asset_issued_ID = 57;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getAssetIssuedId()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.Account.prototype.getAssetIssuedId_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getAssetIssuedId()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.Account.prototype.setAssetIssuedId = function(value) {
+  jspb.Message.setProto3BytesField(this, 57, value);
 };
 
 
@@ -2912,6 +3159,24 @@ proto.protocol.Account.prototype.clearLatestAssetOperationTimeMap = function() {
 
 
 /**
+ * map<string, int64> latest_asset_operation_timeV2 = 58;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,number>}
+ */
+proto.protocol.Account.prototype.getLatestAssetOperationTimev2Map = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 58, opt_noLazyCreate,
+      null));
+};
+
+
+proto.protocol.Account.prototype.clearLatestAssetOperationTimev2Map = function() {
+  this.getLatestAssetOperationTimev2Map().clear();
+};
+
+
+/**
  * optional int64 free_net_usage = 19;
  * @return {number}
  */
@@ -2922,7 +3187,7 @@ proto.protocol.Account.prototype.getFreeNetUsage = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setFreeNetUsage = function(value) {
-  jspb.Message.setField(this, 19, value);
+  jspb.Message.setProto3IntField(this, 19, value);
 };
 
 
@@ -2945,6 +3210,24 @@ proto.protocol.Account.prototype.clearFreeAssetNetUsageMap = function() {
 
 
 /**
+ * map<string, int64> free_asset_net_usageV2 = 59;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,number>}
+ */
+proto.protocol.Account.prototype.getFreeAssetNetUsagev2Map = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,number>} */ (
+      jspb.Message.getMapField(this, 59, opt_noLazyCreate,
+      null));
+};
+
+
+proto.protocol.Account.prototype.clearFreeAssetNetUsagev2Map = function() {
+  this.getFreeAssetNetUsagev2Map().clear();
+};
+
+
+/**
  * optional int64 latest_consume_time = 21;
  * @return {number}
  */
@@ -2955,7 +3238,7 @@ proto.protocol.Account.prototype.getLatestConsumeTime = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setLatestConsumeTime = function(value) {
-  jspb.Message.setField(this, 21, value);
+  jspb.Message.setProto3IntField(this, 21, value);
 };
 
 
@@ -2970,7 +3253,7 @@ proto.protocol.Account.prototype.getLatestConsumeFreeTime = function() {
 
 /** @param {number} value */
 proto.protocol.Account.prototype.setLatestConsumeFreeTime = function(value) {
-  jspb.Message.setField(this, 22, value);
+  jspb.Message.setProto3IntField(this, 22, value);
 };
 
 
@@ -3009,7 +3292,7 @@ proto.protocol.Account.prototype.getAccountId_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Account.prototype.setAccountId = function(value) {
-  jspb.Message.setField(this, 23, value);
+  jspb.Message.setProto3BytesField(this, 23, value);
 };
 
 
@@ -3078,23 +3361,83 @@ proto.protocol.Account.prototype.getCodehash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Account.prototype.setCodehash = function(value) {
-  jspb.Message.setField(this, 30, value);
+  jspb.Message.setProto3BytesField(this, 30, value);
 };
 
 
 /**
- * repeated Permission permissions = 31;
+ * optional Permission owner_permission = 31;
+ * @return {?proto.protocol.Permission}
+ */
+proto.protocol.Account.prototype.getOwnerPermission = function() {
+  return /** @type{?proto.protocol.Permission} */ (
+    jspb.Message.getWrapperField(this, proto.protocol.Permission, 31));
+};
+
+
+/** @param {?proto.protocol.Permission|undefined} value */
+proto.protocol.Account.prototype.setOwnerPermission = function(value) {
+  jspb.Message.setWrapperField(this, 31, value);
+};
+
+
+proto.protocol.Account.prototype.clearOwnerPermission = function() {
+  this.setOwnerPermission(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.protocol.Account.prototype.hasOwnerPermission = function() {
+  return jspb.Message.getField(this, 31) != null;
+};
+
+
+/**
+ * optional Permission witness_permission = 32;
+ * @return {?proto.protocol.Permission}
+ */
+proto.protocol.Account.prototype.getWitnessPermission = function() {
+  return /** @type{?proto.protocol.Permission} */ (
+    jspb.Message.getWrapperField(this, proto.protocol.Permission, 32));
+};
+
+
+/** @param {?proto.protocol.Permission|undefined} value */
+proto.protocol.Account.prototype.setWitnessPermission = function(value) {
+  jspb.Message.setWrapperField(this, 32, value);
+};
+
+
+proto.protocol.Account.prototype.clearWitnessPermission = function() {
+  this.setWitnessPermission(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.protocol.Account.prototype.hasWitnessPermission = function() {
+  return jspb.Message.getField(this, 32) != null;
+};
+
+
+/**
+ * repeated Permission active_permission = 33;
  * @return {!Array.<!proto.protocol.Permission>}
  */
-proto.protocol.Account.prototype.getPermissionsList = function() {
+proto.protocol.Account.prototype.getActivePermissionList = function() {
   return /** @type{!Array.<!proto.protocol.Permission>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.protocol.Permission, 31));
+    jspb.Message.getRepeatedWrapperField(this, proto.protocol.Permission, 33));
 };
 
 
 /** @param {!Array.<!proto.protocol.Permission>} value */
-proto.protocol.Account.prototype.setPermissionsList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 31, value);
+proto.protocol.Account.prototype.setActivePermissionList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 33, value);
 };
 
 
@@ -3103,13 +3446,13 @@ proto.protocol.Account.prototype.setPermissionsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.protocol.Permission}
  */
-proto.protocol.Account.prototype.addPermissions = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 31, opt_value, proto.protocol.Permission, opt_index);
+proto.protocol.Account.prototype.addActivePermission = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 33, opt_value, proto.protocol.Permission, opt_index);
 };
 
 
-proto.protocol.Account.prototype.clearPermissionsList = function() {
-  this.setPermissionsList([]);
+proto.protocol.Account.prototype.clearActivePermissionList = function() {
+  this.setActivePermissionList([]);
 };
 
 
@@ -3287,7 +3630,7 @@ proto.protocol.Key.prototype.getAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Key.prototype.setAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -3302,7 +3645,7 @@ proto.protocol.Key.prototype.getWeight = function() {
 
 /** @param {number} value */
 proto.protocol.Key.prototype.setWeight = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -3317,20 +3660,13 @@ proto.protocol.Key.prototype.setWeight = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.protocol.Permission = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.protocol.Permission.repeatedFields_, null);
+proto.protocol.DelegatedResource = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.protocol.Permission, jspb.Message);
+goog.inherits(proto.protocol.DelegatedResource, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.protocol.Permission.displayName = 'proto.protocol.Permission';
+  proto.protocol.DelegatedResource.displayName = 'proto.protocol.DelegatedResource';
 }
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.protocol.Permission.repeatedFields_ = [4];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -3344,8 +3680,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.protocol.Permission.prototype.toObject = function(opt_includeInstance) {
-  return proto.protocol.Permission.toObject(opt_includeInstance, this);
+proto.protocol.DelegatedResource.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.DelegatedResource.toObject(opt_includeInstance, this);
 };
 
 
@@ -3354,17 +3690,18 @@ proto.protocol.Permission.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.protocol.Permission} msg The msg instance to transform.
+ * @param {!proto.protocol.DelegatedResource} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.protocol.Permission.toObject = function(includeInstance, msg) {
+proto.protocol.DelegatedResource.toObject = function(includeInstance, msg) {
   var f, obj = {
-    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    threshold: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    parent: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    keysList: jspb.Message.toObjectList(msg.getKeysList(),
-    proto.protocol.Key.toObject, includeInstance)
+    from: msg.getFrom_asB64(),
+    to: msg.getTo_asB64(),
+    frozenBalanceForBandwidth: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    frozenBalanceForEnergy: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    expireTimeForBandwidth: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    expireTimeForEnergy: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -3378,23 +3715,23 @@ proto.protocol.Permission.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.protocol.Permission}
+ * @return {!proto.protocol.DelegatedResource}
  */
-proto.protocol.Permission.deserializeBinary = function(bytes) {
+proto.protocol.DelegatedResource.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.protocol.Permission;
-  return proto.protocol.Permission.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.protocol.DelegatedResource;
+  return proto.protocol.DelegatedResource.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.protocol.Permission} msg The message object to deserialize into.
+ * @param {!proto.protocol.DelegatedResource} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.protocol.Permission}
+ * @return {!proto.protocol.DelegatedResource}
  */
-proto.protocol.Permission.deserializeBinaryFromReader = function(msg, reader) {
+proto.protocol.DelegatedResource.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -3402,21 +3739,28 @@ proto.protocol.Permission.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setFrom(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setThreshold(value);
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setTo(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setParent(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setFrozenBalanceForBandwidth(value);
       break;
     case 4:
-      var value = new proto.protocol.Key;
-      reader.readMessage(value,proto.protocol.Key.deserializeBinaryFromReader);
-      msg.addKeys(value);
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setFrozenBalanceForEnergy(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExpireTimeForBandwidth(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExpireTimeForEnergy(value);
       break;
     default:
       reader.skipField();
@@ -3431,9 +3775,9 @@ proto.protocol.Permission.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.protocol.Permission.prototype.serializeBinary = function() {
+proto.protocol.DelegatedResource.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.protocol.Permission.serializeBinaryToWriter(this, writer);
+  proto.protocol.DelegatedResource.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -3441,117 +3785,192 @@ proto.protocol.Permission.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.protocol.Permission} message
+ * @param {!proto.protocol.DelegatedResource} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.protocol.Permission.serializeBinaryToWriter = function(message, writer) {
+proto.protocol.DelegatedResource.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getName();
+  f = message.getFrom_asU8();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeBytes(
       1,
       f
     );
   }
-  f = message.getThreshold();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getTo_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
       2,
       f
     );
   }
-  f = message.getParent();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getFrozenBalanceForBandwidth();
+  if (f !== 0) {
+    writer.writeInt64(
       3,
       f
     );
   }
-  f = message.getKeysList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = message.getFrozenBalanceForEnergy();
+  if (f !== 0) {
+    writer.writeInt64(
       4,
-      f,
-      proto.protocol.Key.serializeBinaryToWriter
+      f
+    );
+  }
+  f = message.getExpireTimeForBandwidth();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
+  f = message.getExpireTimeForEnergy();
+  if (f !== 0) {
+    writer.writeInt64(
+      6,
+      f
     );
   }
 };
 
 
 /**
- * optional string name = 1;
- * @return {string}
+ * optional bytes from = 1;
+ * @return {!(string|Uint8Array)}
  */
-proto.protocol.Permission.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/** @param {string} value */
-proto.protocol.Permission.prototype.setName = function(value) {
-  jspb.Message.setField(this, 1, value);
+proto.protocol.DelegatedResource.prototype.getFrom = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * optional int64 threshold = 2;
+ * optional bytes from = 1;
+ * This is a type-conversion wrapper around `getFrom()`
+ * @return {string}
+ */
+proto.protocol.DelegatedResource.prototype.getFrom_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getFrom()));
+};
+
+
+/**
+ * optional bytes from = 1;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getFrom()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.DelegatedResource.prototype.getFrom_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getFrom()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.DelegatedResource.prototype.setFrom = function(value) {
+  jspb.Message.setProto3BytesField(this, 1, value);
+};
+
+
+/**
+ * optional bytes to = 2;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.DelegatedResource.prototype.getTo = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * optional bytes to = 2;
+ * This is a type-conversion wrapper around `getTo()`
+ * @return {string}
+ */
+proto.protocol.DelegatedResource.prototype.getTo_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getTo()));
+};
+
+
+/**
+ * optional bytes to = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getTo()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.DelegatedResource.prototype.getTo_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getTo()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.DelegatedResource.prototype.setTo = function(value) {
+  jspb.Message.setProto3BytesField(this, 2, value);
+};
+
+
+/**
+ * optional int64 frozen_balance_for_bandwidth = 3;
  * @return {number}
  */
-proto.protocol.Permission.prototype.getThreshold = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+proto.protocol.DelegatedResource.prototype.getFrozenBalanceForBandwidth = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /** @param {number} value */
-proto.protocol.Permission.prototype.setThreshold = function(value) {
-  jspb.Message.setField(this, 2, value);
+proto.protocol.DelegatedResource.prototype.setFrozenBalanceForBandwidth = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional string parent = 3;
- * @return {string}
+ * optional int64 frozen_balance_for_energy = 4;
+ * @return {number}
  */
-proto.protocol.Permission.prototype.getParent = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+proto.protocol.DelegatedResource.prototype.getFrozenBalanceForEnergy = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
-/** @param {string} value */
-proto.protocol.Permission.prototype.setParent = function(value) {
-  jspb.Message.setField(this, 3, value);
+/** @param {number} value */
+proto.protocol.DelegatedResource.prototype.setFrozenBalanceForEnergy = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
 /**
- * repeated Key keys = 4;
- * @return {!Array.<!proto.protocol.Key>}
+ * optional int64 expire_time_for_bandwidth = 5;
+ * @return {number}
  */
-proto.protocol.Permission.prototype.getKeysList = function() {
-  return /** @type{!Array.<!proto.protocol.Key>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.protocol.Key, 4));
+proto.protocol.DelegatedResource.prototype.getExpireTimeForBandwidth = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
-/** @param {!Array.<!proto.protocol.Key>} value */
-proto.protocol.Permission.prototype.setKeysList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 4, value);
+/** @param {number} value */
+proto.protocol.DelegatedResource.prototype.setExpireTimeForBandwidth = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * @param {!proto.protocol.Key=} opt_value
- * @param {number=} opt_index
- * @return {!proto.protocol.Key}
+ * optional int64 expire_time_for_energy = 6;
+ * @return {number}
  */
-proto.protocol.Permission.prototype.addKeys = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.protocol.Key, opt_index);
+proto.protocol.DelegatedResource.prototype.getExpireTimeForEnergy = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
-proto.protocol.Permission.prototype.clearKeysList = function() {
-  this.setKeysList([]);
+/** @param {number} value */
+proto.protocol.DelegatedResource.prototype.setExpireTimeForEnergy = function(value) {
+  jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -3761,7 +4180,370 @@ proto.protocol.authority.prototype.getPermissionName_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.authority.prototype.setPermissionName = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.Permission = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.protocol.Permission.repeatedFields_, null);
+};
+goog.inherits(proto.protocol.Permission, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.Permission.displayName = 'proto.protocol.Permission';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.protocol.Permission.repeatedFields_ = [7];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.Permission.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.Permission.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.Permission} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.Permission.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    type: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    id: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    permissionName: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    threshold: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    parentId: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    operations: msg.getOperations_asB64(),
+    keysList: jspb.Message.toObjectList(msg.getKeysList(),
+    proto.protocol.Key.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.Permission}
+ */
+proto.protocol.Permission.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.Permission;
+  return proto.protocol.Permission.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.Permission} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.Permission}
+ */
+proto.protocol.Permission.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {!proto.protocol.Permission.PermissionType} */ (reader.readEnum());
+      msg.setType(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setId(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPermissionName(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setThreshold(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setParentId(value);
+      break;
+    case 6:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setOperations(value);
+      break;
+    case 7:
+      var value = new proto.protocol.Key;
+      reader.readMessage(value,proto.protocol.Key.deserializeBinaryFromReader);
+      msg.addKeys(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.Permission.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.Permission.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.Permission} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.Permission.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getType();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
+  f = message.getPermissionName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getThreshold();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
+    );
+  }
+  f = message.getParentId();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+  f = message.getOperations_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      6,
+      f
+    );
+  }
+  f = message.getKeysList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      7,
+      f,
+      proto.protocol.Key.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * @enum {number}
+ */
+proto.protocol.Permission.PermissionType = {
+  OWNER: 0,
+  WITNESS: 1,
+  ACTIVE: 2
+};
+
+/**
+ * optional PermissionType type = 1;
+ * @return {!proto.protocol.Permission.PermissionType}
+ */
+proto.protocol.Permission.prototype.getType = function() {
+  return /** @type {!proto.protocol.Permission.PermissionType} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {!proto.protocol.Permission.PermissionType} value */
+proto.protocol.Permission.prototype.setType = function(value) {
+  jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * optional int32 id = 2;
+ * @return {number}
+ */
+proto.protocol.Permission.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Permission.prototype.setId = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional string permission_name = 3;
+ * @return {string}
+ */
+proto.protocol.Permission.prototype.getPermissionName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.Permission.prototype.setPermissionName = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional int64 threshold = 4;
+ * @return {number}
+ */
+proto.protocol.Permission.prototype.getThreshold = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Permission.prototype.setThreshold = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int32 parent_id = 5;
+ * @return {number}
+ */
+proto.protocol.Permission.prototype.getParentId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Permission.prototype.setParentId = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional bytes operations = 6;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.Permission.prototype.getOperations = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * optional bytes operations = 6;
+ * This is a type-conversion wrapper around `getOperations()`
+ * @return {string}
+ */
+proto.protocol.Permission.prototype.getOperations_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getOperations()));
+};
+
+
+/**
+ * optional bytes operations = 6;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getOperations()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.Permission.prototype.getOperations_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getOperations()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.Permission.prototype.setOperations = function(value) {
+  jspb.Message.setProto3BytesField(this, 6, value);
+};
+
+
+/**
+ * repeated Key keys = 7;
+ * @return {!Array.<!proto.protocol.Key>}
+ */
+proto.protocol.Permission.prototype.getKeysList = function() {
+  return /** @type{!Array.<!proto.protocol.Key>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.protocol.Key, 7));
+};
+
+
+/** @param {!Array.<!proto.protocol.Key>} value */
+proto.protocol.Permission.prototype.setKeysList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 7, value);
+};
+
+
+/**
+ * @param {!proto.protocol.Key=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.protocol.Key}
+ */
+proto.protocol.Permission.prototype.addKeys = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.protocol.Key, opt_index);
+};
+
+
+proto.protocol.Permission.prototype.clearKeysList = function() {
+  this.setKeysList([]);
 };
 
 
@@ -4023,7 +4805,7 @@ proto.protocol.Witness.prototype.getAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Witness.prototype.setAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -4038,7 +4820,7 @@ proto.protocol.Witness.prototype.getVotecount = function() {
 
 /** @param {number} value */
 proto.protocol.Witness.prototype.setVotecount = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -4077,7 +4859,7 @@ proto.protocol.Witness.prototype.getPubkey_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Witness.prototype.setPubkey = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -4092,7 +4874,7 @@ proto.protocol.Witness.prototype.getUrl = function() {
 
 /** @param {string} value */
 proto.protocol.Witness.prototype.setUrl = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -4107,7 +4889,7 @@ proto.protocol.Witness.prototype.getTotalproduced = function() {
 
 /** @param {number} value */
 proto.protocol.Witness.prototype.setTotalproduced = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -4122,7 +4904,7 @@ proto.protocol.Witness.prototype.getTotalmissed = function() {
 
 /** @param {number} value */
 proto.protocol.Witness.prototype.setTotalmissed = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -4137,7 +4919,7 @@ proto.protocol.Witness.prototype.getLatestblocknum = function() {
 
 /** @param {number} value */
 proto.protocol.Witness.prototype.setLatestblocknum = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
@@ -4152,7 +4934,7 @@ proto.protocol.Witness.prototype.getLatestslotnum = function() {
 
 /** @param {number} value */
 proto.protocol.Witness.prototype.setLatestslotnum = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
@@ -4169,7 +4951,7 @@ proto.protocol.Witness.prototype.getIsjobs = function() {
 
 /** @param {boolean} value */
 proto.protocol.Witness.prototype.setIsjobs = function(value) {
-  jspb.Message.setField(this, 9, value);
+  jspb.Message.setProto3BooleanField(this, 9, value);
 };
 
 
@@ -4372,7 +5154,7 @@ proto.protocol.Votes.prototype.getAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Votes.prototype.setAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -4588,7 +5370,7 @@ proto.protocol.TXOutput.prototype.getValue = function() {
 
 /** @param {number} value */
 proto.protocol.TXOutput.prototype.setValue = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -4627,7 +5409,7 @@ proto.protocol.TXOutput.prototype.getPubkeyhash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TXOutput.prototype.setPubkeyhash = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -4958,7 +5740,7 @@ proto.protocol.TXInput.raw.prototype.getTxid_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TXInput.raw.prototype.setTxid = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -4973,7 +5755,7 @@ proto.protocol.TXInput.raw.prototype.getVout = function() {
 
 /** @param {number} value */
 proto.protocol.TXInput.raw.prototype.setVout = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -5012,7 +5794,7 @@ proto.protocol.TXInput.raw.prototype.getPubkey_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TXInput.raw.prototype.setPubkey = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -5081,7 +5863,7 @@ proto.protocol.TXInput.prototype.getSignature_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TXInput.prototype.setSignature = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3BytesField(this, 4, value);
 };
 
 
@@ -5463,7 +6245,7 @@ proto.protocol.ResourceReceipt.prototype.getEnergyUsage = function() {
 
 /** @param {number} value */
 proto.protocol.ResourceReceipt.prototype.setEnergyUsage = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -5478,7 +6260,7 @@ proto.protocol.ResourceReceipt.prototype.getEnergyFee = function() {
 
 /** @param {number} value */
 proto.protocol.ResourceReceipt.prototype.setEnergyFee = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -5493,7 +6275,7 @@ proto.protocol.ResourceReceipt.prototype.getOriginEnergyUsage = function() {
 
 /** @param {number} value */
 proto.protocol.ResourceReceipt.prototype.setOriginEnergyUsage = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -5508,7 +6290,7 @@ proto.protocol.ResourceReceipt.prototype.getEnergyUsageTotal = function() {
 
 /** @param {number} value */
 proto.protocol.ResourceReceipt.prototype.setEnergyUsageTotal = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -5523,7 +6305,7 @@ proto.protocol.ResourceReceipt.prototype.getNetUsage = function() {
 
 /** @param {number} value */
 proto.protocol.ResourceReceipt.prototype.setNetUsage = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -5538,7 +6320,7 @@ proto.protocol.ResourceReceipt.prototype.getNetFee = function() {
 
 /** @param {number} value */
 proto.protocol.ResourceReceipt.prototype.setNetFee = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -5553,7 +6335,7 @@ proto.protocol.ResourceReceipt.prototype.getResult = function() {
 
 /** @param {!proto.protocol.Transaction.Result.contractResult} value */
 proto.protocol.ResourceReceipt.prototype.setResult = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3EnumField(this, 7, value);
 };
 
 
@@ -5770,7 +6552,8 @@ proto.protocol.Transaction.Contract.toObject = function(includeInstance, msg) {
     type: jspb.Message.getFieldWithDefault(msg, 1, 0),
     parameter: (f = msg.getParameter()) && google_protobuf_any_pb.Any.toObject(includeInstance, f),
     provider: msg.getProvider_asB64(),
-    contractname: msg.getContractname_asB64()
+    contractname: msg.getContractname_asB64(),
+    permissionId: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -5823,6 +6606,10 @@ proto.protocol.Transaction.Contract.deserializeBinaryFromReader = function(msg, 
     case 4:
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setContractname(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPermissionId(value);
       break;
     default:
       reader.skipField();
@@ -5882,6 +6669,13 @@ proto.protocol.Transaction.Contract.serializeBinaryToWriter = function(message, 
       f
     );
   }
+  f = message.getPermissionId();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
 };
 
 
@@ -5917,10 +6711,10 @@ proto.protocol.Transaction.Contract.ContractType = {
   EXCHANGEINJECTCONTRACT: 42,
   EXCHANGEWITHDRAWCONTRACT: 43,
   EXCHANGETRANSACTIONCONTRACT: 44,
-  ACCOUNTPERMISSIONUPDATECONTRACT: 45,
-  PERMISSIONADDKEYCONTRACT: 46,
-  PERMISSIONUPDATEKEYCONTRACT: 47,
-  PERMISSIONDELETEKEYCONTRACT: 48
+  UPDATEENERGYLIMITCONTRACT: 45,
+  ACCOUNTPERMISSIONUPDATECONTRACT: 46,
+  CLEARABICONTRACT: 48,
+  UPDATEBROKERAGECONTRACT: 49
 };
 
 /**
@@ -5934,7 +6728,7 @@ proto.protocol.Transaction.Contract.prototype.getType = function() {
 
 /** @param {!proto.protocol.Transaction.Contract.ContractType} value */
 proto.protocol.Transaction.Contract.prototype.setType = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -6003,7 +6797,7 @@ proto.protocol.Transaction.Contract.prototype.getProvider_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Transaction.Contract.prototype.setProvider = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -6042,7 +6836,22 @@ proto.protocol.Transaction.Contract.prototype.getContractname_asU8 = function() 
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Transaction.Contract.prototype.setContractname = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3BytesField(this, 4, value);
+};
+
+
+/**
+ * optional int32 Permission_id = 5;
+ * @return {number}
+ */
+proto.protocol.Transaction.Contract.prototype.getPermissionId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Transaction.Contract.prototype.setPermissionId = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -6096,8 +6905,13 @@ proto.protocol.Transaction.Result.toObject = function(includeInstance, msg) {
     fee: jspb.Message.getFieldWithDefault(msg, 1, 0),
     ret: jspb.Message.getFieldWithDefault(msg, 2, 0),
     contractret: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    assetissueid: jspb.Message.getFieldWithDefault(msg, 14, ""),
     withdrawAmount: jspb.Message.getFieldWithDefault(msg, 15, 0),
-    unfreezeAmount: jspb.Message.getFieldWithDefault(msg, 16, 0)
+    unfreezeAmount: jspb.Message.getFieldWithDefault(msg, 16, 0),
+    exchangeReceivedAmount: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    exchangeInjectAnotherAmount: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    exchangeWithdrawAnotherAmount: jspb.Message.getFieldWithDefault(msg, 20, 0),
+    exchangeId: jspb.Message.getFieldWithDefault(msg, 21, 0)
   };
 
   if (includeInstance) {
@@ -6146,6 +6960,10 @@ proto.protocol.Transaction.Result.deserializeBinaryFromReader = function(msg, re
       var value = /** @type {!proto.protocol.Transaction.Result.contractResult} */ (reader.readEnum());
       msg.setContractret(value);
       break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAssetissueid(value);
+      break;
     case 15:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setWithdrawAmount(value);
@@ -6153,6 +6971,22 @@ proto.protocol.Transaction.Result.deserializeBinaryFromReader = function(msg, re
     case 16:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setUnfreezeAmount(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeReceivedAmount(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeInjectAnotherAmount(value);
+      break;
+    case 20:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeWithdrawAnotherAmount(value);
+      break;
+    case 21:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeId(value);
       break;
     default:
       reader.skipField();
@@ -6204,6 +7038,13 @@ proto.protocol.Transaction.Result.serializeBinaryToWriter = function(message, wr
       f
     );
   }
+  f = message.getAssetissueid();
+  if (f.length > 0) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
   f = message.getWithdrawAmount();
   if (f !== 0) {
     writer.writeInt64(
@@ -6215,6 +7056,34 @@ proto.protocol.Transaction.Result.serializeBinaryToWriter = function(message, wr
   if (f !== 0) {
     writer.writeInt64(
       16,
+      f
+    );
+  }
+  f = message.getExchangeReceivedAmount();
+  if (f !== 0) {
+    writer.writeInt64(
+      18,
+      f
+    );
+  }
+  f = message.getExchangeInjectAnotherAmount();
+  if (f !== 0) {
+    writer.writeInt64(
+      19,
+      f
+    );
+  }
+  f = message.getExchangeWithdrawAnotherAmount();
+  if (f !== 0) {
+    writer.writeInt64(
+      20,
+      f
+    );
+  }
+  f = message.getExchangeId();
+  if (f !== 0) {
+    writer.writeInt64(
+      21,
       f
     );
   }
@@ -6246,7 +7115,8 @@ proto.protocol.Transaction.Result.contractResult = {
   OUT_OF_ENERGY: 10,
   OUT_OF_TIME: 11,
   JVM_STACK_OVER_FLOW: 12,
-  UNKNOWN: 13
+  UNKNOWN: 13,
+  TRANSFER_FAILED: 14
 };
 
 /**
@@ -6260,7 +7130,7 @@ proto.protocol.Transaction.Result.prototype.getFee = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.Result.prototype.setFee = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -6275,7 +7145,7 @@ proto.protocol.Transaction.Result.prototype.getRet = function() {
 
 /** @param {!proto.protocol.Transaction.Result.code} value */
 proto.protocol.Transaction.Result.prototype.setRet = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -6290,7 +7160,22 @@ proto.protocol.Transaction.Result.prototype.getContractret = function() {
 
 /** @param {!proto.protocol.Transaction.Result.contractResult} value */
 proto.protocol.Transaction.Result.prototype.setContractret = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3EnumField(this, 3, value);
+};
+
+
+/**
+ * optional string assetIssueID = 14;
+ * @return {string}
+ */
+proto.protocol.Transaction.Result.prototype.getAssetissueid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.Transaction.Result.prototype.setAssetissueid = function(value) {
+  jspb.Message.setProto3StringField(this, 14, value);
 };
 
 
@@ -6305,7 +7190,7 @@ proto.protocol.Transaction.Result.prototype.getWithdrawAmount = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.Result.prototype.setWithdrawAmount = function(value) {
-  jspb.Message.setField(this, 15, value);
+  jspb.Message.setProto3IntField(this, 15, value);
 };
 
 
@@ -6320,7 +7205,67 @@ proto.protocol.Transaction.Result.prototype.getUnfreezeAmount = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.Result.prototype.setUnfreezeAmount = function(value) {
-  jspb.Message.setField(this, 16, value);
+  jspb.Message.setProto3IntField(this, 16, value);
+};
+
+
+/**
+ * optional int64 exchange_received_amount = 18;
+ * @return {number}
+ */
+proto.protocol.Transaction.Result.prototype.getExchangeReceivedAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Transaction.Result.prototype.setExchangeReceivedAmount = function(value) {
+  jspb.Message.setProto3IntField(this, 18, value);
+};
+
+
+/**
+ * optional int64 exchange_inject_another_amount = 19;
+ * @return {number}
+ */
+proto.protocol.Transaction.Result.prototype.getExchangeInjectAnotherAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Transaction.Result.prototype.setExchangeInjectAnotherAmount = function(value) {
+  jspb.Message.setProto3IntField(this, 19, value);
+};
+
+
+/**
+ * optional int64 exchange_withdraw_another_amount = 20;
+ * @return {number}
+ */
+proto.protocol.Transaction.Result.prototype.getExchangeWithdrawAnotherAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 20, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Transaction.Result.prototype.setExchangeWithdrawAnotherAmount = function(value) {
+  jspb.Message.setProto3IntField(this, 20, value);
+};
+
+
+/**
+ * optional int64 exchange_id = 21;
+ * @return {number}
+ */
+proto.protocol.Transaction.Result.prototype.getExchangeId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.Transaction.Result.prototype.setExchangeId = function(value) {
+  jspb.Message.setProto3IntField(this, 21, value);
 };
 
 
@@ -6607,7 +7552,7 @@ proto.protocol.Transaction.raw.prototype.getRefBlockBytes_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Transaction.raw.prototype.setRefBlockBytes = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -6622,7 +7567,7 @@ proto.protocol.Transaction.raw.prototype.getRefBlockNum = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.raw.prototype.setRefBlockNum = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -6661,7 +7606,7 @@ proto.protocol.Transaction.raw.prototype.getRefBlockHash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Transaction.raw.prototype.setRefBlockHash = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3BytesField(this, 4, value);
 };
 
 
@@ -6676,7 +7621,7 @@ proto.protocol.Transaction.raw.prototype.getExpiration = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.raw.prototype.setExpiration = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
@@ -6746,7 +7691,7 @@ proto.protocol.Transaction.raw.prototype.getData_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Transaction.raw.prototype.setData = function(value) {
-  jspb.Message.setField(this, 10, value);
+  jspb.Message.setProto3BytesField(this, 10, value);
 };
 
 
@@ -6816,7 +7761,7 @@ proto.protocol.Transaction.raw.prototype.getScripts_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.Transaction.raw.prototype.setScripts = function(value) {
-  jspb.Message.setField(this, 12, value);
+  jspb.Message.setProto3BytesField(this, 12, value);
 };
 
 
@@ -6831,7 +7776,7 @@ proto.protocol.Transaction.raw.prototype.getTimestamp = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.raw.prototype.setTimestamp = function(value) {
-  jspb.Message.setField(this, 14, value);
+  jspb.Message.setProto3IntField(this, 14, value);
 };
 
 
@@ -6846,7 +7791,7 @@ proto.protocol.Transaction.raw.prototype.getFeeLimit = function() {
 
 /** @param {number} value */
 proto.protocol.Transaction.raw.prototype.setFeeLimit = function(value) {
-  jspb.Message.setField(this, 18, value);
+  jspb.Message.setProto3IntField(this, 18, value);
 };
 
 
@@ -7029,10 +7974,15 @@ proto.protocol.TransactionInfo.toObject = function(includeInstance, msg) {
     proto.protocol.TransactionInfo.Log.toObject, includeInstance),
     result: jspb.Message.getFieldWithDefault(msg, 9, 0),
     resmessage: msg.getResmessage_asB64(),
+    assetissueid: jspb.Message.getFieldWithDefault(msg, 14, ""),
     withdrawAmount: jspb.Message.getFieldWithDefault(msg, 15, 0),
     unfreezeAmount: jspb.Message.getFieldWithDefault(msg, 16, 0),
     internalTransactionsList: jspb.Message.toObjectList(msg.getInternalTransactionsList(),
-    proto.protocol.InternalTransaction.toObject, includeInstance)
+    proto.protocol.InternalTransaction.toObject, includeInstance),
+    exchangeReceivedAmount: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    exchangeInjectAnotherAmount: jspb.Message.getFieldWithDefault(msg, 19, 0),
+    exchangeWithdrawAnotherAmount: jspb.Message.getFieldWithDefault(msg, 20, 0),
+    exchangeId: jspb.Message.getFieldWithDefault(msg, 21, 0)
   };
 
   if (includeInstance) {
@@ -7111,6 +8061,10 @@ proto.protocol.TransactionInfo.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setResmessage(value);
       break;
+    case 14:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAssetissueid(value);
+      break;
     case 15:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setWithdrawAmount(value);
@@ -7123,6 +8077,22 @@ proto.protocol.TransactionInfo.deserializeBinaryFromReader = function(msg, reade
       var value = new proto.protocol.InternalTransaction;
       reader.readMessage(value,proto.protocol.InternalTransaction.deserializeBinaryFromReader);
       msg.addInternalTransactions(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeReceivedAmount(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeInjectAnotherAmount(value);
+      break;
+    case 20:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeWithdrawAnotherAmount(value);
+      break;
+    case 21:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setExchangeId(value);
       break;
     default:
       reader.skipField();
@@ -7225,6 +8195,13 @@ proto.protocol.TransactionInfo.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = message.getAssetissueid();
+  if (f.length > 0) {
+    writer.writeString(
+      14,
+      f
+    );
+  }
   f = message.getWithdrawAmount();
   if (f !== 0) {
     writer.writeInt64(
@@ -7245,6 +8222,34 @@ proto.protocol.TransactionInfo.serializeBinaryToWriter = function(message, write
       17,
       f,
       proto.protocol.InternalTransaction.serializeBinaryToWriter
+    );
+  }
+  f = message.getExchangeReceivedAmount();
+  if (f !== 0) {
+    writer.writeInt64(
+      18,
+      f
+    );
+  }
+  f = message.getExchangeInjectAnotherAmount();
+  if (f !== 0) {
+    writer.writeInt64(
+      19,
+      f
+    );
+  }
+  f = message.getExchangeWithdrawAnotherAmount();
+  if (f !== 0) {
+    writer.writeInt64(
+      20,
+      f
+    );
+  }
+  f = message.getExchangeId();
+  if (f !== 0) {
+    writer.writeInt64(
+      21,
+      f
     );
   }
 };
@@ -7451,7 +8456,7 @@ proto.protocol.TransactionInfo.Log.prototype.getAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TransactionInfo.Log.prototype.setAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -7543,7 +8548,7 @@ proto.protocol.TransactionInfo.Log.prototype.getData_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TransactionInfo.Log.prototype.setData = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -7582,7 +8587,7 @@ proto.protocol.TransactionInfo.prototype.getId_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TransactionInfo.prototype.setId = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -7597,7 +8602,7 @@ proto.protocol.TransactionInfo.prototype.getFee = function() {
 
 /** @param {number} value */
 proto.protocol.TransactionInfo.prototype.setFee = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -7612,7 +8617,7 @@ proto.protocol.TransactionInfo.prototype.getBlocknumber = function() {
 
 /** @param {number} value */
 proto.protocol.TransactionInfo.prototype.setBlocknumber = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -7627,7 +8632,7 @@ proto.protocol.TransactionInfo.prototype.getBlocktimestamp = function() {
 
 /** @param {number} value */
 proto.protocol.TransactionInfo.prototype.setBlocktimestamp = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
@@ -7719,7 +8724,7 @@ proto.protocol.TransactionInfo.prototype.getContractAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TransactionInfo.prototype.setContractAddress = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3BytesField(this, 6, value);
 };
 
 
@@ -7795,7 +8800,7 @@ proto.protocol.TransactionInfo.prototype.getResult = function() {
 
 /** @param {!proto.protocol.TransactionInfo.code} value */
 proto.protocol.TransactionInfo.prototype.setResult = function(value) {
-  jspb.Message.setField(this, 9, value);
+  jspb.Message.setProto3EnumField(this, 9, value);
 };
 
 
@@ -7834,7 +8839,22 @@ proto.protocol.TransactionInfo.prototype.getResmessage_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TransactionInfo.prototype.setResmessage = function(value) {
-  jspb.Message.setField(this, 10, value);
+  jspb.Message.setProto3BytesField(this, 10, value);
+};
+
+
+/**
+ * optional string assetIssueID = 14;
+ * @return {string}
+ */
+proto.protocol.TransactionInfo.prototype.getAssetissueid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 14, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.TransactionInfo.prototype.setAssetissueid = function(value) {
+  jspb.Message.setProto3StringField(this, 14, value);
 };
 
 
@@ -7849,7 +8869,7 @@ proto.protocol.TransactionInfo.prototype.getWithdrawAmount = function() {
 
 /** @param {number} value */
 proto.protocol.TransactionInfo.prototype.setWithdrawAmount = function(value) {
-  jspb.Message.setField(this, 15, value);
+  jspb.Message.setProto3IntField(this, 15, value);
 };
 
 
@@ -7864,7 +8884,7 @@ proto.protocol.TransactionInfo.prototype.getUnfreezeAmount = function() {
 
 /** @param {number} value */
 proto.protocol.TransactionInfo.prototype.setUnfreezeAmount = function(value) {
-  jspb.Message.setField(this, 16, value);
+  jspb.Message.setProto3IntField(this, 16, value);
 };
 
 
@@ -7896,6 +8916,66 @@ proto.protocol.TransactionInfo.prototype.addInternalTransactions = function(opt_
 
 proto.protocol.TransactionInfo.prototype.clearInternalTransactionsList = function() {
   this.setInternalTransactionsList([]);
+};
+
+
+/**
+ * optional int64 exchange_received_amount = 18;
+ * @return {number}
+ */
+proto.protocol.TransactionInfo.prototype.getExchangeReceivedAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.TransactionInfo.prototype.setExchangeReceivedAmount = function(value) {
+  jspb.Message.setProto3IntField(this, 18, value);
+};
+
+
+/**
+ * optional int64 exchange_inject_another_amount = 19;
+ * @return {number}
+ */
+proto.protocol.TransactionInfo.prototype.getExchangeInjectAnotherAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.TransactionInfo.prototype.setExchangeInjectAnotherAmount = function(value) {
+  jspb.Message.setProto3IntField(this, 19, value);
+};
+
+
+/**
+ * optional int64 exchange_withdraw_another_amount = 20;
+ * @return {number}
+ */
+proto.protocol.TransactionInfo.prototype.getExchangeWithdrawAnotherAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 20, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.TransactionInfo.prototype.setExchangeWithdrawAnotherAmount = function(value) {
+  jspb.Message.setProto3IntField(this, 20, value);
+};
+
+
+/**
+ * optional int64 exchange_id = 21;
+ * @return {number}
+ */
+proto.protocol.TransactionInfo.prototype.getExchangeId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.TransactionInfo.prototype.setExchangeId = function(value) {
+  jspb.Message.setProto3IntField(this, 21, value);
 };
 
 
@@ -8273,7 +9353,7 @@ proto.protocol.TransactionSign.prototype.getPrivatekey_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.TransactionSign.prototype.setPrivatekey = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -8471,7 +9551,8 @@ proto.protocol.BlockHeader.raw.toObject = function(includeInstance, msg) {
     number: jspb.Message.getFieldWithDefault(msg, 7, 0),
     witnessId: jspb.Message.getFieldWithDefault(msg, 8, 0),
     witnessAddress: msg.getWitnessAddress_asB64(),
-    version: jspb.Message.getFieldWithDefault(msg, 10, 0)
+    version: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    accountstateroot: msg.getAccountstateroot_asB64()
   };
 
   if (includeInstance) {
@@ -8535,6 +9616,10 @@ proto.protocol.BlockHeader.raw.deserializeBinaryFromReader = function(msg, reade
     case 10:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setVersion(value);
+      break;
+    case 11:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setAccountstateroot(value);
       break;
     default:
       reader.skipField();
@@ -8614,6 +9699,13 @@ proto.protocol.BlockHeader.raw.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = message.getAccountstateroot_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      11,
+      f
+    );
+  }
 };
 
 
@@ -8628,7 +9720,7 @@ proto.protocol.BlockHeader.raw.prototype.getTimestamp = function() {
 
 /** @param {number} value */
 proto.protocol.BlockHeader.raw.prototype.setTimestamp = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -8667,7 +9759,7 @@ proto.protocol.BlockHeader.raw.prototype.getTxtrieroot_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.BlockHeader.raw.prototype.setTxtrieroot = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -8706,7 +9798,7 @@ proto.protocol.BlockHeader.raw.prototype.getParenthash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.BlockHeader.raw.prototype.setParenthash = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -8721,7 +9813,7 @@ proto.protocol.BlockHeader.raw.prototype.getNumber = function() {
 
 /** @param {number} value */
 proto.protocol.BlockHeader.raw.prototype.setNumber = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
@@ -8736,7 +9828,7 @@ proto.protocol.BlockHeader.raw.prototype.getWitnessId = function() {
 
 /** @param {number} value */
 proto.protocol.BlockHeader.raw.prototype.setWitnessId = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
@@ -8775,7 +9867,7 @@ proto.protocol.BlockHeader.raw.prototype.getWitnessAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.BlockHeader.raw.prototype.setWitnessAddress = function(value) {
-  jspb.Message.setField(this, 9, value);
+  jspb.Message.setProto3BytesField(this, 9, value);
 };
 
 
@@ -8790,7 +9882,46 @@ proto.protocol.BlockHeader.raw.prototype.getVersion = function() {
 
 /** @param {number} value */
 proto.protocol.BlockHeader.raw.prototype.setVersion = function(value) {
-  jspb.Message.setField(this, 10, value);
+  jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional bytes accountStateRoot = 11;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.BlockHeader.raw.prototype.getAccountstateroot = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+};
+
+
+/**
+ * optional bytes accountStateRoot = 11;
+ * This is a type-conversion wrapper around `getAccountstateroot()`
+ * @return {string}
+ */
+proto.protocol.BlockHeader.raw.prototype.getAccountstateroot_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getAccountstateroot()));
+};
+
+
+/**
+ * optional bytes accountStateRoot = 11;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getAccountstateroot()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.BlockHeader.raw.prototype.getAccountstateroot_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getAccountstateroot()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.BlockHeader.raw.prototype.setAccountstateroot = function(value) {
+  jspb.Message.setProto3BytesField(this, 11, value);
 };
 
 
@@ -8859,7 +9990,7 @@ proto.protocol.BlockHeader.prototype.getWitnessSignature_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.BlockHeader.prototype.setWitnessSignature = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -9398,7 +10529,7 @@ proto.protocol.ChainInventory.BlockId.prototype.getHash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.ChainInventory.BlockId.prototype.setHash = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -9413,7 +10544,7 @@ proto.protocol.ChainInventory.BlockId.prototype.getNumber = function() {
 
 /** @param {number} value */
 proto.protocol.ChainInventory.BlockId.prototype.setNumber = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -9459,7 +10590,7 @@ proto.protocol.ChainInventory.prototype.getRemainNum = function() {
 
 /** @param {number} value */
 proto.protocol.ChainInventory.prototype.setRemainNum = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -9795,7 +10926,7 @@ proto.protocol.BlockInventory.BlockId.prototype.getHash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.BlockInventory.BlockId.prototype.setHash = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -9810,7 +10941,7 @@ proto.protocol.BlockInventory.BlockId.prototype.getNumber = function() {
 
 /** @param {number} value */
 proto.protocol.BlockInventory.BlockId.prototype.setNumber = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -9856,7 +10987,7 @@ proto.protocol.BlockInventory.prototype.getType = function() {
 
 /** @param {!proto.protocol.BlockInventory.Type} value */
 proto.protocol.BlockInventory.prototype.setType = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -10025,7 +11156,7 @@ proto.protocol.Inventory.prototype.getType = function() {
 
 /** @param {!proto.protocol.Inventory.InventoryType} value */
 proto.protocol.Inventory.prototype.setType = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -10282,7 +11413,7 @@ proto.protocol.Items.prototype.getType = function() {
 
 /** @param {!proto.protocol.Items.ItemType} value */
 proto.protocol.Items.prototype.setType = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -10517,7 +11648,7 @@ proto.protocol.DynamicProperties.prototype.getLastSolidityBlockNum = function() 
 
 /** @param {number} value */
 proto.protocol.DynamicProperties.prototype.setLastSolidityBlockNum = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
@@ -10659,7 +11790,7 @@ proto.protocol.DisconnectMessage.prototype.getReason = function() {
 
 /** @param {!proto.protocol.ReasonCode} value */
 proto.protocol.DisconnectMessage.prototype.setReason = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -11032,7 +12163,7 @@ proto.protocol.HelloMessage.BlockId.prototype.getHash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.HelloMessage.BlockId.prototype.setHash = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -11047,7 +12178,7 @@ proto.protocol.HelloMessage.BlockId.prototype.getNumber = function() {
 
 /** @param {number} value */
 proto.protocol.HelloMessage.BlockId.prototype.setNumber = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -11092,7 +12223,7 @@ proto.protocol.HelloMessage.prototype.getVersion = function() {
 
 /** @param {number} value */
 proto.protocol.HelloMessage.prototype.setVersion = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3IntField(this, 2, value);
 };
 
 
@@ -11107,7 +12238,7 @@ proto.protocol.HelloMessage.prototype.getTimestamp = function() {
 
 /** @param {number} value */
 proto.protocol.HelloMessage.prototype.setTimestamp = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
@@ -11254,7 +12385,10 @@ proto.protocol.SmartContract.toObject = function(includeInstance, msg) {
     bytecode: msg.getBytecode_asB64(),
     callValue: jspb.Message.getFieldWithDefault(msg, 5, 0),
     consumeUserResourcePercent: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 7, "")
+    name: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    originEnergyLimit: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    codeHash: msg.getCodeHash_asB64(),
+    trxHash: msg.getTrxHash_asB64()
   };
 
   if (includeInstance) {
@@ -11319,6 +12453,18 @@ proto.protocol.SmartContract.deserializeBinaryFromReader = function(msg, reader)
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setName(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setOriginEnergyLimit(value);
+      break;
+    case 9:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setCodeHash(value);
+      break;
+    case 10:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setTrxHash(value);
       break;
     default:
       reader.skipField();
@@ -11396,6 +12542,27 @@ proto.protocol.SmartContract.serializeBinaryToWriter = function(message, writer)
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getOriginEnergyLimit();
+  if (f !== 0) {
+    writer.writeInt64(
+      8,
+      f
+    );
+  }
+  f = message.getCodeHash_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      9,
+      f
+    );
+  }
+  f = message.getTrxHash_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      10,
       f
     );
   }
@@ -11949,7 +13116,7 @@ proto.protocol.SmartContract.ABI.Entry.Param.prototype.getIndexed = function() {
 
 /** @param {boolean} value */
 proto.protocol.SmartContract.ABI.Entry.Param.prototype.setIndexed = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 
@@ -11964,7 +13131,7 @@ proto.protocol.SmartContract.ABI.Entry.Param.prototype.getName = function() {
 
 /** @param {string} value */
 proto.protocol.SmartContract.ABI.Entry.Param.prototype.setName = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -11979,7 +13146,7 @@ proto.protocol.SmartContract.ABI.Entry.Param.prototype.getType = function() {
 
 /** @param {string} value */
 proto.protocol.SmartContract.ABI.Entry.Param.prototype.setType = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -11996,7 +13163,7 @@ proto.protocol.SmartContract.ABI.Entry.prototype.getAnonymous = function() {
 
 /** @param {boolean} value */
 proto.protocol.SmartContract.ABI.Entry.prototype.setAnonymous = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 
@@ -12013,7 +13180,7 @@ proto.protocol.SmartContract.ABI.Entry.prototype.getConstant = function() {
 
 /** @param {boolean} value */
 proto.protocol.SmartContract.ABI.Entry.prototype.setConstant = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
@@ -12028,7 +13195,7 @@ proto.protocol.SmartContract.ABI.Entry.prototype.getName = function() {
 
 /** @param {string} value */
 proto.protocol.SmartContract.ABI.Entry.prototype.setName = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -12105,7 +13272,7 @@ proto.protocol.SmartContract.ABI.Entry.prototype.getType = function() {
 
 /** @param {!proto.protocol.SmartContract.ABI.Entry.EntryType} value */
 proto.protocol.SmartContract.ABI.Entry.prototype.setType = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 
@@ -12122,7 +13289,7 @@ proto.protocol.SmartContract.ABI.Entry.prototype.getPayable = function() {
 
 /** @param {boolean} value */
 proto.protocol.SmartContract.ABI.Entry.prototype.setPayable = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3BooleanField(this, 7, value);
 };
 
 
@@ -12137,7 +13304,7 @@ proto.protocol.SmartContract.ABI.Entry.prototype.getStatemutability = function()
 
 /** @param {!proto.protocol.SmartContract.ABI.Entry.StateMutabilityType} value */
 proto.protocol.SmartContract.ABI.Entry.prototype.setStatemutability = function(value) {
-  jspb.Message.setField(this, 8, value);
+  jspb.Message.setProto3EnumField(this, 8, value);
 };
 
 
@@ -12207,7 +13374,7 @@ proto.protocol.SmartContract.prototype.getOriginAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.SmartContract.prototype.setOriginAddress = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -12246,7 +13413,7 @@ proto.protocol.SmartContract.prototype.getContractAddress_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.SmartContract.prototype.setContractAddress = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -12315,7 +13482,7 @@ proto.protocol.SmartContract.prototype.getBytecode_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.SmartContract.prototype.setBytecode = function(value) {
-  jspb.Message.setField(this, 4, value);
+  jspb.Message.setProto3BytesField(this, 4, value);
 };
 
 
@@ -12330,7 +13497,7 @@ proto.protocol.SmartContract.prototype.getCallValue = function() {
 
 /** @param {number} value */
 proto.protocol.SmartContract.prototype.setCallValue = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
@@ -12345,7 +13512,7 @@ proto.protocol.SmartContract.prototype.getConsumeUserResourcePercent = function(
 
 /** @param {number} value */
 proto.protocol.SmartContract.prototype.setConsumeUserResourcePercent = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -12360,7 +13527,100 @@ proto.protocol.SmartContract.prototype.getName = function() {
 
 /** @param {string} value */
 proto.protocol.SmartContract.prototype.setName = function(value) {
-  jspb.Message.setField(this, 7, value);
+  jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional int64 origin_energy_limit = 8;
+ * @return {number}
+ */
+proto.protocol.SmartContract.prototype.getOriginEnergyLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.SmartContract.prototype.setOriginEnergyLimit = function(value) {
+  jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional bytes code_hash = 9;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.SmartContract.prototype.getCodeHash = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * optional bytes code_hash = 9;
+ * This is a type-conversion wrapper around `getCodeHash()`
+ * @return {string}
+ */
+proto.protocol.SmartContract.prototype.getCodeHash_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getCodeHash()));
+};
+
+
+/**
+ * optional bytes code_hash = 9;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getCodeHash()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.SmartContract.prototype.getCodeHash_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getCodeHash()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.SmartContract.prototype.setCodeHash = function(value) {
+  jspb.Message.setProto3BytesField(this, 9, value);
+};
+
+
+/**
+ * optional bytes trx_hash = 10;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.SmartContract.prototype.getTrxHash = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * optional bytes trx_hash = 10;
+ * This is a type-conversion wrapper around `getTrxHash()`
+ * @return {string}
+ */
+proto.protocol.SmartContract.prototype.getTrxHash_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getTrxHash()));
+};
+
+
+/**
+ * optional bytes trx_hash = 10;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getTrxHash()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.SmartContract.prototype.getTrxHash_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getTrxHash()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.SmartContract.prototype.setTrxHash = function(value) {
+  jspb.Message.setProto3BytesField(this, 10, value);
 };
 
 
@@ -12609,7 +13869,7 @@ proto.protocol.InternalTransaction.CallValueInfo.prototype.toObject = function(o
 proto.protocol.InternalTransaction.CallValueInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     callvalue: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    tokenname: msg.getTokenname_asB64()
+    tokenid: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -12651,8 +13911,8 @@ proto.protocol.InternalTransaction.CallValueInfo.deserializeBinaryFromReader = f
       msg.setCallvalue(value);
       break;
     case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setTokenname(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTokenid(value);
       break;
     default:
       reader.skipField();
@@ -12690,9 +13950,9 @@ proto.protocol.InternalTransaction.CallValueInfo.serializeBinaryToWriter = funct
       f
     );
   }
-  f = message.getTokenname_asU8();
+  f = message.getTokenid();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       2,
       f
     );
@@ -12711,46 +13971,22 @@ proto.protocol.InternalTransaction.CallValueInfo.prototype.getCallvalue = functi
 
 /** @param {number} value */
 proto.protocol.InternalTransaction.CallValueInfo.prototype.setCallvalue = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3IntField(this, 1, value);
 };
 
 
 /**
- * optional bytes tokenName = 2;
- * @return {!(string|Uint8Array)}
- */
-proto.protocol.InternalTransaction.CallValueInfo.prototype.getTokenname = function() {
-  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * optional bytes tokenName = 2;
- * This is a type-conversion wrapper around `getTokenname()`
+ * optional string tokenId = 2;
  * @return {string}
  */
-proto.protocol.InternalTransaction.CallValueInfo.prototype.getTokenname_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getTokenname()));
+proto.protocol.InternalTransaction.CallValueInfo.prototype.getTokenid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
-/**
- * optional bytes tokenName = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getTokenname()`
- * @return {!Uint8Array}
- */
-proto.protocol.InternalTransaction.CallValueInfo.prototype.getTokenname_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getTokenname()));
-};
-
-
-/** @param {!(string|Uint8Array)} value */
-proto.protocol.InternalTransaction.CallValueInfo.prototype.setTokenname = function(value) {
-  jspb.Message.setField(this, 2, value);
+/** @param {string} value */
+proto.protocol.InternalTransaction.CallValueInfo.prototype.setTokenid = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -12789,7 +14025,7 @@ proto.protocol.InternalTransaction.prototype.getHash_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.InternalTransaction.prototype.setHash = function(value) {
-  jspb.Message.setField(this, 1, value);
+  jspb.Message.setProto3BytesField(this, 1, value);
 };
 
 
@@ -12828,7 +14064,7 @@ proto.protocol.InternalTransaction.prototype.getCallerAddress_asU8 = function() 
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.InternalTransaction.prototype.setCallerAddress = function(value) {
-  jspb.Message.setField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 
@@ -12867,7 +14103,7 @@ proto.protocol.InternalTransaction.prototype.getTransfertoAddress_asU8 = functio
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.InternalTransaction.prototype.setTransfertoAddress = function(value) {
-  jspb.Message.setField(this, 3, value);
+  jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
@@ -12937,7 +14173,7 @@ proto.protocol.InternalTransaction.prototype.getNote_asU8 = function() {
 
 /** @param {!(string|Uint8Array)} value */
 proto.protocol.InternalTransaction.prototype.setNote = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setProto3BytesField(this, 5, value);
 };
 
 
@@ -12954,7 +14190,3279 @@ proto.protocol.InternalTransaction.prototype.getRejected = function() {
 
 /** @param {boolean} value */
 proto.protocol.InternalTransaction.prototype.setRejected = function(value) {
-  jspb.Message.setField(this, 6, value);
+  jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.DelegatedResourceAccountIndex = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.protocol.DelegatedResourceAccountIndex.repeatedFields_, null);
+};
+goog.inherits(proto.protocol.DelegatedResourceAccountIndex, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.DelegatedResourceAccountIndex.displayName = 'proto.protocol.DelegatedResourceAccountIndex';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.protocol.DelegatedResourceAccountIndex.repeatedFields_ = [2,3];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.DelegatedResourceAccountIndex.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.DelegatedResourceAccountIndex} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.DelegatedResourceAccountIndex.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    account: msg.getAccount_asB64(),
+    fromaccountsList: msg.getFromaccountsList_asB64(),
+    toaccountsList: msg.getToaccountsList_asB64()
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.DelegatedResourceAccountIndex}
+ */
+proto.protocol.DelegatedResourceAccountIndex.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.DelegatedResourceAccountIndex;
+  return proto.protocol.DelegatedResourceAccountIndex.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.DelegatedResourceAccountIndex} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.DelegatedResourceAccountIndex}
+ */
+proto.protocol.DelegatedResourceAccountIndex.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setAccount(value);
+      break;
+    case 2:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.addFromaccounts(value);
+      break;
+    case 3:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.addToaccounts(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.DelegatedResourceAccountIndex.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.DelegatedResourceAccountIndex} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.DelegatedResourceAccountIndex.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getAccount_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      1,
+      f
+    );
+  }
+  f = message.getFromaccountsList_asU8();
+  if (f.length > 0) {
+    writer.writeRepeatedBytes(
+      2,
+      f
+    );
+  }
+  f = message.getToaccountsList_asU8();
+  if (f.length > 0) {
+    writer.writeRepeatedBytes(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional bytes account = 1;
+ * @return {!(string|Uint8Array)}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getAccount = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * optional bytes account = 1;
+ * This is a type-conversion wrapper around `getAccount()`
+ * @return {string}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getAccount_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getAccount()));
+};
+
+
+/**
+ * optional bytes account = 1;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getAccount()`
+ * @return {!Uint8Array}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getAccount_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getAccount()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
+proto.protocol.DelegatedResourceAccountIndex.prototype.setAccount = function(value) {
+  jspb.Message.setProto3BytesField(this, 1, value);
+};
+
+
+/**
+ * repeated bytes fromAccounts = 2;
+ * @return {!(Array<!Uint8Array>|Array<string>)}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getFromaccountsList = function() {
+  return /** @type {!(Array<!Uint8Array>|Array<string>)} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * repeated bytes fromAccounts = 2;
+ * This is a type-conversion wrapper around `getFromaccountsList()`
+ * @return {!Array.<string>}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getFromaccountsList_asB64 = function() {
+  return /** @type {!Array.<string>} */ (jspb.Message.bytesListAsB64(
+      this.getFromaccountsList()));
+};
+
+
+/**
+ * repeated bytes fromAccounts = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getFromaccountsList()`
+ * @return {!Array.<!Uint8Array>}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getFromaccountsList_asU8 = function() {
+  return /** @type {!Array.<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
+      this.getFromaccountsList()));
+};
+
+
+/** @param {!(Array<!Uint8Array>|Array<string>)} value */
+proto.protocol.DelegatedResourceAccountIndex.prototype.setFromaccountsList = function(value) {
+  jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @param {number=} opt_index
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.addFromaccounts = function(value, opt_index) {
+  jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+proto.protocol.DelegatedResourceAccountIndex.prototype.clearFromaccountsList = function() {
+  this.setFromaccountsList([]);
+};
+
+
+/**
+ * repeated bytes toAccounts = 3;
+ * @return {!(Array<!Uint8Array>|Array<string>)}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getToaccountsList = function() {
+  return /** @type {!(Array<!Uint8Array>|Array<string>)} */ (jspb.Message.getRepeatedField(this, 3));
+};
+
+
+/**
+ * repeated bytes toAccounts = 3;
+ * This is a type-conversion wrapper around `getToaccountsList()`
+ * @return {!Array.<string>}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getToaccountsList_asB64 = function() {
+  return /** @type {!Array.<string>} */ (jspb.Message.bytesListAsB64(
+      this.getToaccountsList()));
+};
+
+
+/**
+ * repeated bytes toAccounts = 3;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getToaccountsList()`
+ * @return {!Array.<!Uint8Array>}
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.getToaccountsList_asU8 = function() {
+  return /** @type {!Array.<!Uint8Array>} */ (jspb.Message.bytesListAsU8(
+      this.getToaccountsList()));
+};
+
+
+/** @param {!(Array<!Uint8Array>|Array<string>)} value */
+proto.protocol.DelegatedResourceAccountIndex.prototype.setToaccountsList = function(value) {
+  jspb.Message.setField(this, 3, value || []);
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @param {number=} opt_index
+ */
+proto.protocol.DelegatedResourceAccountIndex.prototype.addToaccounts = function(value, opt_index) {
+  jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+};
+
+
+proto.protocol.DelegatedResourceAccountIndex.prototype.clearToaccountsList = function() {
+  this.setToaccountsList([]);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.NodeInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.protocol.NodeInfo.repeatedFields_, null);
+};
+goog.inherits(proto.protocol.NodeInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.NodeInfo.displayName = 'proto.protocol.NodeInfo';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.protocol.NodeInfo.repeatedFields_ = [8];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.NodeInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.NodeInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.NodeInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    beginsyncnum: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    block: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    solidityblock: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    currentconnectcount: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    activeconnectcount: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    passiveconnectcount: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    totalflow: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    peerinfolistList: jspb.Message.toObjectList(msg.getPeerinfolistList(),
+    proto.protocol.NodeInfo.PeerInfo.toObject, includeInstance),
+    confignodeinfo: (f = msg.getConfignodeinfo()) && proto.protocol.NodeInfo.ConfigNodeInfo.toObject(includeInstance, f),
+    machineinfo: (f = msg.getMachineinfo()) && proto.protocol.NodeInfo.MachineInfo.toObject(includeInstance, f),
+    cheatwitnessinfomapMap: (f = msg.getCheatwitnessinfomapMap()) ? f.toObject(includeInstance, undefined) : []
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.NodeInfo}
+ */
+proto.protocol.NodeInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.NodeInfo;
+  return proto.protocol.NodeInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.NodeInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.NodeInfo}
+ */
+proto.protocol.NodeInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setBeginsyncnum(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBlock(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSolidityblock(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setCurrentconnectcount(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setActiveconnectcount(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPassiveconnectcount(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTotalflow(value);
+      break;
+    case 8:
+      var value = new proto.protocol.NodeInfo.PeerInfo;
+      reader.readMessage(value,proto.protocol.NodeInfo.PeerInfo.deserializeBinaryFromReader);
+      msg.addPeerinfolist(value);
+      break;
+    case 9:
+      var value = new proto.protocol.NodeInfo.ConfigNodeInfo;
+      reader.readMessage(value,proto.protocol.NodeInfo.ConfigNodeInfo.deserializeBinaryFromReader);
+      msg.setConfignodeinfo(value);
+      break;
+    case 10:
+      var value = new proto.protocol.NodeInfo.MachineInfo;
+      reader.readMessage(value,proto.protocol.NodeInfo.MachineInfo.deserializeBinaryFromReader);
+      msg.setMachineinfo(value);
+      break;
+    case 11:
+      var value = msg.getCheatwitnessinfomapMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString);
+         });
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.NodeInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.NodeInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.NodeInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getBeginsyncnum();
+  if (f !== 0) {
+    writer.writeInt64(
+      1,
+      f
+    );
+  }
+  f = message.getBlock();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getSolidityblock();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getCurrentconnectcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      4,
+      f
+    );
+  }
+  f = message.getActiveconnectcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+  f = message.getPassiveconnectcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      6,
+      f
+    );
+  }
+  f = message.getTotalflow();
+  if (f !== 0) {
+    writer.writeInt64(
+      7,
+      f
+    );
+  }
+  f = message.getPeerinfolistList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      8,
+      f,
+      proto.protocol.NodeInfo.PeerInfo.serializeBinaryToWriter
+    );
+  }
+  f = message.getConfignodeinfo();
+  if (f != null) {
+    writer.writeMessage(
+      9,
+      f,
+      proto.protocol.NodeInfo.ConfigNodeInfo.serializeBinaryToWriter
+    );
+  }
+  f = message.getMachineinfo();
+  if (f != null) {
+    writer.writeMessage(
+      10,
+      f,
+      proto.protocol.NodeInfo.MachineInfo.serializeBinaryToWriter
+    );
+  }
+  f = message.getCheatwitnessinfomapMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(11, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
+  }
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.NodeInfo.PeerInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.protocol.NodeInfo.PeerInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.NodeInfo.PeerInfo.displayName = 'proto.protocol.NodeInfo.PeerInfo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.NodeInfo.PeerInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.NodeInfo.PeerInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.PeerInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    lastsyncblock: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    remainnum: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    lastblockupdatetime: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    syncflag: jspb.Message.getFieldWithDefault(msg, 4, false),
+    headblocktimewebothhave: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    needsyncfrompeer: jspb.Message.getFieldWithDefault(msg, 6, false),
+    needsyncfromus: jspb.Message.getFieldWithDefault(msg, 7, false),
+    host: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    port: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    nodeid: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    connecttime: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    avglatency: +jspb.Message.getFieldWithDefault(msg, 12, 0.0),
+    synctofetchsize: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    synctofetchsizepeeknum: jspb.Message.getFieldWithDefault(msg, 14, 0),
+    syncblockrequestedsize: jspb.Message.getFieldWithDefault(msg, 15, 0),
+    unfetchsynnum: jspb.Message.getFieldWithDefault(msg, 16, 0),
+    blockinporcsize: jspb.Message.getFieldWithDefault(msg, 17, 0),
+    headblockwebothhave: jspb.Message.getFieldWithDefault(msg, 18, ""),
+    isactive: jspb.Message.getFieldWithDefault(msg, 19, false),
+    score: jspb.Message.getFieldWithDefault(msg, 20, 0),
+    nodecount: jspb.Message.getFieldWithDefault(msg, 21, 0),
+    inflow: jspb.Message.getFieldWithDefault(msg, 22, 0),
+    disconnecttimes: jspb.Message.getFieldWithDefault(msg, 23, 0),
+    localdisconnectreason: jspb.Message.getFieldWithDefault(msg, 24, ""),
+    remotedisconnectreason: jspb.Message.getFieldWithDefault(msg, 25, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.NodeInfo.PeerInfo}
+ */
+proto.protocol.NodeInfo.PeerInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.NodeInfo.PeerInfo;
+  return proto.protocol.NodeInfo.PeerInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.NodeInfo.PeerInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.NodeInfo.PeerInfo}
+ */
+proto.protocol.NodeInfo.PeerInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLastsyncblock(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setRemainnum(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setLastblockupdatetime(value);
+      break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSyncflag(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setHeadblocktimewebothhave(value);
+      break;
+    case 6:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setNeedsyncfrompeer(value);
+      break;
+    case 7:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setNeedsyncfromus(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setHost(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPort(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setNodeid(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setConnecttime(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAvglatency(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setSynctofetchsize(value);
+      break;
+    case 14:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setSynctofetchsizepeeknum(value);
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setSyncblockrequestedsize(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUnfetchsynnum(value);
+      break;
+    case 17:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setBlockinporcsize(value);
+      break;
+    case 18:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setHeadblockwebothhave(value);
+      break;
+    case 19:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsactive(value);
+      break;
+    case 20:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setScore(value);
+      break;
+    case 21:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setNodecount(value);
+      break;
+    case 22:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setInflow(value);
+      break;
+    case 23:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setDisconnecttimes(value);
+      break;
+    case 24:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLocaldisconnectreason(value);
+      break;
+    case 25:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRemotedisconnectreason(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.NodeInfo.PeerInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.NodeInfo.PeerInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.PeerInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getLastsyncblock();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getRemainnum();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getLastblockupdatetime();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+  f = message.getSyncflag();
+  if (f) {
+    writer.writeBool(
+      4,
+      f
+    );
+  }
+  f = message.getHeadblocktimewebothhave();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
+  f = message.getNeedsyncfrompeer();
+  if (f) {
+    writer.writeBool(
+      6,
+      f
+    );
+  }
+  f = message.getNeedsyncfromus();
+  if (f) {
+    writer.writeBool(
+      7,
+      f
+    );
+  }
+  f = message.getHost();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getPort();
+  if (f !== 0) {
+    writer.writeInt32(
+      9,
+      f
+    );
+  }
+  f = message.getNodeid();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+  f = message.getConnecttime();
+  if (f !== 0) {
+    writer.writeInt64(
+      11,
+      f
+    );
+  }
+  f = message.getAvglatency();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      12,
+      f
+    );
+  }
+  f = message.getSynctofetchsize();
+  if (f !== 0) {
+    writer.writeInt32(
+      13,
+      f
+    );
+  }
+  f = message.getSynctofetchsizepeeknum();
+  if (f !== 0) {
+    writer.writeInt64(
+      14,
+      f
+    );
+  }
+  f = message.getSyncblockrequestedsize();
+  if (f !== 0) {
+    writer.writeInt32(
+      15,
+      f
+    );
+  }
+  f = message.getUnfetchsynnum();
+  if (f !== 0) {
+    writer.writeInt64(
+      16,
+      f
+    );
+  }
+  f = message.getBlockinporcsize();
+  if (f !== 0) {
+    writer.writeInt32(
+      17,
+      f
+    );
+  }
+  f = message.getHeadblockwebothhave();
+  if (f.length > 0) {
+    writer.writeString(
+      18,
+      f
+    );
+  }
+  f = message.getIsactive();
+  if (f) {
+    writer.writeBool(
+      19,
+      f
+    );
+  }
+  f = message.getScore();
+  if (f !== 0) {
+    writer.writeInt32(
+      20,
+      f
+    );
+  }
+  f = message.getNodecount();
+  if (f !== 0) {
+    writer.writeInt32(
+      21,
+      f
+    );
+  }
+  f = message.getInflow();
+  if (f !== 0) {
+    writer.writeInt64(
+      22,
+      f
+    );
+  }
+  f = message.getDisconnecttimes();
+  if (f !== 0) {
+    writer.writeInt32(
+      23,
+      f
+    );
+  }
+  f = message.getLocaldisconnectreason();
+  if (f.length > 0) {
+    writer.writeString(
+      24,
+      f
+    );
+  }
+  f = message.getRemotedisconnectreason();
+  if (f.length > 0) {
+    writer.writeString(
+      25,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string lastSyncBlock = 1;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getLastsyncblock = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setLastsyncblock = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional int64 remainNum = 2;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getRemainnum = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setRemainnum = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional int64 lastBlockUpdateTime = 3;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getLastblockupdatetime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setLastblockupdatetime = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional bool syncFlag = 4;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getSyncflag = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 4, false));
+};
+
+
+/** @param {boolean} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setSyncflag = function(value) {
+  jspb.Message.setProto3BooleanField(this, 4, value);
+};
+
+
+/**
+ * optional int64 headBlockTimeWeBothHave = 5;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getHeadblocktimewebothhave = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setHeadblocktimewebothhave = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional bool needSyncFromPeer = 6;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getNeedsyncfrompeer = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 6, false));
+};
+
+
+/** @param {boolean} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setNeedsyncfrompeer = function(value) {
+  jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+/**
+ * optional bool needSyncFromUs = 7;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getNeedsyncfromus = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 7, false));
+};
+
+
+/** @param {boolean} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setNeedsyncfromus = function(value) {
+  jspb.Message.setProto3BooleanField(this, 7, value);
+};
+
+
+/**
+ * optional string host = 8;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getHost = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setHost = function(value) {
+  jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional int32 port = 9;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getPort = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setPort = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional string nodeId = 10;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getNodeid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setNodeid = function(value) {
+  jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional int64 connectTime = 11;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getConnecttime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setConnecttime = function(value) {
+  jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional double avgLatency = 12;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getAvglatency = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 12, 0.0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setAvglatency = function(value) {
+  jspb.Message.setProto3FloatField(this, 12, value);
+};
+
+
+/**
+ * optional int32 syncToFetchSize = 13;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getSynctofetchsize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setSynctofetchsize = function(value) {
+  jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
+/**
+ * optional int64 syncToFetchSizePeekNum = 14;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getSynctofetchsizepeeknum = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 14, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setSynctofetchsizepeeknum = function(value) {
+  jspb.Message.setProto3IntField(this, 14, value);
+};
+
+
+/**
+ * optional int32 syncBlockRequestedSize = 15;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getSyncblockrequestedsize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setSyncblockrequestedsize = function(value) {
+  jspb.Message.setProto3IntField(this, 15, value);
+};
+
+
+/**
+ * optional int64 unFetchSynNum = 16;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getUnfetchsynnum = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 16, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setUnfetchsynnum = function(value) {
+  jspb.Message.setProto3IntField(this, 16, value);
+};
+
+
+/**
+ * optional int32 blockInPorcSize = 17;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getBlockinporcsize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 17, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setBlockinporcsize = function(value) {
+  jspb.Message.setProto3IntField(this, 17, value);
+};
+
+
+/**
+ * optional string headBlockWeBothHave = 18;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getHeadblockwebothhave = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 18, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setHeadblockwebothhave = function(value) {
+  jspb.Message.setProto3StringField(this, 18, value);
+};
+
+
+/**
+ * optional bool isActive = 19;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getIsactive = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 19, false));
+};
+
+
+/** @param {boolean} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setIsactive = function(value) {
+  jspb.Message.setProto3BooleanField(this, 19, value);
+};
+
+
+/**
+ * optional int32 score = 20;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getScore = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 20, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setScore = function(value) {
+  jspb.Message.setProto3IntField(this, 20, value);
+};
+
+
+/**
+ * optional int32 nodeCount = 21;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getNodecount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setNodecount = function(value) {
+  jspb.Message.setProto3IntField(this, 21, value);
+};
+
+
+/**
+ * optional int64 inFlow = 22;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getInflow = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 22, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setInflow = function(value) {
+  jspb.Message.setProto3IntField(this, 22, value);
+};
+
+
+/**
+ * optional int32 disconnectTimes = 23;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getDisconnecttimes = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 23, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setDisconnecttimes = function(value) {
+  jspb.Message.setProto3IntField(this, 23, value);
+};
+
+
+/**
+ * optional string localDisconnectReason = 24;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getLocaldisconnectreason = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 24, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setLocaldisconnectreason = function(value) {
+  jspb.Message.setProto3StringField(this, 24, value);
+};
+
+
+/**
+ * optional string remoteDisconnectReason = 25;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.PeerInfo.prototype.getRemotedisconnectreason = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 25, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.PeerInfo.prototype.setRemotedisconnectreason = function(value) {
+  jspb.Message.setProto3StringField(this, 25, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.protocol.NodeInfo.ConfigNodeInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.NodeInfo.ConfigNodeInfo.displayName = 'proto.protocol.NodeInfo.ConfigNodeInfo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.NodeInfo.ConfigNodeInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.NodeInfo.ConfigNodeInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    codeversion: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    p2pversion: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    listenport: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    discoverenable: jspb.Message.getFieldWithDefault(msg, 4, false),
+    activenodesize: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    passivenodesize: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    sendnodesize: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    maxconnectcount: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    sameipmaxconnectcount: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    backuplistenport: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    backupmembersize: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    backuppriority: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    dbversion: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    minparticipationrate: jspb.Message.getFieldWithDefault(msg, 14, 0),
+    supportconstant: jspb.Message.getFieldWithDefault(msg, 15, false),
+    mintimeratio: +jspb.Message.getFieldWithDefault(msg, 16, 0.0),
+    maxtimeratio: +jspb.Message.getFieldWithDefault(msg, 17, 0.0),
+    allowcreationofcontracts: jspb.Message.getFieldWithDefault(msg, 18, 0),
+    allowadaptiveenergy: jspb.Message.getFieldWithDefault(msg, 19, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.NodeInfo.ConfigNodeInfo}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.NodeInfo.ConfigNodeInfo;
+  return proto.protocol.NodeInfo.ConfigNodeInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.NodeInfo.ConfigNodeInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.NodeInfo.ConfigNodeInfo}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCodeversion(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setP2pversion(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setListenport(value);
+      break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setDiscoverenable(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setActivenodesize(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setPassivenodesize(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setSendnodesize(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setMaxconnectcount(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setSameipmaxconnectcount(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setBackuplistenport(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setBackupmembersize(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setBackuppriority(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setDbversion(value);
+      break;
+    case 14:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setMinparticipationrate(value);
+      break;
+    case 15:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSupportconstant(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMintimeratio(value);
+      break;
+    case 17:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setMaxtimeratio(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setAllowcreationofcontracts(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setAllowadaptiveenergy(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.NodeInfo.ConfigNodeInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.NodeInfo.ConfigNodeInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getCodeversion();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getP2pversion();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getListenport();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
+  f = message.getDiscoverenable();
+  if (f) {
+    writer.writeBool(
+      4,
+      f
+    );
+  }
+  f = message.getActivenodesize();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+  f = message.getPassivenodesize();
+  if (f !== 0) {
+    writer.writeInt32(
+      6,
+      f
+    );
+  }
+  f = message.getSendnodesize();
+  if (f !== 0) {
+    writer.writeInt32(
+      7,
+      f
+    );
+  }
+  f = message.getMaxconnectcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      8,
+      f
+    );
+  }
+  f = message.getSameipmaxconnectcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      9,
+      f
+    );
+  }
+  f = message.getBackuplistenport();
+  if (f !== 0) {
+    writer.writeInt32(
+      10,
+      f
+    );
+  }
+  f = message.getBackupmembersize();
+  if (f !== 0) {
+    writer.writeInt32(
+      11,
+      f
+    );
+  }
+  f = message.getBackuppriority();
+  if (f !== 0) {
+    writer.writeInt32(
+      12,
+      f
+    );
+  }
+  f = message.getDbversion();
+  if (f !== 0) {
+    writer.writeInt32(
+      13,
+      f
+    );
+  }
+  f = message.getMinparticipationrate();
+  if (f !== 0) {
+    writer.writeInt32(
+      14,
+      f
+    );
+  }
+  f = message.getSupportconstant();
+  if (f) {
+    writer.writeBool(
+      15,
+      f
+    );
+  }
+  f = message.getMintimeratio();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      16,
+      f
+    );
+  }
+  f = message.getMaxtimeratio();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      17,
+      f
+    );
+  }
+  f = message.getAllowcreationofcontracts();
+  if (f !== 0) {
+    writer.writeInt64(
+      18,
+      f
+    );
+  }
+  f = message.getAllowadaptiveenergy();
+  if (f !== 0) {
+    writer.writeInt64(
+      19,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string codeVersion = 1;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getCodeversion = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setCodeversion = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string p2pVersion = 2;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getP2pversion = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setP2pversion = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional int32 listenPort = 3;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getListenport = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setListenport = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional bool discoverEnable = 4;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getDiscoverenable = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 4, false));
+};
+
+
+/** @param {boolean} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setDiscoverenable = function(value) {
+  jspb.Message.setProto3BooleanField(this, 4, value);
+};
+
+
+/**
+ * optional int32 activeNodeSize = 5;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getActivenodesize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setActivenodesize = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional int32 passiveNodeSize = 6;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getPassivenodesize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setPassivenodesize = function(value) {
+  jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional int32 sendNodeSize = 7;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getSendnodesize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setSendnodesize = function(value) {
+  jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional int32 maxConnectCount = 8;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getMaxconnectcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setMaxconnectcount = function(value) {
+  jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional int32 sameIpMaxConnectCount = 9;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getSameipmaxconnectcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setSameipmaxconnectcount = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int32 backupListenPort = 10;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getBackuplistenport = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setBackuplistenport = function(value) {
+  jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional int32 backupMemberSize = 11;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getBackupmembersize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setBackupmembersize = function(value) {
+  jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional int32 backupPriority = 12;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getBackuppriority = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setBackuppriority = function(value) {
+  jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * optional int32 dbVersion = 13;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getDbversion = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setDbversion = function(value) {
+  jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
+/**
+ * optional int32 minParticipationRate = 14;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getMinparticipationrate = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 14, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setMinparticipationrate = function(value) {
+  jspb.Message.setProto3IntField(this, 14, value);
+};
+
+
+/**
+ * optional bool supportConstant = 15;
+ * Note that Boolean fields may be set to 0/1 when serialized from a Java server.
+ * You should avoid comparisons like {@code val === true/false} in those cases.
+ * @return {boolean}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getSupportconstant = function() {
+  return /** @type {boolean} */ (jspb.Message.getFieldWithDefault(this, 15, false));
+};
+
+
+/** @param {boolean} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setSupportconstant = function(value) {
+  jspb.Message.setProto3BooleanField(this, 15, value);
+};
+
+
+/**
+ * optional double minTimeRatio = 16;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getMintimeratio = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 16, 0.0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setMintimeratio = function(value) {
+  jspb.Message.setProto3FloatField(this, 16, value);
+};
+
+
+/**
+ * optional double maxTimeRatio = 17;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getMaxtimeratio = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 17, 0.0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setMaxtimeratio = function(value) {
+  jspb.Message.setProto3FloatField(this, 17, value);
+};
+
+
+/**
+ * optional int64 allowCreationOfContracts = 18;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getAllowcreationofcontracts = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 18, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setAllowcreationofcontracts = function(value) {
+  jspb.Message.setProto3IntField(this, 18, value);
+};
+
+
+/**
+ * optional int64 allowAdaptiveEnergy = 19;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.getAllowadaptiveenergy = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 19, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.ConfigNodeInfo.prototype.setAllowadaptiveenergy = function(value) {
+  jspb.Message.setProto3IntField(this, 19, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.NodeInfo.MachineInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.protocol.NodeInfo.MachineInfo.repeatedFields_, null);
+};
+goog.inherits(proto.protocol.NodeInfo.MachineInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.NodeInfo.MachineInfo.displayName = 'proto.protocol.NodeInfo.MachineInfo';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.protocol.NodeInfo.MachineInfo.repeatedFields_ = [12,13];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.NodeInfo.MachineInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.NodeInfo.MachineInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.MachineInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    threadcount: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    deadlockthreadcount: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    cpucount: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    totalmemory: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    freememory: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    cpurate: +jspb.Message.getFieldWithDefault(msg, 6, 0.0),
+    javaversion: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    osname: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    jvmtotalmemoery: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    jvmfreememory: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    processcpurate: +jspb.Message.getFieldWithDefault(msg, 11, 0.0),
+    memorydescinfolistList: jspb.Message.toObjectList(msg.getMemorydescinfolistList(),
+    proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.toObject, includeInstance),
+    deadlockthreadinfolistList: jspb.Message.toObjectList(msg.getDeadlockthreadinfolistList(),
+    proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.NodeInfo.MachineInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.NodeInfo.MachineInfo;
+  return proto.protocol.NodeInfo.MachineInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.NodeInfo.MachineInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.NodeInfo.MachineInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setThreadcount(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setDeadlockthreadcount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setCpucount(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setTotalmemory(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setFreememory(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setCpurate(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setJavaversion(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOsname(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setJvmtotalmemoery(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setJvmfreememory(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setProcesscpurate(value);
+      break;
+    case 12:
+      var value = new proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo;
+      reader.readMessage(value,proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.deserializeBinaryFromReader);
+      msg.addMemorydescinfolist(value);
+      break;
+    case 13:
+      var value = new proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo;
+      reader.readMessage(value,proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.deserializeBinaryFromReader);
+      msg.addDeadlockthreadinfolist(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.NodeInfo.MachineInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.NodeInfo.MachineInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.MachineInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getThreadcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      1,
+      f
+    );
+  }
+  f = message.getDeadlockthreadcount();
+  if (f !== 0) {
+    writer.writeInt32(
+      2,
+      f
+    );
+  }
+  f = message.getCpucount();
+  if (f !== 0) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
+  f = message.getTotalmemory();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
+    );
+  }
+  f = message.getFreememory();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
+  f = message.getCpurate();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getJavaversion();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
+  f = message.getOsname();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getJvmtotalmemoery();
+  if (f !== 0) {
+    writer.writeInt64(
+      9,
+      f
+    );
+  }
+  f = message.getJvmfreememory();
+  if (f !== 0) {
+    writer.writeInt64(
+      10,
+      f
+    );
+  }
+  f = message.getProcesscpurate();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      11,
+      f
+    );
+  }
+  f = message.getMemorydescinfolistList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      12,
+      f,
+      proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.serializeBinaryToWriter
+    );
+  }
+  f = message.getDeadlockthreadinfolistList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      13,
+      f,
+      proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.serializeBinaryToWriter
+    );
+  }
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.displayName = 'proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    initsize: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    usesize: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    maxsize: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    userate: +jspb.Message.getFieldWithDefault(msg, 5, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo;
+  return proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setInitsize(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setUsesize(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setMaxsize(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setUserate(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getInitsize();
+  if (f !== 0) {
+    writer.writeInt64(
+      2,
+      f
+    );
+  }
+  f = message.getUsesize();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+  f = message.getMaxsize();
+  if (f !== 0) {
+    writer.writeInt64(
+      4,
+      f
+    );
+  }
+  f = message.getUserate();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string name = 1;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.setName = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional int64 initSize = 2;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.getInitsize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.setInitsize = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional int64 useSize = 3;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.getUsesize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.setUsesize = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 maxSize = 4;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.getMaxsize = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.setMaxsize = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional double useRate = 5;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.getUserate = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 5, 0.0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo.prototype.setUserate = function(value) {
+  jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.displayName = 'proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.toObject = function(opt_includeInstance) {
+  return proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    lockname: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    lockowner: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    state: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    blocktime: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    waittime: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    stacktrace: jspb.Message.getFieldWithDefault(msg, 7, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo;
+  return proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLockname(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setLockowner(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setState(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setBlocktime(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setWaittime(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStacktrace(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getLockname();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getLockowner();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getState();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getBlocktime();
+  if (f !== 0) {
+    writer.writeInt64(
+      5,
+      f
+    );
+  }
+  f = message.getWaittime();
+  if (f !== 0) {
+    writer.writeInt64(
+      6,
+      f
+    );
+  }
+  f = message.getStacktrace();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string name = 1;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setName = function(value) {
+  jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string lockName = 2;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getLockname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setLockname = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string lockOwner = 3;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getLockowner = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setLockowner = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string state = 4;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getState = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setState = function(value) {
+  jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional int64 blockTime = 5;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getBlocktime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setBlocktime = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional int64 waitTime = 6;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getWaittime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setWaittime = function(value) {
+  jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional string stackTrace = 7;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.getStacktrace = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo.prototype.setStacktrace = function(value) {
+  jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional int32 threadCount = 1;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getThreadcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setThreadcount = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional int32 deadLockThreadCount = 2;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getDeadlockthreadcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setDeadlockthreadcount = function(value) {
+  jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional int32 cpuCount = 3;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getCpucount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setCpucount = function(value) {
+  jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional int64 totalMemory = 4;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getTotalmemory = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setTotalmemory = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int64 freeMemory = 5;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getFreememory = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setFreememory = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional double cpuRate = 6;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getCpurate = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 6, 0.0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setCpurate = function(value) {
+  jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional string javaVersion = 7;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getJavaversion = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setJavaversion = function(value) {
+  jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string osName = 8;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getOsname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setOsname = function(value) {
+  jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional int64 jvmTotalMemoery = 9;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getJvmtotalmemoery = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setJvmtotalmemoery = function(value) {
+  jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional int64 jvmFreeMemory = 10;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getJvmfreememory = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setJvmfreememory = function(value) {
+  jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional double processCpuRate = 11;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getProcesscpurate = function() {
+  return /** @type {number} */ (+jspb.Message.getFieldWithDefault(this, 11, 0.0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setProcesscpurate = function(value) {
+  jspb.Message.setProto3FloatField(this, 11, value);
+};
+
+
+/**
+ * repeated MemoryDescInfo memoryDescInfoList = 12;
+ * @return {!Array.<!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo>}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getMemorydescinfolistList = function() {
+  return /** @type{!Array.<!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo, 12));
+};
+
+
+/** @param {!Array.<!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo>} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setMemorydescinfolistList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 12, value);
+};
+
+
+/**
+ * @param {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.addMemorydescinfolist = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 12, opt_value, proto.protocol.NodeInfo.MachineInfo.MemoryDescInfo, opt_index);
+};
+
+
+proto.protocol.NodeInfo.MachineInfo.prototype.clearMemorydescinfolistList = function() {
+  this.setMemorydescinfolistList([]);
+};
+
+
+/**
+ * repeated DeadLockThreadInfo deadLockThreadInfoList = 13;
+ * @return {!Array.<!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo>}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.getDeadlockthreadinfolistList = function() {
+  return /** @type{!Array.<!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo, 13));
+};
+
+
+/** @param {!Array.<!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo>} value */
+proto.protocol.NodeInfo.MachineInfo.prototype.setDeadlockthreadinfolistList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 13, value);
+};
+
+
+/**
+ * @param {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo}
+ */
+proto.protocol.NodeInfo.MachineInfo.prototype.addDeadlockthreadinfolist = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 13, opt_value, proto.protocol.NodeInfo.MachineInfo.DeadLockThreadInfo, opt_index);
+};
+
+
+proto.protocol.NodeInfo.MachineInfo.prototype.clearDeadlockthreadinfolistList = function() {
+  this.setDeadlockthreadinfolistList([]);
+};
+
+
+/**
+ * optional int64 beginSyncNum = 1;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.prototype.getBeginsyncnum = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.prototype.setBeginsyncnum = function(value) {
+  jspb.Message.setProto3IntField(this, 1, value);
+};
+
+
+/**
+ * optional string block = 2;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.prototype.getBlock = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.prototype.setBlock = function(value) {
+  jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string solidityBlock = 3;
+ * @return {string}
+ */
+proto.protocol.NodeInfo.prototype.getSolidityblock = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/** @param {string} value */
+proto.protocol.NodeInfo.prototype.setSolidityblock = function(value) {
+  jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional int32 currentConnectCount = 4;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.prototype.getCurrentconnectcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.prototype.setCurrentconnectcount = function(value) {
+  jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int32 activeConnectCount = 5;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.prototype.getActiveconnectcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.prototype.setActiveconnectcount = function(value) {
+  jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional int32 passiveConnectCount = 6;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.prototype.getPassiveconnectcount = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.prototype.setPassiveconnectcount = function(value) {
+  jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional int64 totalFlow = 7;
+ * @return {number}
+ */
+proto.protocol.NodeInfo.prototype.getTotalflow = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/** @param {number} value */
+proto.protocol.NodeInfo.prototype.setTotalflow = function(value) {
+  jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * repeated PeerInfo peerInfoList = 8;
+ * @return {!Array.<!proto.protocol.NodeInfo.PeerInfo>}
+ */
+proto.protocol.NodeInfo.prototype.getPeerinfolistList = function() {
+  return /** @type{!Array.<!proto.protocol.NodeInfo.PeerInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.protocol.NodeInfo.PeerInfo, 8));
+};
+
+
+/** @param {!Array.<!proto.protocol.NodeInfo.PeerInfo>} value */
+proto.protocol.NodeInfo.prototype.setPeerinfolistList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 8, value);
+};
+
+
+/**
+ * @param {!proto.protocol.NodeInfo.PeerInfo=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.protocol.NodeInfo.PeerInfo}
+ */
+proto.protocol.NodeInfo.prototype.addPeerinfolist = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 8, opt_value, proto.protocol.NodeInfo.PeerInfo, opt_index);
+};
+
+
+proto.protocol.NodeInfo.prototype.clearPeerinfolistList = function() {
+  this.setPeerinfolistList([]);
+};
+
+
+/**
+ * optional ConfigNodeInfo configNodeInfo = 9;
+ * @return {?proto.protocol.NodeInfo.ConfigNodeInfo}
+ */
+proto.protocol.NodeInfo.prototype.getConfignodeinfo = function() {
+  return /** @type{?proto.protocol.NodeInfo.ConfigNodeInfo} */ (
+    jspb.Message.getWrapperField(this, proto.protocol.NodeInfo.ConfigNodeInfo, 9));
+};
+
+
+/** @param {?proto.protocol.NodeInfo.ConfigNodeInfo|undefined} value */
+proto.protocol.NodeInfo.prototype.setConfignodeinfo = function(value) {
+  jspb.Message.setWrapperField(this, 9, value);
+};
+
+
+proto.protocol.NodeInfo.prototype.clearConfignodeinfo = function() {
+  this.setConfignodeinfo(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.protocol.NodeInfo.prototype.hasConfignodeinfo = function() {
+  return jspb.Message.getField(this, 9) != null;
+};
+
+
+/**
+ * optional MachineInfo machineInfo = 10;
+ * @return {?proto.protocol.NodeInfo.MachineInfo}
+ */
+proto.protocol.NodeInfo.prototype.getMachineinfo = function() {
+  return /** @type{?proto.protocol.NodeInfo.MachineInfo} */ (
+    jspb.Message.getWrapperField(this, proto.protocol.NodeInfo.MachineInfo, 10));
+};
+
+
+/** @param {?proto.protocol.NodeInfo.MachineInfo|undefined} value */
+proto.protocol.NodeInfo.prototype.setMachineinfo = function(value) {
+  jspb.Message.setWrapperField(this, 10, value);
+};
+
+
+proto.protocol.NodeInfo.prototype.clearMachineinfo = function() {
+  this.setMachineinfo(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.protocol.NodeInfo.prototype.hasMachineinfo = function() {
+  return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * map<string, string> cheatWitnessInfoMap = 11;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,string>}
+ */
+proto.protocol.NodeInfo.prototype.getCheatwitnessinfomapMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,string>} */ (
+      jspb.Message.getMapField(this, 11, opt_noLazyCreate,
+      null));
+};
+
+
+proto.protocol.NodeInfo.prototype.clearCheatwitnessinfomapMap = function() {
+  this.getCheatwitnessinfomapMap().clear();
 };
 
 
