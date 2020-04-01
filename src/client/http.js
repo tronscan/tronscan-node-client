@@ -237,6 +237,7 @@ class ApiClient {
 
     return {
       transactions: data.data,
+      contractMap:data.contractMap,
       total: data.total,
       rangeTotal: data.rangeTotal,
       wholeChainTxCount: data.wholeChainTxCount
@@ -254,6 +255,7 @@ class ApiClient {
 
     return {
       transfers: data.data,
+      contractMap:data.contractMap,
       total: data.total,
       rangeTotal: data.rangeTotal,
     };
@@ -306,6 +308,7 @@ class ApiClient {
 
     return {
       accounts: data.data,
+      contractMap:data.contractMap,
       total: data.total,
       rangeTotal:data.rangeTotal,
     };
@@ -427,7 +430,8 @@ class ApiClient {
     return {
       addresses: data.data,
       total: data.total,
-      rangeTotal:data.rangeTotal
+      rangeTotal:data.rangeTotal,
+      contractMap:data.contractMap
     };
   }
 
@@ -578,6 +582,7 @@ class ApiClient {
 
     return {
       triggers: data.data,
+      contractMap:data.contractMap,
       total: data.total,
       rangeTotal:data.rangeTotal
     };
@@ -719,6 +724,7 @@ class ApiClient {
 
       return {
         list: data.data,
+        contractMap:data.contractMap,
         total: data.total,
         rangeTotal:data.rangeTotal,
       };
@@ -759,6 +765,7 @@ class ApiClient {
 
     return {
       transfers: data.transfers,
+      contractMap:data.contractMap,
       total: data.total,
       rangeTotal: data.rangeTotal,
     };
