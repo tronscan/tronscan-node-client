@@ -38,11 +38,12 @@ export function transactionJsonToProtoBuf(transaction) {
   if (rawData.expiration) {
     rawDataObj.setExpiration(rawData.expiration);
   }
-
+  if (rawData.data) {
+    rawDataObj.setData(fromHexString(rawData.data));
+  }
   if (rawData.timestamp) {
     rawDataObj.setTimestamp(rawData.timestamp);
   }
-
   if (rawData.fee_limit) {
     rawDataObj.setFeeLimit(rawData.fee_limit);
   }
