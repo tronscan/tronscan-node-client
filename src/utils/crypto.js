@@ -204,7 +204,7 @@ function getPubKeyFromPriKey(priKeyBytes) {
 function ECKeySign(hashBytes, priKeyBytes) {
   let ec = new EC('secp256k1');
   let key = ec.keyFromPrivate(priKeyBytes, 'bytes');
-  let signature = key.sign(hashBytes);
+  let signature = key.sign(hashBytes, { canonical: true }); // Enforce Canonical signatures.
   let r = signature.r;
   let s = signature.s;
   let id = signature.recoveryParam;
