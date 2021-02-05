@@ -238,6 +238,7 @@ class ApiClient {
     return {
       transactions: data.data,
       contractMap:data.contractMap,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal: data.rangeTotal,
       wholeChainTxCount: data.wholeChainTxCount
@@ -256,6 +257,7 @@ class ApiClient {
     return {
       transfers: data.data,
       contractMap:data.contractMap,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal: data.rangeTotal,
     };
@@ -309,6 +311,7 @@ class ApiClient {
     return {
       accounts: data.data,
       contractMap:data.contractMap,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal:data.rangeTotal,
     };
@@ -582,6 +585,7 @@ class ApiClient {
 
     return {
       triggers: data.data,
+      contractInfo:data.contractInfo,
       contractMap:data.contractMap,
       total: data.total,
       rangeTotal:data.rangeTotal
@@ -725,6 +729,7 @@ class ApiClient {
       return {
         list: data.data,
         contractMap:data.contractMap,
+        contractInfo:data.contractInfo,
         total: data.total,
         rangeTotal:data.rangeTotal,
       };
@@ -749,6 +754,7 @@ class ApiClient {
 
     return {
       list: data.token_transfers,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal:data.rangeTotal,
     };
@@ -904,6 +910,39 @@ class ApiClient {
        
         
        
+    }
+
+    /*
+    * get account token list
+    */
+    async getAccountWallet(params) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/account/wallet`,{params});
+      return data;
+    }
+
+    /*
+    * get search token
+    */ 
+    async getAccountTokenSearch(params) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/token/search`,{params});
+      return data;
+    }
+
+    /*
+    ** account add  show token list
+    */
+    async getAccountAddShowList(params) {
+      let {data} = await xhr.post(`${this.apiUrl}/external/account/addShowList`,params);
+      return data;
+    }
+
+
+    /*
+    ** account add  show block list
+    */
+    async getAccountAddBlockList(params) {
+      let {data} = await xhr.post(`${this.apiUrl}/external/account/addBlockList`,params);
+      return data;
     }
 
 
