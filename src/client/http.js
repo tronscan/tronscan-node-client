@@ -263,12 +263,13 @@ class ApiClient {
     };
   }
 
-  async getBlockByNumber(number) {
-    let {blocks} = await this.getBlocks({
-      limit: 1,
-      number,
-    });
-
+  async getBlockByNumber(options = {}) {
+    let {blocks} = await this.getBlocks(
+      Object.assign(
+        {limit: 1,},
+        options
+      )
+    );
     return blocks[0];
   }
 

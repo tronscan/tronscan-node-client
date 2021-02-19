@@ -1,6 +1,6 @@
 {
-  "_from": "@tronscan/client@^0.2.68",
-  "_id": "@tronscan/client@0.2.68",
+  "_from": "@tronscan/client@^0.2.69",
+  "_id": "@tronscan/client@0.2.69",
   "_inBundle": false,
   "_integrity": "sha512-8fO4fTJXYAJeV4yK7KQ3CRP1sMEz8/aKq+sfwYdu8cTYqiWZurJ1M8Rf+iv03hSInHT95PaBv4AGYpCnusr/Ug==",
   "_location": "/@tronscan/client",
@@ -8,20 +8,20 @@
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "@tronscan/client@^0.2.68",
+    "raw": "@tronscan/client@^0.2.69",
     "name": "@tronscan/client",
     "escapedName": "@tronscan%2fclient",
     "scope": "@tronscan",
-    "rawSpec": "^0.2.68",
+    "rawSpec": "^0.2.69",
     "saveSpec": null,
-    "fetchSpec": "^0.2.68"
+    "fetchSpec": "^0.2.69"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@tronscan/client/-/client-0.2.68.tgz",
+  "_resolved": "https://registry.npmjs.org/@tronscan/client/-/client-0.2.69.tgz",
   "_shasum": "715171126ba7e60ff237016c497b207d11f7c31d",
-  "_spec": "@tronscan/client@^0.2.68",
+  "_spec": "@tronscan/client@^0.2.69",
   "_where": "/Users/wujiaolong/Documents/project/project-front/tronscan-frontend",
   "author": {
     "name": "Rovak"
@@ -66,5 +66,5 @@
     "test": "mocha",
     "test:watch": "mocha --watch"
   },
-  "version": "0.2.68"
+  "version": "0.2.69"
 }
