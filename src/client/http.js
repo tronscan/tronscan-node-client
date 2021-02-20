@@ -270,6 +270,7 @@ class ApiClient {
         options
       )
     );
+
     return blocks[0];
   }
 
@@ -282,8 +283,13 @@ class ApiClient {
     return blocks[0];
   }
 
-  async getTransactionByHash(hash) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/transaction-info?hash=${hash}`);
+  async getTransactionByHash(hash,options) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/transaction-info`,
+    {
+      params: Object.assign({
+        hash
+      }, options),
+    })
     return data;
   }
 
@@ -384,8 +390,12 @@ class ApiClient {
     };
   }
 
-  async getAddress(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account?address=` + address);
+  async getAddress(address,options) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/account`, {
+      params: Object.assign({
+        address,
+      }, options)
+    })
     return data;
   }
 
@@ -555,9 +565,13 @@ class ApiClient {
     return data;
   }
 
-  async getContractOverview(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=` + address);
-
+  async getContractOverview(address,options) {
+    // let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/contract`, {
+      params: Object.assign({
+        contract:address,
+      }, options)
+    })
     return data;
   }
 
