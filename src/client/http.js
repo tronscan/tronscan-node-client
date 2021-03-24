@@ -802,6 +802,16 @@ class ApiClient {
       return data;
   }
 
+  async createToken721(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc721tokens`, options);
+    return data;
+}
+
+  async updateToken721(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc721tokens/update`, options);
+    return data;
+  }
+
   async updateToken20(options = {}) {
     let {data} = await xhr.post(`${this.apiUrl}/external/trc20tokens/update`, options);
     return data;
