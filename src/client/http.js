@@ -518,8 +518,8 @@ class ApiClient {
     }
   }
 
-  async getTxOverviewStatsAll() {
-    let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview?days=1000`);
+  async getTxOverviewStatsAll(number) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview?days=${number}`);
     return {
       txOverviewStats: data.data
     }
