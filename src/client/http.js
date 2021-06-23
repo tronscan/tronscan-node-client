@@ -736,6 +736,16 @@ class ApiClient {
       };
   }
 
+  async getAddressTokens(options={}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/account/tokens`, {
+      params: options
+    });
+
+    return {
+      data
+    };
+  }
+  
   async getInternalTransaction(options = {}) {
       let {data} = await xhr.get(`${this.apiUrl}/api/internal-transaction`, {
         params: options
