@@ -391,7 +391,7 @@ class ApiClient {
   }
 
   async getAddress(address,options) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account`, {
+    let {data} = await xhr.get(`${this.apiUrl}/api/accountv2`, {
       params: Object.assign({
         address,
       }, options)
@@ -608,7 +608,7 @@ class ApiClient {
   }
 
   async getAccountByAddressNew(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account?address=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/accountv2?address=` + address);
     return data;
   }
 
@@ -745,7 +745,7 @@ class ApiClient {
       data
     };
   }
-  
+
   async getInternalTransaction(options = {}) {
       let {data} = await xhr.get(`${this.apiUrl}/api/internal-transaction`, {
         params: options
@@ -920,7 +920,7 @@ class ApiClient {
             parameterValue = getTriggerSmartContractParameterValue(hexStrBytes)
             for(let i in parameterValue){
               if(parameterValue[i] !== ''){
-                parameter[i] = parameterValue[i] 
+                parameter[i] = parameterValue[i]
               }
             }
             return parameter;
@@ -935,16 +935,16 @@ class ApiClient {
             parameterValue = getAccountPermissionUpdateContractParameterValue(hexStrBytes)
             for(let i in parameterValue){
               if(parameterValue[i] !== ''){
-                parameter[i] = parameterValue[i] 
+                parameter[i] = parameterValue[i]
               }
             }
             return parameter;
           }
-          
+
         }
-       
-        
-       
+
+
+
     }
 
     /*
@@ -957,7 +957,7 @@ class ApiClient {
 
     /*
     * get search token
-    */ 
+    */
     async getAccountTokenSearch(params) {
       let {data} = await xhr.get(`${this.apiUrl}/api/token/search`,{params});
       return data;
