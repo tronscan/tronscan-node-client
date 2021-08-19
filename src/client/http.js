@@ -263,6 +263,17 @@ class ApiClient {
     };
   }
 
+  async getParticipateProject(address,options = {}) {
+    let { data } = await xhr.get(`${this.apiUrl}/api/participate_project`,
+      {
+        params: Object.assign({
+          address
+        }, options)
+      })
+    return data
+
+  }
+
   async getBlockByNumber(options = {}) {
     let {blocks} = await this.getBlocks(
       Object.assign(
