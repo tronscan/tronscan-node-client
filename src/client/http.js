@@ -238,6 +238,7 @@ class ApiClient {
     return {
       transactions: data.data,
       contractMap:data.contractMap,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal: data.rangeTotal,
       wholeChainTxCount: data.wholeChainTxCount
@@ -256,16 +257,30 @@ class ApiClient {
     return {
       transfers: data.data,
       contractMap:data.contractMap,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal: data.rangeTotal,
     };
   }
 
-  async getBlockByNumber(number) {
-    let {blocks} = await this.getBlocks({
-      limit: 1,
-      number,
-    });
+  async getParticipateProject(address,options = {}) {
+    let data = await xhr.get(`${this.apiUrl}/api/participate_project`,
+      {
+        params: Object.assign({
+          address
+        }, options)
+      })
+    return data
+
+  }
+
+  async getBlockByNumber(options = {}) {
+    let {blocks} = await this.getBlocks(
+      Object.assign(
+        {limit: 1,},
+        options
+      )
+    );
 
     return blocks[0];
   }
@@ -279,8 +294,13 @@ class ApiClient {
     return blocks[0];
   }
 
-  async getTransactionByHash(hash) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/transaction-info?hash=${hash}`);
+  async getTransactionByHash(hash,options) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/transaction-info`,
+    {
+      params: Object.assign({
+        hash
+      }, options),
+    })
     return data;
   }
 
@@ -309,6 +329,7 @@ class ApiClient {
     return {
       accounts: data.data,
       contractMap:data.contractMap,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal:data.rangeTotal,
     };
@@ -380,8 +401,12 @@ class ApiClient {
     };
   }
 
-  async getAddress(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account?address=` + address);
+  async getAddress(address,options) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/accountv2`, {
+      params: Object.assign({
+        address,
+      }, options)
+    })
     return data;
   }
 
@@ -504,8 +529,8 @@ class ApiClient {
     }
   }
 
-  async getTxOverviewStatsAll() {
-    let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview?days=1000`);
+  async getTxOverviewStatsAll(number) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/stats/overview?days=${number}`);
     return {
       txOverviewStats: data.data
     }
@@ -551,9 +576,13 @@ class ApiClient {
     return data;
   }
 
-  async getContractOverview(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=` + address);
-
+  async getContractOverview(address,options) {
+    // let {data} = await xhr.get(`${this.apiUrl}/api/contract?contract=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/contract`, {
+      params: Object.assign({
+        contract:address,
+      }, options)
+    })
     return data;
   }
 
@@ -582,6 +611,7 @@ class ApiClient {
 
     return {
       triggers: data.data,
+      contractInfo:data.contractInfo,
       contractMap:data.contractMap,
       total: data.total,
       rangeTotal:data.rangeTotal
@@ -589,7 +619,7 @@ class ApiClient {
   }
 
   async getAccountByAddressNew(address) {
-    let {data} = await xhr.get(`${this.apiUrl}/api/account?address=` + address);
+    let {data} = await xhr.get(`${this.apiUrl}/api/accountv2?address=` + address);
     return data;
   }
 
@@ -717,6 +747,16 @@ class ApiClient {
       };
   }
 
+  async getAddressTokens(options={}) {
+    let {data} = await xhr.get(`${this.apiUrl}/api/account/tokens`, {
+      params: options
+    });
+
+    return {
+      data
+    };
+  }
+
   async getInternalTransaction(options = {}) {
       let {data} = await xhr.get(`${this.apiUrl}/api/internal-transaction`, {
         params: options
@@ -725,6 +765,7 @@ class ApiClient {
       return {
         list: data.data,
         contractMap:data.contractMap,
+        contractInfo:data.contractInfo,
         total: data.total,
         rangeTotal:data.rangeTotal,
       };
@@ -749,6 +790,7 @@ class ApiClient {
 
     return {
       list: data.token_transfers,
+      contractInfo:data.contractInfo,
       total: data.total,
       rangeTotal:data.rangeTotal,
     };
@@ -779,6 +821,16 @@ class ApiClient {
   async createToken20(options = {}) {
       let {data} = await xhr.post(`${this.apiUrl}/external/trc20tokens`, options);
       return data;
+  }
+
+  async createToken721(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc721tokens`, options);
+    return data;
+}
+
+  async updateToken721(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc721tokens/update`, options);
+    return data;
   }
 
   async updateToken20(options = {}) {
@@ -879,7 +931,7 @@ class ApiClient {
             parameterValue = getTriggerSmartContractParameterValue(hexStrBytes)
             for(let i in parameterValue){
               if(parameterValue[i] !== ''){
-                parameter[i] = parameterValue[i] 
+                parameter[i] = parameterValue[i]
               }
             }
             return parameter;
@@ -894,16 +946,57 @@ class ApiClient {
             parameterValue = getAccountPermissionUpdateContractParameterValue(hexStrBytes)
             for(let i in parameterValue){
               if(parameterValue[i] !== ''){
-                parameter[i] = parameterValue[i] 
+                parameter[i] = parameterValue[i]
               }
             }
             return parameter;
           }
-          
+
         }
-       
-        
-       
+
+
+
+    }
+
+    /*
+    * get account token list
+    */
+    async getAccountWallet(params) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/account/wallet`,{params});
+      return data;
+    }
+
+    /*
+    * get search token
+    */
+    async getAccountTokenSearch(params) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/token/search`,{params});
+      return data;
+    }
+
+    /*
+    ** account add  show token list
+    */
+    async getAccountAddShowList(params) {
+      let {data} = await xhr.post(`${this.apiUrl}/external/account/addShowList`,params);
+      return data;
+    }
+
+
+    /*
+    ** account add  show block list
+    */
+    async getAccountAddBlockList(params) {
+      let {data} = await xhr.post(`${this.apiUrl}/external/account/addBlockList`,params);
+      return data;
+    }
+
+    /*
+    ** tvc total value on chain
+    */
+    async getTVCData(params) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/tokenTvc`,{params});
+      return data;
     }
 
     /*
