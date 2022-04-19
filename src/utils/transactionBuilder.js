@@ -550,69 +550,69 @@ function getAccountPermissionUpdateContractParameterValue(bytes) {
   let owner_address = byteArray2hexStr(transaction.getOwnerAddress());
 
   //get owner
-    const permissionType = proto.protocol.Permission.PermissionType.OWNER;
-    let ownerPermission = transaction.getOwner();
-    let ownerKeys = ownerPermission.getKeysList();
-    let ownerKeysArr = [];
-    ownerKeys.forEach((key) => {
-      ownerKeysArr.push({
-        'address':byteArray2hexStr(key.getAddress()),
-        'weight':key.getWeight()
-      })  
-    })
-    let ownerThreshold = ownerPermission.getThreshold() 
-    let ownerPermissionName = ownerPermission.getPermissionName();
-    let owner = {
-        "keys":ownerKeysArr,
-        "threshold":ownerThreshold,
-        "permission_name":ownerPermissionName
-    }
-
-    if (transaction.getWitness()) {
-        let witnessPermission = transaction.getWitness();
-        let witnessKeys = witnessPermission.getKeysList();
-        let witnessKeysArr = [];
-        witnessKeys.forEach((key) => {
-          ownerKeysArr.push({
-            'address':byteArray2hexStr(key.getAddress()),
-            'weight':key.getWeight()
-          })  
-        })
-        let witnessId = witnessPermission.getId(); 
-        let witnessThreshold = witnessPermission.getThreshold(); 
-        let witnessPermissionName = witnessPermission.getPermissionName();
-        let witnessType = witnessPermission.getType(); 
-        let witness = {
-          "keys":witnessKeysArr,
-          "id":witnessId,
-          "threshold":witnessThreshold,
-          "permission_name":witnessPermissionName,
-          "type":witnessType
-        }
-    }
-    // active
-    let activesPermission = transaction.getActivesList();
-    let actives = [];
-    activesPermission.forEach((active) => {
-      let activeKeys = active.getKeysList();
-      let activeKeysArr = [];
-      activeKeys.forEach((key) => {
-        activeKeysArr.push({
+  const permissionType = proto.protocol.Permission.PermissionType.OWNER;
+  let ownerPermission = transaction.getOwner();
+  let ownerKeys = ownerPermission.getKeysList();
+  let ownerKeysArr = [];
+  ownerKeys.forEach((key) => {
+    ownerKeysArr.push({
+      'address':byteArray2hexStr(key.getAddress()),
+      'weight':key.getWeight()
+    })  
+  })
+  let ownerThreshold = ownerPermission.getThreshold() 
+  let ownerPermissionName = ownerPermission.getPermissionName();
+  let owner = {
+      "keys":ownerKeysArr,
+      "threshold":ownerThreshold,
+      "permission_name":ownerPermissionName
+  }
+  let witness =''
+  if (transaction.getWitness()) {
+      let witnessPermission = transaction.getWitness();
+      let witnessKeys = witnessPermission.getKeysList();
+      let witnessKeysArr = [];
+      witnessKeys.forEach((key) => {
+        ownerKeysArr.push({
           'address':byteArray2hexStr(key.getAddress()),
           'weight':key.getWeight()
         })  
       })
-      actives.push(
-        {
-         "operations": byteArray2hexStr(active.getOperations()),
-         "keys": activeKeysArr,
-         "threshold":active.getThreshold(),
-         "id":active.getId(),
-         "type":active.getType(),
-         "permission_name":active.getPermissionName()
-        }
-      )
+      let witnessId = witnessPermission.getId(); 
+      let witnessThreshold = witnessPermission.getThreshold(); 
+      let witnessPermissionName = witnessPermission.getPermissionName();
+      let witnessType = witnessPermission.getType(); 
+      witness = {
+        "keys":witnessKeysArr,
+        "id":witnessId,
+        "threshold":witnessThreshold,
+        "permission_name":witnessPermissionName,
+        "type":witnessType
+      }
+  }
+  // active
+  let activesPermission = transaction.getActivesList();
+  let actives = [];
+  activesPermission.forEach((active) => {
+    let activeKeys = active.getKeysList();
+    let activeKeysArr = [];
+    activeKeys.forEach((key) => {
+      activeKeysArr.push({
+        'address':byteArray2hexStr(key.getAddress()),
+        'weight':key.getWeight()
+      })  
     })
+    actives.push(
+      {
+        "operations": byteArray2hexStr(active.getOperations()),
+        "keys": activeKeysArr,
+        "threshold":active.getThreshold(),
+        "id":active.getId(),
+        "type":active.getType(),
+        "permission_name":active.getPermissionName()
+      }
+    )
+  })
 
   let parameterValue  = {
     owner,
