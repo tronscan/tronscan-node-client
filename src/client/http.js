@@ -991,6 +991,14 @@ class ApiClient {
       return data;
     }
 
+    /*
+    ** tvc total value on chain
+    */
+    async getTVCData(params) {
+      let {data} = await xhr.get(`${this.apiUrl}/api/tokenTvc`,{params});
+      return data;
+    }
+
 
 }
 
