@@ -391,7 +391,7 @@ function buildTriggerSmartContract(value) {
     contract.setTokenId(value.token_id);
   }
   if(value.call_token_value){
-    contract.setCallTokenValue(value.token_value)
+    contract.setCallTokenValue(value.call_token_value)
   }
   if(value.call_value){
     contract.setCallValue(value.call_value);
