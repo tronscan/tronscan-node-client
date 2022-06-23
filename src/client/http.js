@@ -823,6 +823,11 @@ class ApiClient {
       return data;
   }
 
+   async createToken1155(options = {}) {
+      let {data} = await xhr.post(`${this.apiUrl}/external/trc1155tokens`, options);
+      return data;
+  }
+
   async createToken721(options = {}) {
     let {data} = await xhr.post(`${this.apiUrl}/external/trc721tokens`, options);
     return data;
