@@ -1,15 +1,15 @@
 {
-  "_from": "@tronscan/client@^",
-  "_id": "@tronscan/client@0.2.81",
+  "_from": "@tronscan/clients@^",
+  "_id": "@tronscan/clients@0.2.81",
   "_inBundle": false,
   "_integrity": "sha512-8fO4fTJXYAJeV4yK7KQ3CRP1sMEz8/aKq+sfwYdu8cTYqiWZurJ1M8Rf+iv03hSInHT95PaBv4AGYpCnusr/Ug==",
-  "_location": "/@tronscan/client",
+  "_location": "/@tronscan/clients",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "@tronscan/client@^0.2.81",
-    "name": "@tronscan/client",
+    "raw": "@tronscan/clients@^0.2.81",
+    "name": "@tronscan/clients",
     "escapedName": "@tronscan%2fclient",
     "scope": "@tronscan",
     "rawSpec": "^0.2.81",
@@ -19,9 +19,9 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@tronscan/client/-/client-0.2.81.tgz",
+  "_resolved": "https://registry.npmjs.org/@tronscan/clients/-/client-0.2.81.tgz",
   "_shasum": "715171126ba7e60ff237016c497b207d11f7c31d",
-  "_spec": "@tronscan/client@^0.2.81",
+  "_spec": "@tronscan/clients@^0.2.81",
   "_where": "/Users/wujiaolong/Documents/project/project-front/tronscan-frontend",
   "author": {
     "name": "Rovak"
@@ -55,7 +55,7 @@
   ],
   "license": "GPL-3.0",
   "main": "src/index.js",
-  "name": "@tronscan/client",
+  "name": "@tronscan/clients",
   "repository": {
     "type": "git",
     "url": "git://github.com/tronscan/tronscan-node-client.git"

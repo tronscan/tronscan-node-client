@@ -28,13 +28,13 @@
 Install the package
 
 ```bash
-> npm install @tronscan/client
+> npm install @tronscan/clients
 ```
 
 Use the HTTP Client
 
 ```javascript
-import {Client} from "@tronscan/client";
+import {Client} from "@tronscan/clients";
 
 const client = new Client();
 

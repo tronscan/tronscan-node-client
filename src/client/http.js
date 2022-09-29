@@ -838,6 +838,11 @@ class ApiClient {
     return data;
   }
 
+  async updateToken1155(options = {}) {
+    let {data} = await xhr.post(`${this.apiUrl}/external/trc1155tokens/update`, options);
+    return data;
+  }
+
   async updateToken20(options = {}) {
     let {data} = await xhr.post(`${this.apiUrl}/external/trc20tokens/update`, options);
     return data;
