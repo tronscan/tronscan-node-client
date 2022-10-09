@@ -1,33 +1,33 @@
 {
-  "_from": "@tronscan/apiClients@^",
-  "_id": "@tronscan/apiClients@0.2.81",
+  "_from": "@tronscanteam/apiclients@^",
+  "_id": "@tronscanteam/apiclients@0.2.82",
   "_inBundle": false,
   "_integrity": "sha512-8fO4fTJXYAJeV4yK7KQ3CRP1sMEz8/aKq+sfwYdu8cTYqiWZurJ1M8Rf+iv03hSInHT95PaBv4AGYpCnusr/Ug==",
-  "_location": "/@tronscan/apiClients",
+  "_location": "/@tronscanteam/apiclients",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "@tronscan/apiClients@^0.2.81",
-    "name": "@tronscan/apiClients",
-    "escapedName": "@tronscan%2fclient",
-    "scope": "@tronscan",
-    "rawSpec": "^0.2.81",
+    "raw": "@tronscanteam/apiclients@^0.2.82",
+    "name": "@tronscanteam/apiclients",
+    "escapedName": "@tronscanteam%2fclient",
+    "scope": "@tronscanteam",
+    "rawSpec": "^0.2.82",
     "saveSpec": null,
-    "fetchSpec": "^0.2.81"
+    "fetchSpec": "^0.2.82"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@tronscan/apiClients/-/client-0.2.81.tgz",
+  "_resolved": "https://registry.npmjs.org/@tronscanteam/apiclients/-/client-0.2.82.tgz",
   "_shasum": "715171126ba7e60ff237016c497b207d11f7c31d",
-  "_spec": "@tronscan/apiClients@^0.2.81",
-  "_where": "/Users/wujiaolong/Documents/project/project-front/tronscan-frontend",
+  "_spec": "@tronscanteam/apiclients@^0.2.82",
+  "_where": "/Users/Documents/project/project-front/tronscanteam-frontend",
   "author": {
     "name": "w-richard"
   },
   "bugs": {
-    "url": "https://github.com/tronscan/tronscan-node-client/issues"
+    "url": "https://github.com/tronscanteam/tronscanteam-node-client/issues"
   },
   "bundleDependencies": false,
   "dependencies": {
@@ -55,7 +55,7 @@
   ],
   "license": "GPL-3.0",
   "main": "src/index.js",
-  "name": "@tronscan/apiClients",
+  "name": "@tronscanteam/apiclients",
   "repository": {
     "type": "git",
     "url": "git://github.com/tronscan/tronscan-node-client.git"
@@ -66,5 +66,5 @@
     "test": "mocha",
     "test:watch": "mocha --watch"
   },
-  "version": "0.2.81"
+  "version": "0.2.82"
 }

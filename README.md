@@ -1,3 +1,11 @@
+<!--
+ * @Author: Richard codewellliu@gmail.com
+ * @Date: 2022-09-29 11:23:07
+ * @LastEditors: Richard codewellliu@gmail.com
+ * @LastEditTime: 2022-10-09 10:17:23
+ * @FilePath: /tronnpm/README.md
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <h1 align="center">
   Tronscan Client
   <br>
@@ -28,13 +36,13 @@
 Install the package
 
 ```bash
-> npm install @tronscan/clients
+> npm install @tronscanteam/apiclients
 ```
 
 Use the HTTP Client
 
 ```javascript
-import {Client} from "@tronscan/clients";
+import {Client} from "@tronscanteam/apiclients";
 
 const client = new Client();
 
