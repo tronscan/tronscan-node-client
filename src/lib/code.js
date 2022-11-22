@@ -245,7 +245,7 @@ function byteArray2hexStr(byteArray) {
   return str;
 }
 
-//从base64字符串中解码出原文，格式为byteArray格式
+//Decode the original text from the base64 string in byteArray format
 function base64DecodeFromString(string64) {
   var b = new Base64();
   var decodeBytes = b.decodeToByteArray(string64);
@@ -253,7 +253,7 @@ function base64DecodeFromString(string64) {
 }
 
 //return baset64 String
-//将byteArray格式数据编码为base64字符串
+//Encode byteArray format data to base64 string
 function base64EncodeToString(bytes) {
   // var string = bytesToString(bytes);
   var b = new Base64();
