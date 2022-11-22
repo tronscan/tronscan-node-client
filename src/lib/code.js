@@ -5,7 +5,7 @@ function bin2String(array) {
   return String.fromCharCode.apply(String, array);
 }
 
-//比较两个byteArray是否相等
+//Compare two byteArray to see if they are equal
 function arrayEquals(array1, array2) {
   if (array1.length != array2.length) {
     return false;
@@ -19,7 +19,7 @@ function arrayEquals(array1, array2) {
   return true;
 }
 
-//从base64字符串中解析TransAction对象
+//Parsing TransAction objects from base64 strings
 function getTransActionFromBase64String(base64String) {
   var bytesDecode = base64DecodeFromString(base64String);
   var transaction = proto.protocol.Transaction.deserializeBinary(bytesDecode);
@@ -28,7 +28,7 @@ function getTransActionFromBase64String(base64String) {
 }
 
 //Return a list contains contract object
-//从TransAction对象中获得合约列表
+//Get the list of contracts from the TransAction object
 function getContractListFromTransaction(transaction) {
   var raw = transaction.getRawData();
   var type = raw.getType();
@@ -111,7 +111,7 @@ function getContractListFromTransaction(transaction) {
   return array;
 }
 
-//字符串转byteArray数据格式
+//String to byteArray data format
 function stringToBytes(str) {
   var bytes = new Array();
   var len, c;
@@ -138,7 +138,7 @@ function stringToBytes(str) {
 
 }
 
-//byteArray数据格式转字符串
+//byteArray data format to string
 function bytesToString(arr) {
   if (typeof arr === 'string') {
     return arr;
@@ -235,7 +235,7 @@ function byte2hexStr(byte) {
 
 /* Convert byte arry to HEX string */
 
-//byteArray格式数据转为16进制的ASCII字符串。
+//Convert byteArray format data to hexadecimal ASCII string
 function byteArray2hexStr(byteArray) {
   var str = "";
   for (var i = 0; i < (byteArray.length - 1); i++) {
